@@ -44,7 +44,7 @@
 # Need to CD first...
 cd "$(dirname "$0")"
 
-OUTPUT_LOG=zap2xml.log
+OUTPUT_LOG=runZap2Xml.log
 #OUTPUT_LOG=/dev/null
 
 echo "########## START ##########" >> $OUTPUT_LOG
