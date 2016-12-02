@@ -46,10 +46,15 @@ Enable gcc, make...
 
 === Install perl missing libs
 
+This is required for the EPG downloader.
+
  sudo perl -MCPAN -e shell
  install JSON::XS
 
 === MPEG-2 License
+
+Need to buy a license from http://www.raspberrypi.com/mpeg-2-license-key/
+
 License key = 0x16baa230
 
 Enable via:
