@@ -7,12 +7,15 @@ The following rough guide applies to XBian.
 === SSH
 
 Connect:
+
  ssh xbian@192.168.2.22
 
-File copy '''from''' PI:
+File copy *from* PI:
+
  scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
 
-File copy '''to''' PI:
+File copy *to* PI:
+
  scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 
 === Disabling WIFI power saving
@@ -28,10 +31,12 @@ Add the following line anywhere in the file:
 TBD: There seems to be many possible location to set the timezone.
 
 * SSH:
+
  dpkg-reconfigure tzdata
+ 
 * Kodi:
- System > Config > TBD > TZ
- System > Config > XBian > TBD > TZ
+** System > Config > TBD > TZ
+** System > Config > XBian > TBD > TZ
 
 === Builds
 
