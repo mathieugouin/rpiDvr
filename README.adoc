@@ -41,6 +41,7 @@ TBD: There seems to be many possible location to set the timezone.
 === Builds
 
 Enable gcc, make...
+
  sudo apt-get install build-essential
 
 === Install perl missing libs
@@ -52,6 +53,7 @@ Enable gcc, make...
 License key = 0x16baa230
 
 Enable via:
+
  sudo xbian-config
 
 == Tvheadend
@@ -60,29 +62,35 @@ Enable via:
 
 * Copy zap2xml config to PI using scp.
 * Set cron job to fetch EPG daily:
+
  crontab -e
 
  # m  h  dom mon dow   command
    33 3  *   *   *     /home/xbian/zap2xml/runZap2Xml.sh
 
 * Enable internal grabber in path:
+
  cd /usr/local/bin
  sudo ln -s /home/xbian/zap2xml/tv_grab_file
 
 === Frontend (Kodi)
 
 In Kodi TV interface:
-* Install '''Tvheadend HTSP Client'''
+* Install *Tvheadend HTSP Client*
 * Config: point to localhost
 
-=== Backend
+=== Backend (tvheadend)
 
 ==== Basic setup
 
 * Create default user via ssh:
+
  tvheadend -C
+ 
 * Enable tvheadend services via:
+
  sudo xbian-config
+
 * Set proper users using the web interface: http://192.168.2.22:9981
 ** Admin:
 *** tvheadend
@@ -96,7 +104,7 @@ In Kodi TV interface:
 The following is done using the web interface: http://192.168.2.22:9981 while logged in as admin.
 
 Goto Config > DVB Input
-* Network tab: Add network '''us_ATSC_center_frequencies'''
+* Network tab: Add network *us_ATSC_center_frequencies*
 * TV Adapters tab: Assign network to tuner
 * Network tab: Force scan
 * Muxes tab: Check scan results.
@@ -104,8 +112,10 @@ Goto Config > DVB Input
 
 Goto Config > Channel/EPG
 * EPG Grabber tab: Set EPG frequency (advanced mode)
+
  # MGouin custom to run 04:00 after zap2xml
  0 4 * * *
+
 * EPG Grabber Modules tab: Enable Internal tv_grab_file
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 * Channels tab: give proper channel names
@@ -125,9 +135,11 @@ Goto Configuration > Recording > Profile
 Refer to: https://tvheadend.readthedocs.org/en/latest/Appendices/command_line_options/
 
 Debug command:
+
  tvheadend -d -u xbian -g xbian -c /home/xbian/.hts/tvheadend
 
 Default command:
+
  tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
 
 === General Infos ===
@@ -135,6 +147,7 @@ Default command:
 HD Recordings: 30 min = 4165 MB
 
 Recordings DB:
+
  /home/xbian/.hts/tvheadend/dvr/log
 
 
@@ -196,6 +209,7 @@ This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q (re
  sudo btrfs-auto-snapshot list
 
 Remove snapshots:
+
  sudo -i
  btrfs-auto-snapshot list | grep -v /@$ | grep auto-snap | xargs -L1 btrfs-auto-snapshot destroy
 
