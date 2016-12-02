@@ -236,3 +236,4 @@ TBD? btrfs how to check for filesystem integrity?
 * http://kodi.wiki/view/Tvheadend_PVR
 * http://www.tvfool.com
 * https://github.com/mathieugouin/rpiDvr
+* http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/
