@@ -81,6 +81,7 @@ Enable via:
 === Frontend (Kodi)
 
 In Kodi TV interface:
+
 * Install *Tvheadend HTSP Client*
 * Config: point to localhost
 
@@ -104,11 +105,14 @@ In Kodi TV interface:
 *** <blank>
 *** <blank>
 
+Goto Config > General > Base, set User interface level to Expert.
+
 ==== Channel setup
 
 The following is done using the web interface: http://192.168.2.22:9981 while logged in as admin.
 
 Goto Config > DVB Input
+
 * Network tab: Add network *us_ATSC_center_frequencies*
 * TV Adapters tab: Assign network to tuner
 * Network tab: Force scan
@@ -116,6 +120,7 @@ Goto Config > DVB Input
 * Services tab: map all selected, map all services.
 
 Goto Config > Channel/EPG
+
 * EPG Grabber tab: Set EPG frequency (advanced mode)
 
  # MGouin custom to run 04:00 after zap2xml
