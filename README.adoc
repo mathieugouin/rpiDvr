@@ -55,7 +55,9 @@ This is required for the EPG downloader.
 
 Need to buy a license from http://www.raspberrypi.com/mpeg-2-license-key/
 
-License key = 0x16baa230
+For my PI, the license is:
+
+ License key = 0x16baa230
 
 Enable via:
 
