@@ -47,6 +47,9 @@ cd "$(dirname "$0")"
 OUTPUT_LOG=runZap2Xml.log
 #OUTPUT_LOG=/dev/null
 
+BACKUP_FOLDER=bak
+TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
+
 echo "########## START ##########" >> $OUTPUT_LOG
 echo $(date) >> $OUTPUT_LOG
 
@@ -57,7 +60,11 @@ echo $(date) >> $OUTPUT_LOG
 #./zap2xml.pl -u XXX@gmail.com -p XXX -d 14 -N 1 -i iconsZap -U
 
 # normal test w/ login (no icons)
-./zap2xml.pl -u XXX@gmail.com -p XXX -d 14 -N 1 -M -U
+# 14 days of EPG data
+# 2 days of no cache data from start
+# Copy movie year to subtitle
+# Use UTF-8 encoding
+./zap2xml.pl -u XXX@gmail.com -p XXX -d 14 -N 2 -M -U
 
 # Correct bad encoding
 ./correctBadEncoding.py < xmltv.xml > xmltv.xml.new
@@ -66,6 +73,10 @@ mv -f xmltv.xml.new xmltv.xml
 # Correct the bad categories
 ./category-update.pl < xmltv.xml > xmltv.xml.new
 mv -f xmltv.xml.new xmltv.xml
+
+# Backup old xmltv.xml for debug purposes
+cp xmltv.xml $BACKUP_FOLDER/xmltv_${TIMESTAMP}.xml
+# TBD need to delete old files...
 
 echo $(date) >> $OUTPUT_LOG
 echo "########## STOP ##########" >> $OUTPUT_LOG
