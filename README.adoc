@@ -239,3 +239,5 @@ TBD? btrfs how to check for filesystem integrity?
 * http://www.tvfool.com
 * https://github.com/mathieugouin/rpiDvr
 * http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+* https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi
+
