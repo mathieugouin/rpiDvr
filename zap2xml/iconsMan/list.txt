@@ -1,0 +1,16 @@
+2   ICI     http://www.lyngsat-logo.com/hires/cc/cbc_radio_canada_tele.png
+6   CBC     http://www.lyngsat-logo.com/hires/cc/cbc_tv_ca.png
+10  TVA     http://www.lyngsat-logo.com/hires/tt/tva_ca.png
+12  CTV     http://www.lyngsat-logo.com/hires/cc/ctv_ca.png
+15  Global  http://www.lyngsat-logo.com/hires/gg/global_ca.png
+17  TeleQc  http://www.lyngsat-logo.com/hires/tt/tele_quebec.png
+35  V       http://www.lyngsat-logo.com/hires/cc/cfjp_montreal.png
+62  City    http://www.lyngsat-logo.com/hires/cc/city_tv_ca.png
+
+3.1 CBS     http://www.lyngsat-logo.com/hires/cc/cbs_hd.png
+3.2 Movies  http://www.lyngsat-logo.com/hires/mm/movies_tv_us.png
+47.1 CFHD   https://upload.wikimedia.org/wikipedia/en/3/32/ICI_TV_Montreal.png
+57.1 PBS    http://www.lyngsat-logo.com/hires/pp/pbs_east.png
+57.2 PBS-WV http://www.lyngsat-logo.com/hires/mm/mhz_worldview.png
+57.3 PBS-W  http://www.lyngsat-logo.com/logo/tv/cc/classic_arts_showcase.png
+
