@@ -76,7 +76,9 @@ mv -f xmltv.xml.new xmltv.xml
 
 # Backup old xmltv.xml for debug purposes
 cp xmltv.xml $BACKUP_FOLDER/xmltv_${TIMESTAMP}.xml
-# TBD need to delete old files...
+
+# Delete old backup files
+find ./$BACKUP_FOLDER -name "*.xml" -mtime +15 -type f -delete
 
 echo $(date) >> $OUTPUT_LOG
 echo "########## STOP ##########" >> $OUTPUT_LOG
