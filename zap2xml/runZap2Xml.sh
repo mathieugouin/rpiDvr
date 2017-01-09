@@ -74,7 +74,7 @@ mv -f xmltv.xml.new xmltv.xml
 ./category-update.pl < xmltv.xml > xmltv.xml.new
 mv -f xmltv.xml.new xmltv.xml
 
-# Backup old xmltv.xml for debug purposes
+# Backup new xmltv.xml for debug purposes
 cp xmltv.xml $BACKUP_FOLDER/xmltv_${TIMESTAMP}.xml
 
 # Delete old backup files that are more than 15 days old
