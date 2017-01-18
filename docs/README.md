@@ -13,13 +13,11 @@ Connect:
 ssh xbian@192.168.2.22
 ```
 File copy *from* PI:
-
 ```
 scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
 ```
 
 File copy *to* PI:
-
 ```
 scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 ```
@@ -85,7 +83,6 @@ crontab -e
 ```
 
 * Enable internal grabber in path:
-
 ```
 cd /usr/local/bin
 sudo ln -s /home/xbian/zap2xml/tv_grab_file
@@ -94,7 +91,6 @@ sudo ln -s /home/xbian/zap2xml/tv_grab_file
 ### Frontend (Kodi)
 
 In Kodi TV interface:
-
 * Install *Tvheadend HTSP Client*
 * Config: point to localhost
 
@@ -108,7 +104,6 @@ tvheadend -C
 ```
 
 * Enable tvheadend services via:
-
 ```
 sudo xbian-config
 ```
