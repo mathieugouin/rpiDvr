@@ -39,8 +39,8 @@ TBD: There seems to be many possible location to set the timezone.
 dpkg-reconfigure tzdata
 ```
 * Kodi:
-** System > Config > TBD > TZ
-** System > Config > XBian > TBD > TZ
+  * System > Config > TBD > TZ
+  * System > Config > XBian > TBD > TZ
 
 ### Builds
 
