@@ -25,21 +25,21 @@ scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 ```
 
 ### Disabling WIFI power saving
-
- sudo vi /etc/network/interfaces
-
+```
+sudo vi /etc/network/interfaces
+```
 Add the following line anywhere in the file:
-
- wireless-power off
-
+```
+wireless-power off
+```
 ### Set proper timezone
 
 TBD: There seems to be many possible location to set the timezone.
 
 * SSH:
-
- dpkg-reconfigure tzdata
-
+```
+dpkg-reconfigure tzdata
+```
 * Kodi:
 ** System > Config > TBD > TZ
 ** System > Config > XBian > TBD > TZ
@@ -47,27 +47,28 @@ TBD: There seems to be many possible location to set the timezone.
 ### Builds
 
 Enable gcc, make...
-
- sudo apt-get install build-essential
-
+```
+sudo apt-get install build-essential
+```
 ### Install perl missing libs
 
 This is required for the EPG downloader.
-
- sudo perl -MCPAN -e shell
- install JSON::XS
-
+```
+sudo perl -MCPAN -e shell
+install JSON::XS
+```
 ### MPEG-2 License
 
 Need to buy a license from http://www.raspberrypi.com/mpeg-2-license-key/
 
 For my PI, the license is:
-
- License key = 0x16baa230
-
+```
+License key = 0x16baa230
+```
 Enable via:
-
- sudo xbian-config
+```
+sudo xbian-config
+```
 
 ## Tvheadend
 
@@ -76,15 +77,19 @@ Enable via:
 * Copy zap2xml config to PI using scp.
 * Set cron job to fetch EPG daily:
 
- crontab -e
+```
+crontab -e
 
  # m  h  dom mon dow   command
    33 3  *   *   *     /home/xbian/zap2xml/runZap2Xml.sh
+```
 
 * Enable internal grabber in path:
 
- cd /usr/local/bin
- sudo ln -s /home/xbian/zap2xml/tv_grab_file
+```
+cd /usr/local/bin
+sudo ln -s /home/xbian/zap2xml/tv_grab_file
+```
 
 ### Frontend (Kodi)
 
@@ -98,12 +103,15 @@ In Kodi TV interface:
 #### Basic setup
 
 * Create default user via ssh:
-
- tvheadend -C
+```
+tvheadend -C
+```
 
 * Enable tvheadend services via:
 
- sudo xbian-config
+```
+sudo xbian-config
+```
 
 * Set proper users using the web interface: http://192.168.2.22:9981
 ** Admin:
@@ -130,9 +138,10 @@ Goto Config > DVB Input
 Goto Config > Channel/EPG
 
 * EPG Grabber tab: Set EPG frequency (advanced mode)
-
- # MGouin custom to run 04:00 after zap2xml
- 0 4 * * *
+```
+# MGouin custom to run 04:00 after zap2xml
+0 4 * * *
+```
 
 * EPG Grabber Modules tab: Enable Internal tv_grab_file
 * EPG Grabber Channels tab: Assign channels to each EPG channel
@@ -146,7 +155,9 @@ Refer to http://docs.tvheadend.org/webui/config_dvr/
 
 Goto Configuration > Recording > Profile
 
- $t$-e_%F$n.$x
+```
+$t$-e_%F$n.$x
+```
 
 ### Debugging
 
@@ -154,26 +165,32 @@ Refer to: https://tvheadend.readthedocs.org/en/latest/Appendices/command_line_op
 
 Debug command:
 
- tvheadend -d -u xbian -g xbian -c /home/xbian/.hts/tvheadend
+```
+tvheadend -d -u xbian -g xbian -c /home/xbian/.hts/tvheadend
+```
 
 Default command:
-
- tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
+```
+tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
+```
 
 ### General Infos
 
-HD Recordings: 30 min = 4165 MB
+HD Recordings:
+* 30 min = 4165 MB, 4 GB
+* 1 h = 8330 MB, 8.1 GB
 
 Recordings DB:
-
- /home/xbian/.hts/tvheadend/dvr/log
+```
+/home/xbian/.hts/tvheadend/dvr/log
+```
 
 
 ### Tuner Test
 #### Hauppauge Xbox One
 
 This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q (refer to dmesg listing below:
-
+```
   [35258.315869] usb 1-1.2: new high-speed USB device number 8 using dwc_otg
   [35258.406298] usb 1-1.2: New USB device found, idVendor=2040, idProduct=b123
   [35258.406312] usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
@@ -215,21 +232,26 @@ This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q (re
   [35259.074624] si2157 7-0060: found a 'Silicon Labs Si2157-A30'
   [35259.123494] si2157 7-0060: firmware version: 3.0.5
   [35259.123547] cx231xx 1-1.2:1.1: DVB: adapter 0 frontend 0 frequency 0 out of range (55000000..858000000)
+```
 
 ## Maintenance
 
 ### Check
 
- mount
- cat /etc/fstab
- sudo fdisk -l
- df -h
- sudo btrfs-auto-snapshot list
+```
+mount
+cat /etc/fstab
+sudo fdisk -l
+df -h
+sudo btrfs-auto-snapshot list
+```
 
 Remove snapshots:
 
- sudo -i
- btrfs-auto-snapshot list | grep -v /@$ | grep auto-snap | xargs -L1 btrfs-auto-snapshot destroy
+```
+sudo -i
+btrfs-auto-snapshot list | grep -v /@$ | grep auto-snap | xargs -L1 btrfs-auto-snapshot destroy
+```
 
 ### Correction
 
