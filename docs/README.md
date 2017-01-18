@@ -21,6 +21,7 @@ scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
 ```
 
 File copy *to* PI:
+
 ```
 scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 ```
@@ -104,6 +105,7 @@ sudo ln -s /home/xbian/zap2xml/tv_grab_file
 ### Frontend (Kodi)
 
 In Kodi TV interface:
+
 * Install *Tvheadend HTSP Client*
 * Config: point to localhost
 
@@ -125,11 +127,11 @@ sudo xbian-config
 
 * Set proper users using the web interface: http://192.168.2.22:9981
   * Admin:
-    * tvheadend
-    * xxxxx
+    * ```tvheadend```
+    * ```xxxxx```
   * User:
-    * <blank>
-    * <blank>
+    * ```<blank>```
+    * ```<blank>```
 
 * Goto Config > General > Base, set User interface level to Expert.
 
@@ -189,6 +191,7 @@ tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
 ### General Infos
 
 HD Recordings:
+
 * 30 min = 4165 MB, 4 GB
 * 1 h = 8330 MB, 8.1 GB
 
