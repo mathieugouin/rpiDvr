@@ -9,10 +9,13 @@ The following rough guide applies to XBian.
 ### SSH
 
 Connect:
+
 ```
 ssh xbian@192.168.2.22
 ```
+
 File copy *from* PI:
+
 ```
 scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
 ```
@@ -23,21 +26,27 @@ scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 ```
 
 ### Disabling WIFI power saving
+
 ```
 sudo vi /etc/network/interfaces
 ```
+
 Add the following line anywhere in the file:
+
 ```
 wireless-power off
 ```
+
 ### Set proper timezone
 
 TBD: There seems to be many possible location to set the timezone.
 
 * SSH:
+
 ```
 dpkg-reconfigure tzdata
 ```
+
 * Kodi:
   * System > Config > TBD > TZ
   * System > Config > XBian > TBD > TZ
@@ -45,25 +54,28 @@ dpkg-reconfigure tzdata
 ### Builds
 
 Enable gcc, make...
+
 ```
 sudo apt-get install build-essential
 ```
+
 ### Install perl missing libs
 
 This is required for the EPG downloader.
+
 ```
 sudo perl -MCPAN -e shell
 install JSON::XS
 ```
+
 ### MPEG-2 License
 
 Need to buy a license from http://www.raspberrypi.com/mpeg-2-license-key/
 
-For my PI, the license is:
-```
-License key = 0x16baa230
-```
+For my PI, the license is: ```0x16baa230```
+
 Enable via:
+
 ```
 sudo xbian-config
 ```
@@ -83,6 +95,7 @@ crontab -e
 ```
 
 * Enable internal grabber in path:
+
 ```
 cd /usr/local/bin
 sudo ln -s /home/xbian/zap2xml/tv_grab_file
@@ -99,24 +112,26 @@ In Kodi TV interface:
 #### Basic setup
 
 * Create default user via ssh:
+
 ```
 tvheadend -C
 ```
 
 * Enable tvheadend services via:
+
 ```
 sudo xbian-config
 ```
 
 * Set proper users using the web interface: http://192.168.2.22:9981
-** Admin:
-*** tvheadend
-*** xxxxx
-** User:
-*** <blank>
-*** <blank>
+  * Admin:
+    * tvheadend
+    * xxxxx
+  * User:
+    * <blank>
+    * <blank>
 
-Goto Config > General > Base, set User interface level to Expert.
+* Goto Config > General > Base, set User interface level to Expert.
 
 #### Channel setup
 
@@ -133,6 +148,7 @@ Goto Config > DVB Input
 Goto Config > Channel/EPG
 
 * EPG Grabber tab: Set EPG frequency (advanced mode)
+
 ```
 # MGouin custom to run 04:00 after zap2xml
 0 4 * * *
@@ -165,6 +181,7 @@ tvheadend -d -u xbian -g xbian -c /home/xbian/.hts/tvheadend
 ```
 
 Default command:
+
 ```
 tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
 ```
@@ -175,16 +192,19 @@ HD Recordings:
 * 30 min = 4165 MB, 4 GB
 * 1 h = 8330 MB, 8.1 GB
 
-Recordings DB:
+Recordings are stored in a textual DB:
+
 ```
 /home/xbian/.hts/tvheadend/dvr/log
 ```
 
 
 ### Tuner Test
+
 #### Hauppauge Xbox One
 
 This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q (refer to dmesg listing below:
+
 ```
   [35258.315869] usb 1-1.2: new high-speed USB device number 8 using dwc_otg
   [35258.406298] usb 1-1.2: New USB device found, idVendor=2040, idProduct=b123
