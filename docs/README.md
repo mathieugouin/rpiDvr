@@ -71,7 +71,7 @@ install JSON::XS
 
 ### MPEG-2 License
 
-Need to buy a license from http://www.raspberrypi.com/mpeg-2-license-key/
+Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
 
 For my PI, the license is: ```0x16baa230```
 
@@ -125,7 +125,7 @@ tvheadend -C
 sudo xbian-config
 ```
 
-* Set proper users using the web interface: http://192.168.2.22:9981
+* Set proper users using the web interface: <http://192.168.2.22:9981>
   * Admin:
     * ```tvheadend```
     * ```xxxxx```
@@ -137,7 +137,7 @@ sudo xbian-config
 
 #### Channel setup
 
-The following is done using the web interface: http://192.168.2.22:9981 while logged in as admin.
+The following is done using the web interface: <http://192.168.2.22:9981> while logged in as admin.
 
 Goto Config > DVB Input
 
@@ -164,7 +164,7 @@ Goto Config > Channel/EPG
 
 Possible file naming scheme:
 
-Refer to http://docs.tvheadend.org/webui/config_dvr/
+Refer to <http://docs.tvheadend.org/webui/config_dvr/>
 
 Goto Configuration > Recording > Profile
 
@@ -174,7 +174,7 @@ $t$-e_%F$n.$x
 
 ### Debugging
 
-Refer to: https://tvheadend.readthedocs.org/en/latest/Appendices/command_line_options/
+Refer to: <https://tvheadend.readthedocs.org/en/latest/Appendices/command_line_options/>
 
 Debug command:
 
@@ -277,13 +277,13 @@ TBD? btrfs how to check for filesystem integrity?
 
 ## References
 
-* https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital
-* https://en.wikipedia.org/wiki/List_of_United_States_stations_available_in_Canada
-* https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies
-* http://docs.tvheadend.org/before_you_begin/
-* http://kodi.wiki/view/Tvheadend_PVR
-* http://www.tvfool.com
-* https://github.com/mathieugouin/rpiDvr
-* http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/
-* https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi
+* <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital>
+* <https://en.wikipedia.org/wiki/List_of_United_States_stations_available_in_Canada>
+* <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
+* <http://docs.tvheadend.org/before_you_begin/>
+* <http://kodi.wiki/view/Tvheadend_PVR>
+* <http://www.tvfool.com>
+* <https://github.com/mathieugouin/rpiDvr>
+* <http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/>
+* <https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi>
 
