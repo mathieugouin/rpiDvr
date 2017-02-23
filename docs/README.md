@@ -282,6 +282,7 @@ TBD? btrfs how to check for filesystem integrity?
 * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 * <http://docs.tvheadend.org/before_you_begin/>
 * <http://kodi.wiki/view/Tvheadend_PVR>
+* <http://wiki.xbian.org/doku.php/snapshots>
 * <http://www.tvfool.com>
 * <https://github.com/mathieugouin/rpiDvr>
 * <http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/>
