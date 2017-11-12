@@ -38,6 +38,14 @@ Add the following line anywhere in the file:
 wireless-power off
 ```
 
+### Clean Icons Cache
+When changing tvheadend channel icons, it is required to clean the cache to force Kodi to reload the new icons
+```
+rm $HOME/.kodi/userdata/Thumbnails/*/*.png
+rm $HOME/.kodi/userdata/Database/Textures13.db
+sudo reboot
+```
+
 ### Set proper timezone
 
 TBD: There seems to be many possible location to set the timezone.
