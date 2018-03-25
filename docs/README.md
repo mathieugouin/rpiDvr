@@ -121,7 +121,7 @@ sudo ln -s /home/xbian/zap2xml/tv_grab_file
 
 In Kodi TV interface:
 
-* Install *Tvheadend HTSP Client*
+* Install/Enable *Tvheadend HTSP Client*
 * Config: point to localhost
 
 ### Backend (tvheadend)
@@ -145,7 +145,7 @@ sudo xbian-config
     * ```tvheadend```
     * ```xxxxx```
   * User:
-    * ```<blank>```
+    * ```*```
     * ```<blank>```
 
 * Goto Config > General > Base, set User interface level to Expert.
