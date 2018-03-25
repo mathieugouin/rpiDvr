@@ -44,8 +44,11 @@
 # Need to CD first...
 cd "$(dirname "$0")"
 
-OUTPUT_LOG=runZap2Xml.log
-#OUTPUT_LOG=/dev/null
+#OUTPUT_LOG=runZap2Xml.log
+OUTPUT_LOG=/dev/null
+
+#OUTPUT_DEBUG_LOG=runZap2Xml.debug.log
+OUTPUT_DEBUG_LOG=/dev/null
 
 BACKUP_FOLDER=bak
 TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
@@ -53,25 +56,22 @@ TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
 echo "########## START ##########" >> $OUTPUT_LOG
 echo $(date) >> $OUTPUT_LOG
 
-# OLD TEST COMMANDS
-# Working command: no need to login
-#./zap2xml.pl -d 14 -i iconsZap -e -D -I -Z J3Z1E1 -Y PC:J3Z1
-# normal test w/ login & icons
-#./zap2xml.pl -u XXX@gmail.com -p XXX -d 14 -N 1 -i iconsZap -U
+echo "########## START ##########" >> $OUTPUT_DEBUG_LOG
+echo $(date) >> $OUTPUT_DEBUG_LOG
 
 # normal test w/ login (no icons)
 # 14 days of EPG data
-# 2 days of no cache data from start
+# 3 days of no cache data from start
 # Copy movie year to subtitle
 # Use UTF-8 encoding
-./zap2xml.pl -u XXX@gmail.com -p XXX -d 14 -N 2 -M -U
+./zap2xml.pl -u xxx@gmail.com -p xxx -d 14 -N 3 -M -U >> $OUTPUT_DEBUG_LOG 2>&1
 
 # Correct bad encoding
 ./correctBadEncoding.py < xmltv.xml > xmltv.xml.new
 mv -f xmltv.xml.new xmltv.xml
 
 # Correct the bad categories
-./category-update.pl < xmltv.xml > xmltv.xml.new
+./category-update.pl < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
 mv -f xmltv.xml.new xmltv.xml
 
 # Backup new xmltv.xml for debug purposes
@@ -82,3 +82,7 @@ find ./$BACKUP_FOLDER -name "*.xml" -mtime +15 -type f -delete
 
 echo $(date) >> $OUTPUT_LOG
 echo "########## STOP ##########" >> $OUTPUT_LOG
+
+echo $(date) >> $OUTPUT_DEBUG_LOG
+echo "########## STOP ##########" >> $OUTPUT_DEBUG_LOG
+

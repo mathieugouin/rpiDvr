@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+use List::Util 'any';
+
 #
 # The categories recognized by tvheadend (see epg.c)
 #
@@ -83,16 +85,99 @@ my $COOKING           =    "Cooking";
 my $SHOPPING          =    "Advertisement / Shopping";
 my $GARDENING         =    "Gardening";
 
+
+#
+# Array containing all default tvheadend category supported
+#
+my @TVH_CATEGORY = (
+  $MOVIE             ,
+  $THRILLER          ,
+  $ADVENTURE         ,
+  $SF                ,
+  $COMEDY            ,
+  $SOAP              ,
+  $ROMANCE           ,
+  $HISTORICAL        ,
+  $XXX               ,
+
+  $NEWS              ,
+  $WEATHER           ,
+  $NEWS_MAGAZINE     ,
+  $DOCUMENTARY       ,
+  $DEBATE            ,
+  $INTERVIEW         ,
+
+  $SHOW              ,
+  $GAME              ,
+  $VARIETY           ,
+  $TALKSHOW          ,
+
+  $SPORT             ,
+  $SPORT_SPECIAL     ,
+  $SPORT_MAGAZINE    ,
+  $FOOTBALL          ,
+  $TENNIS            ,
+  $SPORT_TEAM        ,
+  $ATHLETICS         ,
+  $SPORT_MOTOR       ,
+  $SPORT_WATER       ,
+
+  $KIDS              ,
+  $KIDS_0_5          ,
+  $KIDS_6_14         ,
+  $KIDS_10_16        ,
+  $EDUCATIONAL       ,
+  $CARTOON           ,
+
+  $MUSIC             ,
+  $ROCK_POP          ,
+  $CLASSICAL         ,
+  $FOLK              ,
+  $JAZZ              ,
+  $OPERA             ,
+
+  $CULTURE           ,
+  $PERFORMING        ,
+  $FINE_ARTS         ,
+  $RELIGION          ,
+  $POPULAR_ART       ,
+  $LITERATURE        ,
+  $FILM              ,
+  $EXPERIMENTAL_FILM ,
+  $BROADCASTING      ,
+
+  $SOCIAL            ,
+  $MAGAZINE          ,
+  $ECONOMIC          ,
+  $VIP               ,
+
+  $SCIENCE           ,
+  $NATURE            ,
+  $TECHNOLOGY        ,
+  $MEDECINE          ,
+  $FOREIGN           ,
+  $SPIRITUAL         ,
+  $FURTHER_EDUCATION ,
+  $LANGUAGES         ,
+
+  $HOBBIES           ,
+  $TRAVEL            ,
+  $HANDICRAF         ,
+  $MOTORING          ,
+  $FITNESS           ,
+  $COOKING           ,
+  $SHOPPING          ,
+  $GARDENING         ,
+  );
+
 #
 # This is the mapping from the source
 #
-
 my %REPLACE=(
+  "Family"              => $KIDS ,
   "Movie"               => $MOVIE ,
   "News"                => $NEWS ,
-  "Series"              => $SHOW ,
-  "Sports"              => $SPORT , # no change for this one
-  "Children"            => $KIDS ,
+  "Talk"                => $TALKSHOW ,
   );
 
 my $PRE  = '<category lang=\"en\">' ;
@@ -100,8 +185,10 @@ my $POST = '</category>'  ;
 
 sub myfilter {
   my ($a) = @_;
-  if ( exists $REPLACE{$a} ) {
+  if ( exists $REPLACE{$a} ) { # a replacement is available
     return $REPLACE{$a} ;
+  } elsif ( any { /^$a$/ } @TVH_CATEGORY ) { # match default tvheadend categories, no changes required
+    return $a ;
   } else {
     print STDERR "Warning: Unmanaged category: '$a'\n" ;
     return $a ;

@@ -6,3 +6,4 @@ cd ..
 cd iconsZap
 rm -f *
 cd ..
+
