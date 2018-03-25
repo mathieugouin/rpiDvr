@@ -78,6 +78,7 @@ install JSON::XS
 install HTML::Parser
 install HTTP::Cookies
 install LWP::UserAgent
+install JSON
 ```
 
 ### MPEG-2 License
