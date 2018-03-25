@@ -75,6 +75,8 @@ This is required for the EPG downloader.
 ```
 sudo perl -MCPAN -e shell
 install JSON::XS
+install HTML::Parser
+install HTTP::Cookies
 ```
 
 ### MPEG-2 License
