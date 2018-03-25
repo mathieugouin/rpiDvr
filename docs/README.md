@@ -72,13 +72,12 @@ sudo apt-get install build-essential
 
 This is required for the EPG downloader.
 
+Note: should install tvheadend first (lots of perl lib will be installed at the same time)
+
 ```
 sudo perl -MCPAN -e shell
 install JSON::XS
 install HTML::Parser
-install HTTP::Cookies
-install LWP::UserAgent
-install JSON
 ```
 
 ### MPEG-2 License
@@ -94,6 +93,10 @@ sudo xbian-config
 ```
 
 ## Tvheadend
+
+```
+sudo apt install xbian-package-tvheadend
+```
 
 ### EPG Downloader
 
@@ -137,7 +140,7 @@ tvheadend -C
 sudo xbian-config
 ```
 
-* Set proper users using the web interface: <http://192.168.2.22:9981>
+* Set proper users using the web interface: <http://192.168.1.22:9981>
   * Admin:
     * ```tvheadend```
     * ```xxxxx```
@@ -149,7 +152,7 @@ sudo xbian-config
 
 #### Channel setup
 
-The following is done using the web interface: <http://192.168.2.22:9981> while logged in as admin.
+The following is done using the web interface: <http://192.168.1.22:9981> while logged in as admin.
 
 Goto Config > DVB Input
 
