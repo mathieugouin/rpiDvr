@@ -77,6 +77,7 @@ sudo perl -MCPAN -e shell
 install JSON::XS
 install HTML::Parser
 install HTTP::Cookies
+install LWP::UserAgent
 ```
 
 ### MPEG-2 License
