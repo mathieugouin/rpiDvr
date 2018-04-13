@@ -107,7 +107,7 @@ sudo apt install xbian-package-tvheadend
 crontab -e
 
  # m  h  dom mon dow   command
-   33 3  *   *   *     /home/xbian/zap2xml/runZap2Xml.sh
+   33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
 ```
 
 * Enable internal grabber in path:
@@ -221,7 +221,9 @@ Recordings are stored in a textual DB:
 
 #### Hauppauge Xbox One
 
-This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q (refer to dmesg listing below:
+Install the firware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/>
+
+This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  Refer to dmesg listing below:
 
 ```
   [35258.315869] usb 1-1.2: new high-speed USB device number 8 using dwc_otg
@@ -302,4 +304,5 @@ TBD? btrfs how to check for filesystem integrity?
 * <https://github.com/mathieugouin/rpiDvr>
 * <http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/>
 * <https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi>
+* <https://linuxtv.org/downloads/firmware/>
 
