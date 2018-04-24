@@ -1,0 +1,1 @@
+Folder location for the backup of xmltv.xml files.
