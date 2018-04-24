@@ -933,7 +933,7 @@ sub getURL {
     my $dc = $r->decoded_content( raise_error => 1 );
     if ($r->is_success && $cl) {
       return $dc;
-    } elsif ($r->code == 400 && $dc =~ /Invalid time stamp passed/) {
+    } elsif ($r->code == 400 && $dc =~ /Invalid time/) {
       &pout("$dc\n");
       &pout("Date not in range (reached zap2it limit), normal exit.\n");
       return "";
@@ -1518,7 +1518,7 @@ sub min ($$) { $_[$_[0] > $_[1]] }
 
 sub HELP_MESSAGE {
 print <<END;
-zap2xml <zap2xml\@gmail.com> (2018-01-12)
+zap2xml <zap2xml\@gmail.com> (2018-04-22)
   -u <username>
   -p <password>
   -d <# of days> (default = $days)
