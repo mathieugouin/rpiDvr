@@ -29,7 +29,7 @@
 #   -L = output "<live />" tag (not part of xmltv.dtd)
 #   -T = don't cache files containing programs with "\bTBA\b|To Be Announced" titles
 #   -P <http://proxyhost:port> = to use an http proxy
-#   -C <configuration file> (default = "/home/mgouin/.zap2xmlrc")
+#   -C <configuration file> (default = "/home/user/.zap2xmlrc")
 #   -S <#seconds> = sleep between requests to prevent flooding of server
 #   -D = include details = 1 extra http request per program!
 #   -I = include icons (image URLs) - 1 extra http request per program!
@@ -59,7 +59,8 @@ echo $(date) >> $OUTPUT_LOG
 echo "########## START ##########" >> $OUTPUT_DEBUG_LOG
 echo $(date) >> $OUTPUT_DEBUG_LOG
 
-# normal test w/ login (no icons)
+# w/ login
+# no icons
 # 14 days of EPG data
 # 3 days of no cache data from start
 # Copy movie year to subtitle
@@ -67,7 +68,7 @@ echo $(date) >> $OUTPUT_DEBUG_LOG
 ./zap2xml.pl -u xxx@gmail.com -p xxx -d 14 -N 3 -M -U >> $OUTPUT_DEBUG_LOG 2>&1
 
 # Correct bad encoding
-./correctBadEncoding.py < xmltv.xml > xmltv.xml.new
+./correctBadEncoding.py < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
 mv -f xmltv.xml.new xmltv.xml
 
 # Correct the bad categories
