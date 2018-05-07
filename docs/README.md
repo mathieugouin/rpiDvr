@@ -100,7 +100,8 @@ sudo apt install xbian-package-tvheadend
 
 ### EPG Downloader
 
-* Copy zap2xml config to PI using scp.
+* install git: `sudo apt install git`
+* git clone: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
 * Set cron job to fetch EPG daily:
 
 ```
@@ -114,7 +115,7 @@ crontab -e
 
 ```
 cd /usr/local/bin
-sudo ln -s /home/xbian/zap2xml/tv_grab_file
+sudo ln -s /home/xbian/rpiDvr/zap2xml/tv_grab_file
 ```
 
 ### Frontend (Kodi)
@@ -305,4 +306,5 @@ TBD? btrfs how to check for filesystem integrity?
 * <http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/>
 * <https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi>
 * <https://linuxtv.org/downloads/firmware/>
+* <http://zap2xml.awardspace.info/>
 
