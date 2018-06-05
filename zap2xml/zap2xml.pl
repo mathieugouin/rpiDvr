@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # zap2xml (c) <zap2xml@gmail.com> - for personal use only!
 # not for redistribution of any kind, or conversion to other languages,
-# not GPL. not for github, thank you. 
+# not GPL. not for github, thank you.
 
 BEGIN { $SIG{__DIE__} = sub { 
   return if $^S;
@@ -43,6 +43,9 @@ no warnings 'utf8';
 
 STDOUT->autoflush(1);
 STDERR->autoflush(1);
+
+$VERSION = "2018-06-03";
+print "zap2xml ($VERSION)\nCommand line: $0 " .  join(" ",@ARGV) . "\n";
 
 %options=();
 getopts("?aA:bB:c:C:d:DeE:Fgi:IjJ:l:Lm:Mn:N:o:Op:P:qRr:s:S:t:Tu:UwWxY:zZ:89",\%options);
@@ -218,7 +221,9 @@ if (defined($options{z})) {
       &login() if !defined($zlineupId);
       my $duration = $gridHours * 60;
       my $tvgstart = substr($ms, 0, -3);
-      $rc = Encode::encode('utf8', &getURL($tvgurlRoot . "Listingsweb/ws/rest/schedules/$zlineupId/start/$tvgstart/duration/$duration"));
+      $rs = &getURL($tvgurlRoot . "Listingsweb/ws/rest/schedules/$zlineupId/start/$tvgstart/duration/$duration", 1);
+      last if ($rs eq '');
+      $rc = Encode::encode('utf8', $rs);
       &wbf($fn, Compress::Zlib::memGzip($rc));
     }
     &pout("[" . ($count+1) . "/" . "$maxCount] Parsing: $fn\n");
@@ -259,7 +264,7 @@ if (defined($options{z})) {
       $params .= &getZapGParams();
       $params .= '&TMSID=&AffiliateID=gapzap&FromPage=TV%20Grid';
       $params .= '&ActivityID=1&OVDID=&isOverride=true';
-      $rs = &getURL($urlRoot . "api/grid$params",'X-Requested-With' => 'XMLHttpRequest');
+      $rs = &getURL($urlRoot . "api/grid$params",1);
       last if ($rs eq '');
       $rc = Encode::encode('utf8', $rs);
       &wbf($fn, Compress::Zlib::memGzip($rc));
@@ -920,6 +925,7 @@ sub login {
 
 sub getURL {
   my $url = shift;
+  my $er = shift;
   &login() if !defined($ua);
 
   my $rc = 0;
@@ -933,19 +939,21 @@ sub getURL {
     my $dc = $r->decoded_content( raise_error => 1 );
     if ($r->is_success && $cl) {
       return $dc;
-    } elsif ($r->code == 400 && $dc =~ /Invalid time/) {
-      &pout("$dc\n");
-      &pout("Date not in range (reached zap2it limit), normal exit.\n");
-      return "";
     } elsif ($r->code == 500 && $dc =~ /Could not load details/) {
       &pout("$dc\n");
       return "";
     } else {
       &perr("[Attempt $rc] $cl:" . $r->status_line . "\n");
+      &perr($r->content . "\n");
       sleep ($sleeptime + 2);
     }
   }
-  die "Failed to download within $retries retries.\n";
+  &perr("Failed to download within $retries retries.\n");
+  if ($er) { 
+    &perr("Server out of data? Temporary server error? Normal exit anyway.\n");
+    return "";
+  };
+  die;
 }
 
 sub wbf {
@@ -985,7 +993,7 @@ sub handleLogo {
   $stations{$cs}{logoExt} = $s;
   $stations{$cs}{logoURL} = $url;
   my $f = $iconDir . "/" . $n . $s;
-  if (! -e $f) { &wbf($f, &getURL($url)); }
+  if (! -e $f) { &wbf($f, &getURL($url,0)); }
 }
 
 sub setOriginalAirDate {
@@ -1043,7 +1051,7 @@ sub parseTVGFavs {
 
 sub parseTVGIcons {
   require GD;
-  $rc = Encode::encode('utf8', &getURL($tvgspritesurl . "$zlineupId\.css") );
+  $rc = Encode::encode('utf8', &getURL($tvgspritesurl . "$zlineupId\.css",0) );
   if ($rc =~ /background-image:.+?url\((.+?)\)/) {
     my $url = $tvgspritesurl . $1;
 
@@ -1053,7 +1061,7 @@ sub parseTVGIcons {
 
     ($n,$_,$s) = fileparse($url, qr"\..*");
     $f = $iconDir . "/sprites-" . $n . $s;
-    &wbf($f, &getURL($url));
+    &wbf($f, &getURL($url,0));
 
     GD::Image->trueColor(1);
     $im = new GD::Image->new($f);
@@ -1226,7 +1234,7 @@ sub getDetails {
   my ($func, $cp, $url, $prefix) = @_;
   my $fn = "$cacheDir/$prefix$cp\.js\.gz";
   if (! -e $fn) {
-    my $rs = &getURL($url);
+    my $rs = &getURL($url,1);
     if (length($rs)) {
       $rc = Encode::encode('utf8', $rs);
       &wbf($fn, Compress::Zlib::memGzip($rc));
@@ -1518,7 +1526,7 @@ sub min ($$) { $_[$_[0] > $_[1]] }
 
 sub HELP_MESSAGE {
 print <<END;
-zap2xml <zap2xml\@gmail.com> (2018-04-22)
+zap2xml <zap2xml\@gmail.com> ($VERSION)
   -u <username>
   -p <password>
   -d <# of days> (default = $days)
