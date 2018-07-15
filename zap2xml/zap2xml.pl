@@ -44,7 +44,7 @@ no warnings 'utf8';
 STDOUT->autoflush(1);
 STDERR->autoflush(1);
 
-$VERSION = "2018-06-03";
+$VERSION = "2018-07-11";
 print "zap2xml ($VERSION)\nCommand line: $0 " .  join(" ",@ARGV) . "\n";
 
 %options=();
@@ -158,7 +158,7 @@ $urlRoot = 'https://tvlistings.zap2it.com/';
 $urlAssets = 'https://zap2it.tmsimg.com/assets/';
 $tvgurlRoot = 'http://mobilelistings.tvguide.com/';
 $tvgMapiRoot = 'http://mapi.tvguide.com/';
-$tvgurl = 'http://www.tvguide.com/';
+$tvgurl = 'https://www.tvguide.com/';
 $tvgspritesurl = 'http://static.tvgcdn.net/sprites/';
 $retries = 20 if $retries > 20; # Too many
 
@@ -169,6 +169,7 @@ my $cs;
 my $rcs;
 my %schedule = ();
 my $sch;
+my %logos = ();
 
 my $coNum = 0;
 my $tb = 0;
@@ -677,11 +678,6 @@ sub printStationsXTVD {
       print $FH "\t\t<callSign>" . $sname . "</callSign>\n";
       print $FH "\t\t<name>" . $sname . "</name>\n";
       print $FH "\t\t<fccChannelNumber>" . $stations{$key}{number} . "</fccChannelNumber>\n";
-      if (defined($stations{$key}{logo}) && $stations{$key}{logo} =~ /_affiliate/i) {
-        $affiliate = $stations{$key}{logo};
-        $affiliate =~ s/(.*)\_.*/uc($1)/e;
-        print $FH "\t\t<affiliate>" . $affiliate . " Affiliate</affiliate>\n";
-      }
       &copyLogo($key);
     }
     print $FH "\t</station>\n";
@@ -773,7 +769,7 @@ sub printGenresXTVD {
 
 sub loginTVG {
   $treq++;
-  my $r = $ua->get($tvgurl . 'user/_modal/');
+  my $r = $ua->get($tvgurl . 'signin/');
   if ($r->is_success) {
     my $str = $r->decoded_content;
     if ($str =~ /<input.+name=\"_token\".+?value=\"(.*?)\"/is) {
@@ -801,7 +797,7 @@ sub loginTVG {
             }
             return $dc; 
           } else {
-            &pout("[Attempt $rc] " . $dc . "\n");
+            &pout("[Attempt $rc] " . $r->status_line . ":"  . $dc . "\n");
             sleep ($sleeptime + 1);
           }
         }
@@ -971,12 +967,13 @@ sub unf {
 
 sub copyLogo {
   my $key = shift;
-  if (defined($iconDir) && defined($stations{$key}{logo})) {
+  my $cid = substr($key, rindex($key, ".")+1);
+  if (defined($iconDir) && defined($logos{$cid}{logo})) {
     my $num = $stations{$key}{number};
-    my $src = "$iconDir/" . $stations{$key}{logo} . $stations{$key}{logoExt};
-    my $dest1 = "$iconDir/$num" . $stations{$key}{logoExt};
-    my $dest2 = "$iconDir/$num " . $stations{$key}{name} . $stations{$key}{logoExt};
-    my $dest3 = "$iconDir/$num\_" . $stations{$key}{name} . $stations{$key}{logoExt};
+    my $src = "$iconDir/" . $logos{$cid}{logo} . $logos{$cid}{logoExt};
+    my $dest1 = "$iconDir/$num" . $logos{$cid}{logoExt};
+    my $dest2 = "$iconDir/$num " . $stations{$key}{name} . $logos{$cid}{logoExt};
+    my $dest3 = "$iconDir/$num\_" . $stations{$key}{name} . $logos{$cid}{logoExt};
     copy($src, $dest1);
     copy($src, $dest2);
     copy($src, $dest3);
@@ -989,8 +986,6 @@ sub handleLogo {
     mkdir($iconDir) or die "Can't mkdir: $!\n";
   }
   my $n; my $s;  ($n,$_,$s) = fileparse($url, qr"\..*");
-  $stations{$cs}{logo} = $n;
-  $stations{$cs}{logoExt} = $s;
   $stations{$cs}{logoURL} = $url;
   my $f = $iconDir . "/" . $n . $s;
   if (! -e $f) { &wbf($f, &getURL($url,0)); }
@@ -1078,10 +1073,10 @@ sub parseTVGIcons {
       $icon->saveAlpha(1);
       $icon->copy($im, 0, 0, $iconx, $icony, $iconw, $iconh);
 
-      $stations{$cid}{logo} = "sprite-" . $cid;
-      $stations{$cid}{logoExt} = $s;
+      $logos{$cid}{logo} = "sprite-" . $cid;
+      $logos{$cid}{logoExt} = $s;
 
-      my $ifn = $iconDir . "/" . $stations{$cid}{logo} . $stations{$cid}{logoExt};
+      my $ifn = $iconDir . "/" . $logos{$cid}{logo} . $logos{$cid}{logoExt};
       &wbf($ifn, $icon->png);
     }
   }
