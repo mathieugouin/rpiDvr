@@ -34,6 +34,7 @@ use HTTP::Cookies;
 use URI;
 use URI::Escape;
 use LWP::UserAgent;
+use LWP::ConnCache;
 use POSIX;
 use Time::Local;
 use Time::Piece;
@@ -44,7 +45,7 @@ no warnings 'utf8';
 STDOUT->autoflush(1);
 STDERR->autoflush(1);
 
-$VERSION = "2018-07-11";
+$VERSION = "2018-12-01";
 print "zap2xml ($VERSION)\nCommand line: $0 " .  join(" ",@ARGV) . "\n";
 
 %options=();
@@ -174,6 +175,7 @@ my %logos = ();
 my $coNum = 0;
 my $tb = 0;
 my $treq = 0;
+my $tsocks = ();
 my $expired = 0;
 my $ua;
 my $tba = 0;
@@ -289,8 +291,10 @@ if (defined($options{z})) {
 
 }
 my $s2 = time();
-
-&pout("Downloaded $tb bytes in $treq http requests.\n") if $tb > 0;
+my $tsockt = scalar(keys %tsocks);
+&pout("Downloaded " . &pl($tb, "byte") 
+  . " in " . &pl($treq, "http request") 
+  . " using " . &pl($tsockt > 0 ? $tsockt : $treq, "socket") . ".\n") if $tb > 0;
 &pout("Expired programs: $expired\n") if $expired > 0;
 &pout("Writing XML file: $outFile\n");
 open($FH, ">$outFile");
@@ -345,6 +349,12 @@ sub incXML {
     }
   }
   close($XF);
+}
+
+sub pl {
+ my($i, $s) = @_;
+ my $r = "$i $s";
+ return $i == 1 ? $r : $r . "s";
 }
 
 sub pout {
@@ -768,8 +778,7 @@ sub printGenresXTVD {
 }
 
 sub loginTVG {
-  $treq++;
-  my $r = $ua->get($tvgurl . 'signin/');
+  my $r = &ua_get($tvgurl . 'signin/');
   if ($r->is_success) {
     my $str = $r->decoded_content;
     if ($str =~ /<input.+name=\"_token\".+?value=\"(.*?)\"/is) {
@@ -777,7 +786,7 @@ sub loginTVG {
       if ($userEmail ne '' && $password ne '') {
         my $rc = 0;
         while ($rc++ < $retries) {
-          my $r = $ua->post($tvgurl . 'user/attempt/', 
+          my $r = &ua_post($tvgurl . 'user/attempt/', 
             { 
               _token => $token,
               email => $userEmail, 
@@ -789,7 +798,7 @@ sub loginTVG {
           if ($dc =~ /success/) {
             $ua->cookie_jar->scan(sub { if ($_[1] eq "ServiceID") { $zlineupId = $_[2]; }; }); 
             if (!defined($options{a})) {
-              my $r = $ua->get($tvgurl . "user/favorites/?provider=$zlineupId",'X-Requested-With' => 'XMLHttpRequest'); 
+              my $r = &ua_get($tvgurl . "user/favorites/?provider=$zlineupId",'X-Requested-With' => 'XMLHttpRequest'); 
               $dc = Encode::encode('utf8', $r->decoded_content( raise_error => 1 ));
               if ($dc =~ /\{\"code\":200/) {
                 &parseTVGFavs($dc);
@@ -812,8 +821,7 @@ sub loginTVG {
 sub loginZAP {
   my $rc = 0;
   while ($rc++ < $retries) {
-    $treq++;
-    my $r = $ua->post($urlRoot . 'api/user/login', 
+    my $r = &ua_post($urlRoot . 'api/user/login', 
       { 
         emailid => $userEmail, password => $password,
         usertype => '0', facebookuser =>'false',
@@ -838,7 +846,7 @@ sub loginZAP {
       $country = $prs->{2003};
       ($lineupId, $device) = split(/:/, $prs->{2004});
       if (!defined($options{a})) {
-        my $r = $ua->post($urlRoot . "api/user/favorites", { token => $zapToken }, 'X-Requested-With' => 'XMLHttpRequest'); 
+        my $r = &ua_post($urlRoot . "api/user/favorites", { token => $zapToken }, 'X-Requested-With' => 'XMLHttpRequest'); 
         $dc = Encode::encode('utf8', $r->decoded_content( raise_error => 1 ));
         if ($r->is_success) {
           &parseZFavs($dc);
@@ -900,7 +908,8 @@ sub login {
   }
 
   if (!defined($ua)) {
-    $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 }); # WIN 
+    $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 }); # WIN
+    $ua->conn_cache(LWP::ConnCache->new( total_capacity => undef ));
     $ua->cookie_jar(HTTP::Cookies->new);
     $ua->proxy(['http', 'https'], $proxy) if defined($proxy);
     $ua->agent('Mozilla/4.0');
@@ -919,6 +928,29 @@ sub login {
   }
 }
 
+sub ua_stats {
+  my ($s, @p) = @_;
+  my $r;
+  if ($s eq 'POST') {
+    $r = $ua->post(@p);
+  } else { 
+    $r = $ua->get(@p);
+  }
+  my $cc = $ua->conn_cache;
+  if (defined($cc)) {
+    my @cxns = $cc->get_connections();
+    foreach (@cxns) {
+      $tsocks{$_} = 1;
+    }
+  }
+  $treq++;
+  $tb += length($r->content);
+  return $r;
+}
+
+sub ua_get { return &ua_stats('GET', @_); }
+sub ua_post { return &ua_stats('POST', @_); }
+
 sub getURL {
   my $url = shift;
   my $er = shift;
@@ -928,10 +960,8 @@ sub getURL {
   while ($rc++ < $retries) {
     &pout("[$treq] Getting: $url\n");
     sleep $sleeptime; # do these rapid requests flood servers?
-    $treq++;
-    my $r = $ua->get($url);
+    my $r = &ua_get($url);
     my $cl = length($r->content);
-    $tb += $cl;
     my $dc = $r->decoded_content( raise_error => 1 );
     if ($r->is_success && $cl) {
       return $dc;
@@ -967,7 +997,10 @@ sub unf {
 
 sub copyLogo {
   my $key = shift;
-  my $cid = substr($key, rindex($key, ".")+1);
+  my $cid = $key;
+  if (!defined($logos{$cid}{logo})) {
+     $cid = substr($key, rindex($key, ".")+1);
+  }
   if (defined($iconDir) && defined($logos{$cid}{logo})) {
     my $num = $stations{$key}{number};
     my $src = "$iconDir/" . $logos{$cid}{logo} . $logos{$cid}{logoExt};
@@ -987,6 +1020,8 @@ sub handleLogo {
   }
   my $n; my $s;  ($n,$_,$s) = fileparse($url, qr"\..*");
   $stations{$cs}{logoURL} = $url;
+  $logos{$cs}{logo} = $n;
+  $logos{$cs}{logoExt} = $s;
   my $f = $iconDir . "/" . $n . $s;
   if (! -e $f) { &wbf($f, &getURL($url,0)); }
 }
@@ -1012,7 +1047,7 @@ sub parseZFavs {
     my $m = $t->{'channels'};
     foreach my $f (@{$m}) {
       if ($options{R}) {
-        my $r = $ua->post($urlRoot . "api/user/ChannelAddtofav", { token => $zapToken, prgsvcid => $f, addToFav => "false" }, 'X-Requested-With' => 'XMLHttpRequest');
+        my $r = &ua_post($urlRoot . "api/user/ChannelAddtofav", { token => $zapToken, prgsvcid => $f, addToFav => "false" }, 'X-Requested-With' => 'XMLHttpRequest');
         if ($r->is_success) {
           &pout("Removed favorite $f\n");
         } else {
@@ -1380,13 +1415,10 @@ sub postJSONO {
     my $url = $urlRoot . 'api/program/overviewDetails';
     &pout("[$treq] Post $sid: $url\n");
     sleep $sleeptime; # do these rapid requests flood servers?
-    $treq++;
     my %phash = &getZapPParams();
     $phash{programSeriesID} = $sid;
     $phash{'clickstream[FromPage]'} = 'TV%20Grid';
-    my $r = $ua->post($url, \%phash, 'X-Requested-With' => 'XMLHttpRequest'); 
-    my $cl = length($r->content);
-    $tb += $cl;
+    my $r = &ua_post($url, \%phash, 'X-Requested-With' => 'XMLHttpRequest'); 
     if ($r->is_success) {
       $dc = Encode::encode('utf8', $r->decoded_content( raise_error => 1 ));
       &wbf($fn, Compress::Zlib::memGzip($dc));
