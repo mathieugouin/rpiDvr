@@ -44,11 +44,11 @@
 # Need to CD first...
 cd "$(dirname "$0")"
 
-#OUTPUT_LOG=runZap2Xml.log
-OUTPUT_LOG=/dev/null
+OUTPUT_LOG=runZap2Xml.log
+#OUTPUT_LOG=/dev/null
 
-#OUTPUT_DEBUG_LOG=runZap2Xml.debug.log
-OUTPUT_DEBUG_LOG=/dev/null
+OUTPUT_DEBUG_LOG=runZap2Xml.debug.log
+#OUTPUT_DEBUG_LOG=/dev/null
 
 BACKUP_FOLDER=bak
 TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
