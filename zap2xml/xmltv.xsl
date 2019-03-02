@@ -13,7 +13,7 @@
             <head>
                 <link rel="stylesheet" href="xmltv.css" type="text/css" />
                 <link rel="stylesheet" href="programme_categories.css" type="text/css" />
-                <title>TV Listings (TEST)</title>
+                <title>TV Listings</title>
             </head>
             <body>
                 <h1>TV Listing</h1>
@@ -142,6 +142,9 @@
             <div class="{$category_class}">
                 [<xsl:value-of select="$start_time" />-<xsl:value-of select="$stop_time" />]
                 <xsl:value-of select="title" />
+                <xsl:if test="episode-num">
+                    (<xsl:value-of select="episode-num[1]"/>)
+                </xsl:if>
             </div>
         </li>
     </xsl:template>
@@ -158,19 +161,19 @@
 
             <ul>
                 <xsl:apply-templates mode="date_group" select="
-                  key('channel_key', @channel)[
-                    generate-id()
-                    =
-                    generate-id(
-                      key(
-                        'channel_date_key',
-                        concat(
-                            @channel,
-                            ',',
-                            substring(@start,1,8))
-                      )[1]
-                    )
-                  ]
+                    key('channel_key', @channel)[
+                        generate-id()
+                        =
+                        generate-id(
+                            key(
+                                'channel_date_key',
+                                concat(
+                                    @channel,
+                                    ',',
+                                    substring(@start,1,8))
+                            )[1]
+                        )
+                    ]
                 ">
                     <xsl:sort select="substring(@start,1,14)" data-type="number" />
                 </xsl:apply-templates>

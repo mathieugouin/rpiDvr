@@ -59,13 +59,13 @@ echo $(date) >> $OUTPUT_LOG
 echo "########## START ##########" >> $OUTPUT_DEBUG_LOG
 echo $(date) >> $OUTPUT_DEBUG_LOG
 
-# w/ login
+# w/ login (user + password)
 # no icons
 # 14 days of EPG data
 # 3 days of no cache data from start
 # Copy movie year to subtitle
 # Use UTF-8 encoding
-./zap2xml.pl -u xxx@gmail.com -p xxx -d 14 -N 3 -M -U >> $OUTPUT_DEBUG_LOG 2>&1
+./zap2xml.pl -u xxx@xxx.com -p xxx -d 14 -N 3 -M -U >> $OUTPUT_DEBUG_LOG 2>&1
 
 # Correct bad encoding
 ./correctBadEncoding.py < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
@@ -74,6 +74,9 @@ mv -f xmltv.xml.new xmltv.xml
 # Correct the bad categories
 ./category-update.pl < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
 mv -f xmltv.xml.new xmltv.xml
+
+# Add xml stylesheet line
+sed -i '/<?xml version="1.0" encoding="UTF-8"?>/a <?xml-stylesheet href="xmltv.xsl" type="text/xsl" ?>' xmltv.xml
 
 # Backup new xmltv.xml for debug purposes
 cp xmltv.xml $BACKUP_FOLDER/xmltv_${TIMESTAMP}.xml
