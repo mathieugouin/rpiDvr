@@ -76,7 +76,7 @@ mv -f xmltv.xml.new xmltv.xml
 mv -f xmltv.xml.new xmltv.xml
 
 # Add xml stylesheet line
-sed -i '/<?xml version="1.0" encoding="UTF-8"?>/a <?xml-stylesheet href="xmltv.xsl" type="text/xsl" ?>' xmltv.xml
+sed -i '/<?xml version="1.0" encoding="UTF-8"?>/a <?xml-stylesheet href="xmltv.xsl" type="text/xsl"?>' xmltv.xml
 
 # Backup new xmltv.xml for debug purposes
 cp xmltv.xml $BACKUP_FOLDER/xmltv_${TIMESTAMP}.xml
