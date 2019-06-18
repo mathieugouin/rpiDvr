@@ -2,6 +2,19 @@
 
 A short introduction on how to setup a DVR using Raspberry Pi 3 to watch and record free over the air HDTV.
 
+## XBian Install
+
+Download from xbian.org.
+
+Extract downloaded file.
+
+Write to micro sd card:
+
+```
+sudo dd if=XBian_2019.06.14_rpi3.img of=/dev/sdf bs=1M
+```
+
+
 ## Initial Setup
 
 The following rough guide applies to XBian.
