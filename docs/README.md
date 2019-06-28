@@ -235,7 +235,7 @@ Recordings are stored in a textual DB:
 
 #### Hauppauge Xbox One
 
-Install the firware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/>
+Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/>
 
 This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  Refer to dmesg listing below:
 
