@@ -62,14 +62,6 @@ Add the following line anywhere in the file:
 wireless-power off
 ```
 
-### Clean Icons Cache
-When changing tvheadend channel icons, it is required to clean the cache to force Kodi to reload the new icons
-```
-rm $HOME/.kodi/userdata/Thumbnails/*/*.png
-rm $HOME/.kodi/userdata/Database/Textures13.db
-sudo reboot
-```
-
 ### Set proper timezone
 
 TBD: There seems to be many possible location to set the timezone.
@@ -241,12 +233,11 @@ Recordings are stored in a textual DB:
 /home/xbian/.hts/tvheadend/dvr/log
 ```
 
-
 ### Tuner Test
 
 #### Hauppauge Xbox One
 
-Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/>
+Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/> in /lib/firmware.
 
 This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  Refer to dmesg listing below:
 
@@ -296,11 +287,19 @@ This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  R
 
 ## Maintenance
 
-### Check
+### Clean Icons Cache
+When changing tvheadend channel icons, it is required to clean the cache to force Kodi to reload the new icons
+```
+rm $HOME/.kodi/userdata/Thumbnails/*/*.png
+rm $HOME/.kodi/userdata/Database/Textures13.db
+sudo reboot
+```
 
+### Check
 ```
 mount
 cat /etc/fstab
+lsblk
 sudo fdisk -l
 df -h
 sudo btrfs-auto-snapshot list
