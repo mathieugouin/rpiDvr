@@ -316,7 +316,7 @@ TBD? btrfs how to check for filesystem integrity?
 * <http://wiki.xbian.org/doku.php/snapshots>
 * <http://www.tvfool.com>
 * <https://github.com/mathieugouin/rpiDvr>
-* <http://www.asciidoctor.org/docs/asciidoc-syntax-quick-reference/>
 * <https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi>
 * <https://linuxtv.org/downloads/firmware/>
+* <https://www.linuxtv.org/wiki/index.php/Hauppauge_WinTV-HVR-955Q>
 * <http://zap2xml.awardspace.info/>
