@@ -55,7 +55,7 @@ sudo xbian-config
 
 * SSH:
 ```
-dpkg-reconfigure tzdata
+sudo dpkg-reconfigure tzdata
 ```
 
 ### Disabling WIFI power saving
@@ -74,13 +74,6 @@ wireless-power off
 ```
 sudo apt install xbian-package-tvheadend
 ```
-
-### Frontend (Kodi)
-
-In Kodi TV interface:
-
-* Install/Enable *Tvheadend HTSP Client*
-* Config: point to localhost
 
 ### Backend (tvheadend)
 
@@ -133,8 +126,7 @@ Goto Config > Channel/EPG
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 * Channels tab: give proper channel names
 
-### DVR Setup
-
+#### DVR Setup
 Possible file naming scheme:
 
 Refer to <http://docs.tvheadend.org/webui/config_dvr/>
@@ -145,8 +137,16 @@ Goto Configuration > Recording > Profile
 $t$-e_%F$n.$x
 ```
 
-### Install perl missing libs
+### Frontend (Kodi)
+In Kodi TV interface:
 
+* Install/Enable PVR addon: *Tvheadend HTSP Client*
+* Config: point to localhost
+
+### EPG Downloader
+A program that will fetch channel EPG nightly.
+
+#### Install perl missing libs
 This is required for the EPG downloader.
 
 Note: should install tvheadend first (lots of perl lib will be installed at the same time)
@@ -163,11 +163,10 @@ install JSON::XS
 install HTML::Parser
 ```
 
-### EPG Downloader
-
+#### EPG Downloader Setup
 * install git: `sudo apt install git`
-* git clone: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
-* update email & password in ```runZap2Xml.sh```
+* git clone project: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
+* update email & password in ```runZap2Xml.sh``` (do not commit ;) )
 * Set cron job to fetch EPG daily:
 
 ```
@@ -177,7 +176,7 @@ crontab -e
    33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
 ```
 
-* Enable internal grabber in path:
+* Enable internal grabber in path to work with tvheadend:
 
 ```
 cd /usr/local/bin
