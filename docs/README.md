@@ -8,12 +8,23 @@ Download from xbian.org.
 
 Extract downloaded file.
 
+Plug micro sd card.
+
+Check where mounted:
+```
+lsblk
+```
+
+Unmount card partition (if mounted):
+```
+sudo umount /dev/sdx/sdx#
+```
+
 Write to micro sd card:
 
 ```
-sudo dd if=XBian_2019.06.14_rpi3.img of=/dev/sdf bs=1M
+sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdf bs=4M status=progress
 ```
-
 
 ## Initial Setup
 
