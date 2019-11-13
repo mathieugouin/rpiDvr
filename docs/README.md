@@ -8,7 +8,7 @@ Download from xbian.org.
 
 Extract downloaded file.
 
-Plug micro sd card.
+Plug micro sd card in PC.
 
 Check where mounted:
 ```
@@ -28,30 +28,26 @@ sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdf bs=4M status=progress
 
 ## Initial Setup
 
-The following rough guide applies to XBian.
+The following rough guide applies to XBian 18.4 (and possibly other versions...).
 
-### SSH
+* Plug sdcard
+* Boot PI
+* Wait for full initial setup, including partition resize
 
-Connect:
+TBD from here
+* Reboot
+* Connect to Wifi
 
+### Set proper timezone
+* Kodi:
+  * Settings > Interface > Regional
+
+* SSH:
 ```
-ssh xbian@192.168.2.22
-```
-
-File copy *from* PI:
-
-```
-scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
-```
-
-File copy *to* PI:
-
-```
-scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
+dpkg-reconfigure tzdata
 ```
 
 ### Disabling WIFI power saving
-
 ```
 sudo vi /etc/network/interfaces
 ```
@@ -62,26 +58,13 @@ Add the following line anywhere in the file:
 wireless-power off
 ```
 
-### Set proper timezone
-
-TBD: There seems to be many possible location to set the timezone.
-
-* SSH:
-
-```
-dpkg-reconfigure tzdata
-```
-
-* Kodi:
-  * System > Config > TBD > TZ
-  * System > Config > XBian > TBD > TZ
-
 ### Builds
 
 Enable gcc, make...
 
 ```
-sudo apt-get install build-essential
+sudo apt-get update
+sudo apt-get install build-essential git tvheadend vim
 ```
 
 ### Install perl missing libs
@@ -293,6 +276,25 @@ When changing tvheadend channel icons, it is required to clean the cache to forc
 rm $HOME/.kodi/userdata/Thumbnails/*/*.png
 rm $HOME/.kodi/userdata/Database/Textures13.db
 sudo reboot
+```
+
+### SSH
+Connect:
+
+```
+ssh xbian@192.168.2.22
+```
+
+File copy *from* PI:
+
+```
+scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
+```
+
+File copy *to* PI:
+
+```
+scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
 ```
 
 ### Check
