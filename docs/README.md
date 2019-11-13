@@ -38,6 +38,17 @@ TBD from here
 * Reboot
 * Connect to Wifi
 
+### MPEG-2 License
+Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
+
+For my PI, the license is: ```0x16baa230```
+
+Enable via:
+
+```
+sudo xbian-config
+```
+
 ### Set proper timezone
 * Kodi:
   * Settings > Interface > Regional
@@ -58,63 +69,10 @@ Add the following line anywhere in the file:
 wireless-power off
 ```
 
-### Builds
-
-Enable gcc, make...
-
-```
-sudo apt-get update
-sudo apt-get install build-essential git tvheadend vim
-```
-
-### Install perl missing libs
-
-This is required for the EPG downloader.
-
-Note: should install tvheadend first (lots of perl lib will be installed at the same time)
-
-```
-sudo perl -MCPAN -e shell
-install JSON::XS
-install HTML::Parser
-```
-
-### MPEG-2 License
-
-Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
-
-For my PI, the license is: ```0x16baa230```
-
-Enable via:
-
-```
-sudo xbian-config
-```
-
 ## Tvheadend
 
 ```
 sudo apt install xbian-package-tvheadend
-```
-
-### EPG Downloader
-
-* install git: `sudo apt install git`
-* git clone: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
-* Set cron job to fetch EPG daily:
-
-```
-crontab -e
-
- # m  h  dom mon dow   command
-   33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
-```
-
-* Enable internal grabber in path:
-
-```
-cd /usr/local/bin
-sudo ln -s /home/xbian/rpiDvr/zap2xml/tv_grab_file
 ```
 
 ### Frontend (Kodi)
@@ -186,6 +144,46 @@ Goto Configuration > Recording > Profile
 ```
 $t$-e_%F$n.$x
 ```
+
+### Install perl missing libs
+
+This is required for the EPG downloader.
+
+Note: should install tvheadend first (lots of perl lib will be installed at the same time)
+
+TBD to try instead of manually compiling:
+```
+sudo apt install libjson-xs-perl libhtml-parser-perl
+```
+Alternative method
+```
+sudo apt-get install build-essential
+sudo perl -MCPAN -e shell
+install JSON::XS
+install HTML::Parser
+```
+
+### EPG Downloader
+
+* install git: `sudo apt install git`
+* git clone: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
+* update email & password in ```runZap2Xml.sh```
+* Set cron job to fetch EPG daily:
+
+```
+crontab -e
+
+ # m  h  dom mon dow   command
+   33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
+```
+
+* Enable internal grabber in path:
+
+```
+cd /usr/local/bin
+sudo ln -s /home/xbian/rpiDvr/zap2xml/tv_grab_file
+```
+
 
 ### Debugging
 
