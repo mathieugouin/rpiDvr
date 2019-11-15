@@ -77,7 +77,10 @@ wireless-power off
 
 Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/> in /lib/firmware.
 
-Direct link: <https://linuxtv.org/downloads/firmware/v4l-cx231xx-avcore-01.fw>
+Direct download in the Pi:
+```
+wget https://linuxtv.org/downloads/firmware/v4l-cx231xx-avcore-01.fw
+```
 
 This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  Refer to dmesg listing below:
 
