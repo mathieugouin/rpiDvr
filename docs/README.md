@@ -265,6 +265,10 @@ Recordings are stored in a textual DB:
 
 ## Maintenance
 
+### APT
+* apt-cache search keywords
+* apt-cache show package_name
+
 ### Clean Icons Cache
 When changing tvheadend channel icons, it is required to clean the cache to force Kodi to reload the new icons
 ```
