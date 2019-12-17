@@ -152,19 +152,19 @@ This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  R
 ```
 
 ### Backend (tvheadend)
+Install it:
 ```
 sudo apt install xbian-package-tvheadend
 ```
 
 Enable tvheadend services via:
-
 ```
 sudo xbian-config
 ```
 
 #### Basic setup
 
-* Set proper users using the web interface: <http://192.168.1.22:9981>
+* Set proper users using the web interface: http://ip:9981 (mine is: <http://192.168.1.22:9981> )
   * Admin:
     * ```tvheadend```
     * ```xxxxx```
@@ -181,7 +181,7 @@ The following is done using the web interface: <http://192.168.1.22:9981> while 
 Goto Config > DVB Input
 
 * Network tab: Add network *us_ATSC_center_frequencies*
-* TV Adapters tab: Assign network to tuner
+* TV Adapters tab: Assign network to tuner for ATSC-T (for terrestial)
 * Network tab: Force scan
 * Muxes tab: Check scan results.
 * Services tab: map all selected, map all services.
