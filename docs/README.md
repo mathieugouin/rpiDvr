@@ -188,16 +188,18 @@ Goto Config > DVB Input
 
 Goto Config > Channel/EPG
 
-* EPG Grabber tab: Set EPG frequency (advanced mode)
+* EPG Grabber Modules tab: Enable Internal tv_grab_file
+* EPG Grabber tab: Set EPG frequency (Expert mode) for Internal grabber
 
 ```
-# MGouin custom to run 04:00 after zap2xml
+# Run at 04:00 after zap2xml script
 0 4 * * *
 ```
 
-* EPG Grabber Modules tab: Enable Internal tv_grab_file
 * EPG Grabber Channels tab: Assign channels to each EPG channel
-* Channels tab: give proper channel names
+* Channels tab:
+** Give proper channel names
+** (optional) Give url to channel icons, http format or file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
 
 #### DVR Setup
 Possible file naming scheme:
