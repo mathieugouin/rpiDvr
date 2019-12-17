@@ -8,7 +8,7 @@ These instructions will allow 2 simultaneous programme recording while watching 
 
 It aims at providing addressign the following:
 * ATSC Signal: Outdoor/indoor antenna
-* Reception of the signal: USB ATSC TV Tuner
+* Decoding of the signal: USB ATSC TV Tuner
 * Channel guide: third party source from <https://tvlistings.zap2it.com> & download script
 * Recordings management & scheduling: <https://tvheadend.org/>
 * Recordings playing: Kodi + XBian + Tvheadend HTSP Client
@@ -41,7 +41,7 @@ sudo umount /dev/sdx/sdx#
 Write to micro sd card:
 
 ```
-sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdf bs=4M status=progress
+sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdx bs=4M status=progress
 ```
 
 ## Initial Setup
@@ -77,6 +77,8 @@ sudo dpkg-reconfigure tzdata
 ```
 
 ### Disabling WIFI power saving
+TBD confirm if still required
+
 ```
 sudo vi /etc/network/interfaces
 ```
@@ -90,6 +92,8 @@ wireless-power off
 ## Tvheadend
 
 ### Tuner Setup
+
+TBD: Current XBian does not enable the driver by default, refer to <http://forum.xbian.org/thread-4051.html>
 
 #### Hauppauge Xbox One
 
