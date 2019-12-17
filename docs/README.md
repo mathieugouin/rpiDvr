@@ -2,6 +2,24 @@
 
 A short introduction on how to setup a DVR using Raspberry Pi 3 to watch and record free over the air HDTV.
 
+These instructions will allow 2 simultaneous programme recording while watching another already recorder programme.
+
+## Overview
+
+It aims at providing addressign the following:
+* ATSC Signal: Outdoor/indoor antenna
+* Reception of the signal: USB ATSC TV Tuner
+* Channel guide: third party source from <https://tvlistings.zap2it.com> & download script
+* Recordings management & scheduling: <https://tvheadend.org/>
+* Recordings playing: Kodi + XBian + Tvheadend HTSP Client
+* Recordings storage: high capacity external USB hard drive
+
+## Bill of Material (BOM)
+* Raspberry Pi 3 kit
+* 2 TB USB external hard drive
+* 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
+* Coax cable splitter (not required if dual recording is not a must)
+
 ## XBian Install
 
 Download from xbian.org.
