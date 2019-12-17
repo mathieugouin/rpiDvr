@@ -18,6 +18,7 @@ It aims at providing addressign the following:
 * Raspberry Pi 3 kit
 * 2 TB USB external hard drive
 * 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
+* Raspberry MPEG-2 License (to enable HW decoding of ATSC Streams when playing back)
 * Coax cable splitter (not required if dual recording is not a must)
 
 ## XBian Install
