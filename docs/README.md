@@ -198,8 +198,15 @@ Goto Config > Channel/EPG
 
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 * Channels tab:
-** Give proper channel names
-** (optional) Give url to channel icons, http format or file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
+  * Give proper channel names
+  * (optional) Give url to channel icons, ex:
+    * Full URL: https://www.satlogo.com/hires/cc/cbc_tv_ca.png
+    * Local file URL: file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
+* Channel Tags tab (optional): create the following tags and assign them in the "Channels" tab:
+  * Canada
+  * USA
+  * English
+  * French
 
 #### DVR Setup
 Possible file naming scheme:
@@ -349,7 +356,7 @@ TBD? btrfs how to check for filesystem integrity?
 * <http://kodi.wiki/view/Tvheadend_PVR>
 * <http://wiki.xbian.org/doku.php/snapshots>
 * <http://www.tvfool.com>
-* <https://github.com/mathieugouin/rpiDvr>
+* <https://www.satlogo.com/tvcountry/ca_1.html>
 * <https://en.wikipedia.org/wiki/User:Mgouin/Raspberry_Pi>
 * <https://linuxtv.org/downloads/firmware/>
 * <https://www.linuxtv.org/wiki/index.php/Hauppauge_WinTV-HVR-955Q>
