@@ -6,7 +6,7 @@ These instructions will allow 2 simultaneous programme recording while watching 
 
 ## Overview
 
-It aims at providing addressign the following:
+It aims at providing and addressing the following:
 * ATSC Signal: Outdoor/indoor antenna
 * Decoding of the signal: USB ATSC TV Tuner
 * Channel guide: third party source from <https://tvlistings.zap2it.com> & download script
