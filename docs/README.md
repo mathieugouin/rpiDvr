@@ -14,7 +14,7 @@ It aims at providing and addressing the following:
 * Recordings playing: Kodi + XBian + Tvheadend HTSP Client
 * Recordings storage: high capacity external USB hard drive
 
-## Bill of Material (BOM)
+## Bill of Material
 * Raspberry Pi 3 kit
 * 2 TB USB external hard drive
 * 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
