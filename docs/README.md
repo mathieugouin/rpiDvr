@@ -36,7 +36,7 @@ lsblk
 
 Unmount card partition (if mounted):
 ```
-sudo umount /dev/sdx/sdx#
+sudo umount /dev/sdx#
 ```
 
 Write to micro sd card:
