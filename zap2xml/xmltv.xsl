@@ -17,6 +17,21 @@
             </head>
             <body>
                 <h1>TV Listing</h1>
+
+                <h2>Category Colors</h2>
+                <div class="drama">drama</div>
+                <div class="talk">talk</div>
+                <div class="sitco">sitco</div>
+                <div class="sport">sport</div>
+                <div class="news">news</div>
+                <div class="child">child</div>
+                <div class="reali">reali</div>
+                <div class="cooki">cooki</div>
+                <div class="mv">mv</div>
+                <div class="child_hidden">child_hidden</div>
+                <div class="empty_category">empty_category</div>
+                <div class="unknown">unknown</div>
+
 <!-- TBD MGouin:
                 <xsl:apply-templates select="/tv" mode="normal"/>
 -->
@@ -224,6 +239,9 @@
                     </xsl:when>
                     <xsl:when test="$value = 'Sports'">
                         sport
+                    </xsl:when>
+                    <xsl:when test="$value = 'Talk show'">
+                        talk
                     </xsl:when>
                     <xsl:otherwise>
                         unknown
