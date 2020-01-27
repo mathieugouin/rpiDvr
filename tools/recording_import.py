@@ -13,6 +13,7 @@ import random
 import os
 import fnmatch
 import subprocess
+import math
 
 from time import gmtime,strftime,strptime
 from collections import OrderedDict
@@ -35,6 +36,7 @@ TVH_FILE_PATTERN = "????????????????????????????????"
 TVH_CONFIG_NAME = "8d0f5b7ae354d956d7fe5db25f5d0d24"
 
 START_TIME_RESOLUTION = 30.0 * 60.0 # in seconds
+DURATION_RESOLUTION = 60.0 # in seconds
 
 TEMP_DIR = '/home/mgouin/tmp/dvr'
 
@@ -54,6 +56,9 @@ TEMP_DIR = '/home/mgouin/tmp/dvr'
 TVH_DEFAULT_CHANNEL_KEY = '52cf67a489e79fdb75b9081e5ee8865e'
 TVH_DEFAULT_CHANNEL_NAME = 'Radio-Canada'
 
+def roundup(x, r):
+    return math.ceil(float(x) / r) * r
+
 # Will always return absolute path to files matched
 def find_files(directory, pattern):
     for root, dirs, files in os.walk(directory):
@@ -67,9 +72,14 @@ def find_files(directory, pattern):
 
 
 def test():
+    print subprocess.check_output(["pwd"])
+    print subprocess.check_output(["echo", "hey you!"])
+    print subprocess.check_output(["ls"])
+    print subprocess.check_output(['ls'])
+    print subprocess.check_output(['git', '--version'])
+    return
     for f in find_files('/home/mgouin/Documents/Mathieu/DVR/tvh', '????????????????????????????????'):
         print f
-    pass
 
 
 # Empty string when at root
@@ -78,26 +88,24 @@ def get_video_directory(video_file):
     return basedir
 
 def get_video_duration(video_file):
-
-    return 3600
-
-    # TBD not working from python...
-
     # ffprobe -v quiet -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 filename.ts
     output = subprocess.check_output([
         "ffprobe",
-        "-v quiet",
-        "-show_entries format=duration",
-        "-of default=noprint_wrappers=1:nokey=1",
+        "-v",
+        "quiet",
+        "-show_entries",
+        "format=duration",
+        "-of",
+        "default=noprint_wrappers=1:nokey=1",
         video_file])
-    return float(output)
+    return float(output.rstrip())
 
 def process():
     # get all existing tvh recordings (to prevent accidental duplication of filename)
     existing_recording_logs = [os.path.relpath(f, TVH_DVR_CONFIG_DIR) for f in find_files(TVH_DVR_CONFIG_DIR, TVH_FILE_PATTERN)]
 
     for video_file in find_files(VIDEO_DIR, "*.ts"):
-        print video_file
+        print "Processing", video_file
 
         video_directory = get_video_directory(video_file)
 
@@ -106,30 +114,15 @@ def process():
         while log_name in existing_recording_logs:
             log_name = hex(random.getrandbits(128))[2:-1]
 
-        if False:
-            movie.Open(video_file)
-            video_duration = movie.Get(Stream.Video,0,"Duration")
-            startDate = movie.Get(Stream.General,0,"DATE_BROADCASTED")
-            if startDate == '':
-                startDate = strftime('%Y-%m-%d %H:%M:%S',gmtime(float(stat(video_file)[9])))
-            channel = movie.Get(Stream.General,0,"TVCHANNEL")
-            if channel == '':
-                channel = TVH_DEFAULT_CHANNEL_NAME
-            summary = movie.Get(Stream.General,0,"SUMMARY")
-            title = movie.Get(Stream.General,0,"Title")
-            if title == '':
-                title = path.splitext(path.basename(video_file))[0]
-            movie.Close()
-
-        # getmtime return in seconds, round down to a resolution of 30 minutes
+        # getmtime return in seconds, round down to a decent resolution
         video_mod_time = int(int(os.path.getmtime(video_file) / START_TIME_RESOLUTION) * START_TIME_RESOLUTION)
-        video_duration = get_video_duration(video_file)
+        video_duration = roundup(get_video_duration(video_file), DURATION_RESOLUTION)
 
         title = os.path.splitext(os.path.basename(video_file))[0]
 
         recordingDict = OrderedDict()
         startTime = video_mod_time
-        stopTime = startTime + video_duration
+        stopTime = startTime + int(video_duration)
         recordingDict['enabled'] = True
         recordingDict['start'] = startTime
         recordingDict['start_extra'] = 0
@@ -140,7 +133,7 @@ def process():
         recordingDict['title'] = { 'eng': title }
         recordingDict['description'] = { 'eng': 'Not available' }
         recordingDict['pri'] =  2
-        recordingDict['retention'] =  0
+        recordingDict['retention'] = 0
         recordingDict['removal'] = 0
         recordingDict['playposition'] = 0
         recordingDict['playcount'] = 0
