@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Project Custom files/folders to ignore
+zap2xml/cache/*.js.gz
+zap2xml/bak/*.xml
+xmltv.xml
+*.log
+
+# Pycharm
+.idea/
+
