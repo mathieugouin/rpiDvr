@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Project Custom files/folders to ignore
+zap2xml/cache/*.js.gz
 zap2xml/bak/*.xml
 xmltv.xml
 *.log
