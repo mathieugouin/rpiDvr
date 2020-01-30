@@ -1,0 +1,68 @@
+{
+	"enabled": true,
+	"start": 1579824000,
+	"start_extra": 0,
+	"stop": 1579825800,
+	"stop_extra": 0,
+	"channel": "52cf67a489e79fdb75b9081e5ee8865e",
+	"channelname": "Radio-Canada",
+	"title": {
+		"eng": "District 31"
+	},
+	"description": {
+		"eng": "Les compétences de Da-Xia sont mises à profit afin d'en savoir davantage sur la personne qui harcèle l'autrice Léa Bordage."
+	},
+	"pri": 2,
+	"retention": 0,
+	"removal": 0,
+	"playposition": 0,
+	"playcount": 0,
+	"config_name": "8d0f5b7ae354d956d7fe5db25f5d0d24",
+	"creator": "192.168.1.51",
+	"directory": "District-31",
+	"errorcode": 0,
+	"errors": 0,
+	"data_errors": 0,
+	"dvb_eid": 0,
+	"noresched": true,
+	"norerecord": false,
+	"fileremoved": 0,
+	"autorec": "97d8e7aa786ae6946b7348bb45495c24",
+	"timerec": "",
+	"parent": "",
+	"child": "",
+	"content_type": 0,
+	"broadcast": 0,
+	"episode": "Season 4.Episode 72",
+	"comment": "Auto recording: Created from EPG query",
+	"files": [
+		{
+			"filename": "/storage/DVR/recordings/District-31/District-31-S04E72_2020-01-23.ts",
+			"info": [
+				{
+					"type": "MPEG2VIDEO",
+					"width": 1280,
+					"height": 720,
+					"duration": 1501,
+					"aspect_num": 0,
+					"aspect_den": 0
+				},
+				{
+					"type": "AC3",
+					"language": "fre",
+					"audio_type": 1,
+					"audio_version": 1
+				},
+				{
+					"type": "AC3",
+					"language": "und",
+					"audio_type": 3,
+					"audio_version": 1
+				}
+			],
+			"start": 1579824000,
+			"stop": 1579825800
+		}
+	]
+}
+

@@ -88,6 +88,7 @@ def get_video_directory(video_file):
     return basedir
 
 def get_video_duration(video_file):
+    # https://ffmpeg.org/ffprobe.html#Options
     # ffprobe -v quiet -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 filename.ts
     output = subprocess.check_output([
         "ffprobe",
