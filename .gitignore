@@ -6,7 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
-# Project Custom fodlers to ignore
+# Project Custom files/folders to ignore
+zap2xml/bak/*.xml
+xmltv.xml
+*.log
 
 # Pycharm
 .idea/
