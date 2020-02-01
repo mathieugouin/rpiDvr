@@ -99,6 +99,12 @@ def get_video_duration(video_file):
         video_file])
     return float(output.rstrip())
 
+
+# Create a new filename for dvr log, with leading 0s
+def get_new_filename():
+    return "{:032x}".format(random.getrandbits(128))
+
+
 def process():
     # get all existing tvh recordings (to prevent accidental duplication of filename)
     existing_recording_logs = [os.path.relpath(f, TVH_DVR_CONFIG_DIR) for f in find_files(TVH_DVR_CONFIG_DIR, TVH_FILE_PATTERN)]
@@ -108,10 +114,10 @@ def process():
 
         video_directory = get_video_directory(video_file)
 
-        log_name = hex(random.getrandbits(128))[2:-1]
+        log_name = get_new_filename()
         # Generate a new name in case already present (low probability)
         while log_name in existing_recording_logs:
-            log_name = hex(random.getrandbits(128))[2:-1]
+            log_name = get_new_filename()
 
         # getmtime return in seconds, round down to a decent resolution
         video_mod_time = roundup(os.path.getmtime(video_file), START_TIME_RESOLUTION)
