@@ -17,14 +17,16 @@ import math
 import collections
 
 # ####### KODI
-# # TVH config base directory
-# TVH_BASE_DIR = '/storage/.kodi/userdata/addon_data/service.tvheadend42'
-# VIDEO_DIR = '/storage/DVR/recordings_backup'
+TVH_BASE_DIR = '/storage/.kodi/userdata/addon_data/service.tvheadend42' # TVH config base directory
+VIDEO_DIR = '/storage/DVR/recordings_backup'
+TEMP_DIR = '/storage/tmp/dvr'
 
 # ####### TESTING
-# TVH config base directory
-TVH_BASE_DIR = '/home/mgouin/Documents/Mathieu/DVR/tvh'
-VIDEO_DIR = '/home/mgouin/Documents/Mathieu/DVR/recordings_bak'
+#TVH_BASE_DIR = '/home/mgouin/Documents/Mathieu/DVR/tvh' # TVH config base directory
+#VIDEO_DIR = '/home/mgouin/Documents/Mathieu/DVR/recordings_bak'
+#TEMP_DIR = '/home/mgouin/tmp/dvr'
+
+# ####### COMMON Config
 
 # /storage/.kodi/userdata/addon_data/service.tvheadend42/dvr/log
 TVH_DVR_CONFIG_DIR = TVH_BASE_DIR + '/dvr/log'
@@ -35,8 +37,6 @@ TVH_CONFIG_NAME = "8d0f5b7ae354d956d7fe5db25f5d0d24"
 
 START_TIME_RESOLUTION = 30.0 * 60.0 # in seconds
 DURATION_RESOLUTION = 60.0 # in seconds
-
-TEMP_DIR = '/home/mgouin/tmp/dvr'
 
 #       02ef45aeeca563efa8ed83b4733088c3:	"name": "Global",
 #       20b7ef885b8744b97c78759c2676f8ed:	"name": "TVA",
@@ -114,7 +114,7 @@ def process():
             log_name = hex(random.getrandbits(128))[2:-1]
 
         # getmtime return in seconds, round down to a decent resolution
-        video_mod_time = int(int(os.path.getmtime(video_file) / START_TIME_RESOLUTION) * START_TIME_RESOLUTION)
+        video_mod_time = roundup(os.path.getmtime(video_file), START_TIME_RESOLUTION)
         video_duration = roundup(get_video_duration(video_file), DURATION_RESOLUTION)
 
         title = os.path.splitext(os.path.basename(video_file))[0]
@@ -166,6 +166,7 @@ def process():
 
         if not os.path.exists(TEMP_DIR):
             raise "BAD"
+            return
             makedirs(TEMP_DIR)
         with open(outFileName, 'wb') as fh_log:
             json.dump(recordingDict, fh_log, indent=4)
@@ -176,7 +177,6 @@ def process():
 def _main():
     process()
     #test()
-    pass
 
 
 if __name__ == '__main__':
