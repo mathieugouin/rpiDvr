@@ -302,8 +302,8 @@ Recordings are stored in a textual DB:
 * apt-cache search keywords
 * apt-cache show package_name
 
-### Clean Icons Cache
-When changing tvheadend channel icons, it is required to clean the cache to force Kodi to reload the new icons
+### Clear Icons Cache
+When changing tvheadend channel icons, it is required to clear the cache to force Kodi to reload the new icons
 ```
 rm $HOME/.kodi/userdata/Thumbnails/*/*.png
 rm $HOME/.kodi/userdata/Database/Textures13.db
@@ -314,19 +314,19 @@ sudo reboot
 Connect:
 
 ```
-ssh xbian@192.168.2.22
+ssh xbian@192.168.1.22
 ```
 
 File copy *from* PI:
 
 ```
-scp xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz .
+scp xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz .
 ```
 
 File copy *to* PI:
 
 ```
-scp zap2xml.tar.gz xbian@192.168.2.22:/home/xbian/zap2xml.tar.gz
+scp zap2xml.tar.gz xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz
 ```
 
 ### Check
