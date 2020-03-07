@@ -169,11 +169,11 @@ sudo xbian-config
     * ```<blank>```
 
 * Goto Config > General > Base:
-** Set User interface level to Expert
-** Picon ssection:
-*** Uncheck prefer picon
-*** Set channel icon path: https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png
-*** Channel icon name scheme: "All lower case"
+  * Set User interface level to Expert
+  * Picon ssection:
+    * Uncheck prefer picon
+    * Set channel icon path: https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png
+    * Channel icon name scheme: "All lower case"
 
 #### Channel setup
 
@@ -182,21 +182,21 @@ The following is done using the web interface: <http://192.168.1.23:9981> while 
 Goto Config > DVB Input
 
 * Network tab: Add network
-** type = ATSC-T
-** Name = ATSC-T
-** Predefined muxes: United States: us-ATSC-center-frequencies-8VSB
+  * type = ATSC-T
+  * Name = ATSC-T
+  * Predefined muxes: United States: us-ATSC-center-frequencies-8VSB
 * TV Adapters tab:
-** Enable only the ATSC-T sub tuner
-** Assign network to tuner for ATSC-T (for terrestial)
+  * Enable only the ATSC-T sub tuner
+  * Assign network to tuner for ATSC-T (for terrestial)
 * Network tab: Force scan
 * Muxes tab: Check scan results.
 * Services tab: map all selected, map all services.
 
 Goto Config > Channel/EPG
 * Channels tab:
-** Adjust channel name & number
-** Make sure user icon is set properly (use reset icon + save)
-** Manually add channel + map to services if not all services were correctly mapped
+  * Adjust channel name & number
+  * Make sure user icon is set properly (use reset icon + save)
+  * Manually add channel + map to services if not all services were correctly mapped
 * EPG Grabber Modules tab: Enable Internal tv_grab_file
 * EPG Grabber tab: Set EPG frequency (Expert mode) for Internal grabber
 
