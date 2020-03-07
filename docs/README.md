@@ -193,11 +193,19 @@ Goto Config > DVB Input
 * Services tab: map all selected, map all services.
 
 Goto Config > Channel/EPG
+* Channel Tags tab (optional): create the following tags to help when searching:
+  * French
+  * English
+  * Canada
+  * USA
+  * En-Can
 * Channels tab:
   * Adjust channel name & number
-  * Make sure user icon is set properly (use reset icon + save)
-  * Manually add channel + map to services if not all services were correctly mapped
-* EPG Grabber Modules tab: Enable Internal tv_grab_file
+  * Make sure user icon is set properly (use reset icon + save).  Manually setting icons can be done as follows:
+    * Full URL: https://www.satlogo.com/hires/cc/cbc_tv_ca.png
+    * Local file URL: file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
+  * Manually add channel and map to services if not all services were correctly mapped
+* EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_file"
 * EPG Grabber tab: Set EPG frequency (Expert mode) for Internal grabber
 
 ```
@@ -206,16 +214,6 @@ Goto Config > Channel/EPG
 ```
 
 * EPG Grabber Channels tab: Assign channels to each EPG channel
-* Channels tab:
-  * Give proper channel names
-  * (optional) Give url to channel icons, ex:
-    * Full URL: https://www.satlogo.com/hires/cc/cbc_tv_ca.png
-    * Local file URL: file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
-* Channel Tags tab (optional): create the following tags and assign them in the "Channels" tab:
-  * Canada
-  * USA
-  * English
-  * French
 
 #### DVR Setup
 Possible file naming scheme:
@@ -242,16 +240,8 @@ This is required for the EPG downloader.
 
 Note: should install tvheadend first (lots of perl lib will be installed at the same time)
 
-TBD to try instead of manually compiling:
 ```
 sudo apt install libjson-xs-perl libhtml-parser-perl
-```
-Alternative method
-```
-sudo apt-get install build-essential
-sudo perl -MCPAN -e shell
-install JSON::XS
-install HTML::Parser
 ```
 
 #### EPG Downloader Setup
@@ -267,13 +257,12 @@ crontab -e
    33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
 ```
 
-* Enable internal grabber in path to work with tvheadend:
+* Enable internal grabber in path to work with tvheadend (refer to steps above):
 
 ```
 cd /usr/local/bin
 sudo ln -s /home/xbian/rpiDvr/zap2xml/tv_grab_file
 ```
-
 
 ### Debugging
 
