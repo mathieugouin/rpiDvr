@@ -53,10 +53,7 @@ The following rough guide applies to XBian 18.4 (and possibly other versions...)
 * Plug sdcard
 * Boot PI
 * Wait for full initial setup, including partition resize
-
-TBD from here
-* Reboot
-* Connect to Wifi
+* Follow wizzard to setup Wifi, etc...
 
 ### MPEG-2 License
 Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
@@ -79,7 +76,7 @@ sudo dpkg-reconfigure tzdata
 ```
 
 ### Disabling WIFI power saving
-TBD confirm if still required
+Done by default in recent version of XBian
 
 ```
 sudo vi /etc/network/interfaces
@@ -95,9 +92,7 @@ wireless-power off
 
 ### Tuner Setup
 
-TBD: Current XBian does not enable the driver by default, refer to <http://forum.xbian.org/thread-4051.html>
-
-#### Hauppauge Xbox One
+For this setup, I use the "Hauppauge Xbox One"
 
 Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/> in /lib/firmware.
 
@@ -158,7 +153,7 @@ Install it:
 sudo apt install xbian-package-tvheadend
 ```
 
-Enable tvheadend services via:
+If required to admin the services, do it via:
 ```
 sudo xbian-config
 ```
@@ -173,22 +168,35 @@ sudo xbian-config
     * ```*```
     * ```<blank>```
 
-* Goto Config > General > Base, set User interface level to Expert.
+* Goto Config > General > Base:
+** Set User interface level to Expert
+** Picon ssection:
+*** Uncheck prefer picon
+*** Set channel icon path: https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png
+*** Channel icon name scheme: "All lower case"
 
 #### Channel setup
 
-The following is done using the web interface: <http://192.168.1.22:9981> while logged in as admin.
+The following is done using the web interface: <http://192.168.1.23:9981> while logged in as admin.
 
 Goto Config > DVB Input
 
-* Network tab: Add network *us_ATSC_center_frequencies*
-* TV Adapters tab: Assign network to tuner for ATSC-T (for terrestial)
+* Network tab: Add network
+** type = ATSC-T
+** Name = ATSC-T
+** Predefined muxes: United States: us-ATSC-center-frequencies-8VSB
+* TV Adapters tab:
+** Enable only the ATSC-T sub tuner
+** Assign network to tuner for ATSC-T (for terrestial)
 * Network tab: Force scan
 * Muxes tab: Check scan results.
 * Services tab: map all selected, map all services.
 
 Goto Config > Channel/EPG
-
+* Channels tab:
+** Adjust channel name & number
+** Make sure user icon is set properly (use reset icon + save)
+** Manually add channel + map to services if not all services were correctly mapped
 * EPG Grabber Modules tab: Enable Internal tv_grab_file
 * EPG Grabber tab: Set EPG frequency (Expert mode) for Internal grabber
 
