@@ -9,7 +9,7 @@ if (( $# < 1 ))
 then
   # TBD MGouin: edit path here...
   cat /home/xbian/rpiDvr/zap2xml/xmltv.xml
-  # echo $(date) >> /home/xbian/zap2xml/tv_grab_file.log
+  # echo $(date) >> /home/xbian/rpiDvr/zap2xml/tv_grab_file.log
   exit 0
 fi
 
