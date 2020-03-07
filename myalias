@@ -1,0 +1,5 @@
+alias ls='ls -F --color=auto --group-directories-first -h'
+alias la='ls -A'
+alias l='ls -l'
+alias ll='ls -l -A'
+alias ..='cd ..'
