@@ -12,29 +12,29 @@
         <html>
             <head>
                 <link rel="stylesheet" href="xmltv.css" type="text/css" />
-                <link rel="stylesheet" href="programme_categories.css" type="text/css" />
                 <title>TV Listings</title>
             </head>
             <body>
                 <h1>TV Listing</h1>
 
                 <h2>Category Colors</h2>
-                <div class="drama">drama</div>
-                <div class="talk">talk</div>
-                <div class="sitco">sitco</div>
-                <div class="sport">sport</div>
-                <div class="news">news</div>
-                <div class="child">child</div>
-                <div class="reali">reali</div>
-                <div class="cooki">cooki</div>
-                <div class="mv">mv</div>
-                <div class="child_hidden">child_hidden</div>
-                <div class="empty_category">empty_category</div>
-                <div class="unknown">unknown</div>
+                <div style="width: 50%; margin: auto">
+                    <div class="drama">drama</div>
+                    <div class="talk">talk</div>
+                    <div class="sitco">sitco</div>
+                    <div class="sport">sport</div>
+                    <div class="news">news</div>
+                    <div class="child">child</div>
+                    <div class="reali">reali</div>
+                    <div class="cooki">cooki</div>
+                    <div class="mv">mv</div>
+                    <div class="child_hidden">child_hidden</div>
+                    <div class="empty_category">empty_category</div>
+                    <div class="unknown">unknown</div>
+                </div>
 
-<!-- TBD MGouin:
                 <xsl:apply-templates select="/tv" mode="normal"/>
--->
+
                 <xsl:apply-templates select="/tv" mode="key"/>
             </body>
         </html>
@@ -43,7 +43,7 @@
     <!-- ******************************************************************************** -->
     <xsl:template match="tv" mode="normal">
         <h2>Template tv normal</h2>
-        <xsl:apply-templates select="channel" mode="full" />
+        <xsl:apply-templates select="channel" mode="simple" />
 <!-- TBD MGouin:
         <xsl:apply-templates select="channel" mode="full" />
         <xsl:apply-templates select="channel" mode="simple" />
@@ -54,7 +54,7 @@
 
     <!-- ******************************************************************************** -->
     <xsl:template match="tv" mode="key">
-        <h2>Template tv key</h2>
+        <h2>Channel, Date, Program</h2>
         <ul>
             <xsl:apply-templates mode="channel_group" select="
                 programme[

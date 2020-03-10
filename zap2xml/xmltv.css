@@ -1,259 +1,61 @@
 /*
-    '===========================================================
-    ' xmltv.css:
-    ' Author: Timothy Alosi (timalosi.com)
-    ' Revision 0.1.B
-    ' Revision Date: October 10, 2007
-    '
-    'Copyright (c) 2007 Timothy Alosi
-    '
-    ' This opensource project is hosted at http://xmltvtools.sourceforge.net
-    ' Please contribute any improvements back to the project.
-    '
-    'Permission is hereby granted, free of charge, to any person obtaining a copy
-    'of this software and associated documentation files (the "Software"), to deal
-    'in the Software without restriction, including without limitation the rights
-    'to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    'copies of the Software, and to permit persons to whom the Software is
-    'furnished to do so, subject to the following conditions:
-    '
-    'The above copyright notice and this permission notice shall be included in
-    'all copies or substantial portions of the Software.
-    '
-    'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    'IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    'FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    'AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    'THE SOFTWARE.
-    '
-    '===========================================================
-*/
-
-/*
  * The General Elements Below Set the Default Font Family
  */
-/*
- * Links
- */
-
-A
-{
-    cursor:hand;
-}
-
-A:hover
-{
-    color: red;
-}
-
-body
-{
-    background-color: #ffffff;
-}
-
 span, div, th, td, font, h1, h2, h3, h4, p, body, small, input
 {
     font-family: Tahoma, Arial, MS Sans Serif;
 }
 
-div.time_slice
+/*
+ * If a program falls into more than one category, the
+ * last style it sees will be the one applied.
+ */
+.drama, .comed, .actio, .suspe, .scien, .fanta, .docud
 {
-    position:absolute;
-    float:left;
+    background-color: #FFA07A; /* lightsalmon */
+}
+.talk, .paid, .relig, .shopp, .commu, .compu
+{
+    background-color: #FFE4C4; /* bisque */
+}
+.sitco, .serie
+{
+    background-color: #ADD8E6; /* lightblue */
+}
+.sport, .water
+{
+    background-color: #FFA500; /* orange */
+}
+.news, .speci, .inter, .newsm, .publi, .docum
+{
+    background-color: #F0E68C; /* khaki */
+}
+.child, .anima, .educa
+{
+    background-color: #DDA0DD;  /* plum */
+}
+.reali
+{
+    background-color: #20B2AA; /* lightseagreen */
+}
+.cooki, .how-t, .home, .garde
+{
+    background-color: #7FFFD4; /* aquamarine */
+}
+.mv
+{
+    background-color:#FF6347; /* tomato */
+}
+.child_hidden
+{
+    background-color: #fff
+}
+.empty_category
+{
+    background-color: #fff
+}
+.unknown
+{
+    background-color: #f00
 }
 
-div.debug
-{
-    border: solid 2 red;
-    top: 500;
-    width: 20ex; height: 4ex;
-    overflow:auto;
-}
-
-td.debug
-{
-    border: solid 2 red;
-    overflow:hidden;
-}
-
-div.listing
-{
-    overflow:hidden;
-    padding: .25em .25em .25em .25em;
-}
-
-td.listing, th.listing
-{
-    border: solid 1 black;
-}
-
-.listing
-{
-    font-size: 8pt;
-    height: 3em;
-}
-
-.header
-{
-    font-weight: bold;
-    text-align:center;
-}
-
-
-.colspan1
-{
-    width: 3em;
-}
-.colspan2
-{
-    width: 6em;
-}
-.colspan3
-{
-    width: 9em;
-}
-.colspan4
-{
-    width: 12em;
-}
-.colspan5
-{
-    width: 15em;
-}
-.colspan6
-{
-    width: 18em;
-}
-.colspan7
-{
-    width: 21em;
-}
-.colspan8
-{
-    width: 24em;
-}
-.colspan9
-{
-    width: 27em;
-}
-.colspan10
-{
-    width: 30em;
-}
-.colspan11
-{
-    width: 33em;
-}
-.colspan12
-{
-    width: 36em;
-}
-
-
-div.menu
-{
-    top: 10;
-    left: 10;
-    z-index: 100;
-    font-size: 10pt;
-}
-
-.popup_title
-{
-    background-color:Navy;
-    font-size: 10pt;
-    color: White;
-    font-weight:bold;
-    text-align:center;
-    padding-left: 1em;
-    padding-right: 1em;
-    border-bottom: ridge 3 silver;
-}
-
-.popup_window
-{
-    background-color: #eeeeee;
-    border: ridge 3 silver;
-    color: Black;
-    position: absolute;
-    top: 1;
-    left: 1;
-    z-index: 200;
-}
-
-.popup_data
-{
-    background-color:Transparent;
-    font-size: 10pt;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5ex;
-    padding-bottom: 0.5ex;
-}
-
-.popup_close
-{
-    background-color:#ccc;
-    font-size: 8pt;
-    height: 1.25em;
-    width:1.25em;
-    overflow:hidden;
-    margin-top:0.1em;
-    line-height:80%;
-    vertical-align:baseline ;
-    border: outset 2 #ccc;
-    color: black;
-    font-variant:small-caps;
-    text-align:center;
-}
-
-#MenuDiv
-{
-    width: 13em;
-    overflow:hidden;
-}
-#MenuTitle
-{
-    width: 13em;
-    overflow:hidden;
-}
-#MenuData
-{
-    width: 13em;
-    overflow:hidden;
-}
-
-#AboutDiv
-{
-    width: 25em;
-}
-#AboutTitle
-{
-    width: 25em;
-}
-#AboutData
-{
-    width: 25em;
-}
-#AboutClose
-{
-    position:relative ;
-    left:21.75em;
-    z-index:300;
-    top:1px;
-}
-
-.popup_small
-{
-    font-size: 8pt;
-}
-
-input.small_checkbox
-{
-    width: 2ex;
-    height: 2ex;
-    vertical-align: middle;
-    margin-right: 1ex;
-}
