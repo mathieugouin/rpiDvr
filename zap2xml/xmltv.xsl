@@ -157,6 +157,11 @@
             <div class="{$category_class}">
                 [<xsl:value-of select="$start_time" />-<xsl:value-of select="$stop_time" />]
                 <xsl:value-of select="title" />
+
+                <xsl:if test="sub-title">
+                    | <xsl:value-of select="sub-title[1]"/>
+                </xsl:if>
+
                 <xsl:if test="episode-num">
                     (<xsl:value-of select="episode-num[1]"/>)
                 </xsl:if>
@@ -169,7 +174,7 @@
         <xsl:variable name="chanid" select="@channel" />
         <li>
             <xsl:value-of select="/tv/channel[@id=$chanid]/display-name[1]" />
-            <!-- TBD MGouin:
+            <!-- Notes:
             http://stackoverflow.com/questions/948218/xslt-3-level-grouping-on-attributes/955527
             http://www.jenitennison.com/xslt/grouping/muenchian.html
             -->
@@ -203,16 +208,16 @@
             <xsl:value-of select="$start_date" />
             <ul>
                 <xsl:apply-templates mode="simple_no_date" select="
-                  key(
-                    'channel_date_key',
-                    concat(
-                        @channel,
-                        ',',
-                        substring(@start,1,8)
+                    key(
+                      'channel_date_key',
+                      concat(
+                          @channel,
+                          ',',
+                          substring(@start,1,8)
+                      )
                     )
-                  )
-                  ">
-                  <xsl:sort select="@start" data-type="text" />
+                    ">
+                    <xsl:sort select="@start" data-type="text" />
                 </xsl:apply-templates>
             </ul>
         </li>
