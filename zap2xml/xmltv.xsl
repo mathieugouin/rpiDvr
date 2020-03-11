@@ -162,9 +162,37 @@
                     | <xsl:value-of select="sub-title[1]"/>
                 </xsl:if>
 
-                <xsl:if test="episode-num">
-                    (<xsl:value-of select="episode-num[1]"/>)
-                </xsl:if>
+                <!-- Prioritize episode system -->
+                <xsl:choose>
+                    <xsl:when test="episode-num[@system='onscreen']">
+                        (<xsl:value-of select="episode-num[@system='onscreen']"/>)
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="episode-num[@system='common']">
+                                (<xsl:value-of select="episode-num[@system='common']"/>)
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="episode-num[@system='xmltv_ns']">
+                                        (<xsl:value-of select="episode-num[@system='xmltv_ns']"/>)
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:choose>
+                                            <xsl:when test="episode-num[@system='dd_progid']">
+                                                (<xsl:value-of select="episode-num[@system='dd_progid']"/>)
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <!-- No episode number -->
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+
             </div>
         </li>
     </xsl:template>
