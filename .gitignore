@@ -9,7 +9,7 @@ __pycache__/
 # Project Custom files/folders to ignore
 zap2xml/cache/*.js.gz
 zap2xml/bak/*.xml
-xmltv.xml
+zap2xml/*.xml
 *.log
 
 # Pycharm
