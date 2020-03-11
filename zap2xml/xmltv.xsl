@@ -258,7 +258,7 @@
             <xsl:when test="$value != ''"> <!-- Category provided -->
                 <xsl:variable name="apos" select='"&apos;"'/>
                 <xsl:choose>
-                    <xsl:when test="$value = concat('Children', $apos, 's / Youth programmes')">
+                    <xsl:when test="$value = concat('Children', $apos, 's / Youth programs')">
                         child
                     </xsl:when>
                     <xsl:when test="$value = 'Movie / Drama'">
