@@ -42,7 +42,7 @@ sudo umount /dev/sdx#
 Write to micro sd card:
 
 ```
-sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdx bs=4M status=progress
+sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdx bs=4M conv=fsync status=progress
 sync
 ```
 
