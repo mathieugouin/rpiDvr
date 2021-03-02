@@ -1,10 +1,8 @@
-# Raspberry Pi DVR
+# Overview
 
 A short introduction on how to setup a DVR using Raspberry Pi 3 to watch and record free over the air HDTV.
 
 These instructions will allow 2 simultaneous programme recording while watching another already recorder programme.
-
-## Overview
 
 It aims at providing and addressing the following:
 * ATSC Signal: Outdoor/indoor antenna
@@ -15,17 +13,20 @@ It aims at providing and addressing the following:
 * Recordings storage: high capacity external USB hard drive
 
 ## Bill of Material
+
 * Raspberry Pi 3 kit
 * 2 TB USB external hard drive
 * 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
 * Raspberry MPEG-2 License (to enable HW decoding of ATSC Streams when playing back)
 * Coax cable splitter (not required if dual recording is not a must)
 
-## XBian Install
+# LibreELEC Install
 
-Download from xbian.org.
+Download from <https://libreelec.tv/>
 
-Extract downloaded file.
+The version that was causing less issue is 9.2.1 for my Raspberry Pi 3.  <http://archive.libreelec.tv/LibreELEC-RPi2.arm-9.2.1.img.gz>
+
+Extract downloaded file and unzip it.
 
 Plug micro sd card in PC.
 
@@ -42,157 +43,80 @@ sudo umount /dev/sdx#
 Write to micro sd card:
 
 ```
-sudo dd if=XBian_2019.11.08_rpi3.img of=/dev/sdx bs=4M conv=fsync status=progress
+sudo dd if=XXX.img of=/dev/sdx bs=4M conv=fsync status=progress
 sync
 ```
 
-## Initial Setup
-
-The following rough guide applies to XBian 18.4 (and possibly other versions...).
-
-* Plug sdcard
+* Plug sdcard on the PI
 * Boot PI
 * Wait for full initial setup, including partition resize
 * Follow wizzard to setup Wifi, etc...
 
-### MPEG-2 License
+## MPEG-2 License
 Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
 
 For my PI, the license is: ```0x16baa230```
 
-Enable via:
+Enable via: TBD (GUI?)
 
-```
-sudo xbian-config
-```
+# Tvheadend
 
-### Set proper timezone
-* Kodi:
-  * Settings > Interface > Regional
+## Backend (tvheadend)
 
-* SSH:
-```
-sudo dpkg-reconfigure tzdata
-```
+Install it via LibreELEC add-ons repo under "services".
 
-### Disabling WIFI power saving
-Done by default in recent version of XBian
+Most of the tvheadend configuration is done from a web interface: http://ip:9981 (mine is: <http://192.168.1.23:9981>)
 
-```
-sudo vi /etc/network/interfaces
-```
+Goto Configuration > General > Base:
+* Set User interface level to Expert
+* Picon section:
+  * Uncheck prefer picon
+  * Set channel icon path: `https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png`
+  * Channel icon name scheme: "All lower case"
 
-Add the following line anywhere in the file:
-
-```
-wireless-power off
-```
-
-## Tvheadend
-
-### Tuner Setup
-
-For this setup, I use the "Hauppauge Xbox One"
-
-Install the firmware v4l-cx231xx-avcore-01.fw from <https://linuxtv.org/downloads/firmware/> in /lib/firmware.
-
-Direct download in the Pi:
-```
-wget https://linuxtv.org/downloads/firmware/v4l-cx231xx-avcore-01.fw
-```
-
-This tuner works well.  It has the same chip as the Hauppauge WinTV-HVR-955Q.  Refer to dmesg listing below:
-
-```
-  [35258.315869] usb 1-1.2: new high-speed USB device number 8 using dwc_otg
-  [35258.406298] usb 1-1.2: New USB device found, idVendor=2040, idProduct=b123
-  [35258.406312] usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-  [35258.406319] usb 1-1.2: Product: Hauppauge Device
-  [35258.406326] usb 1-1.2: Manufacturer: Hauppauge
-  [35258.406333] usb 1-1.2: SerialNumber: 4035698510
-  [35258.439050] media: Linux media interface: v0.10
-  [35258.458527] Linux video capture interface: v2.00
-  [35258.501645] cx231xx 1-1.2:1.1: New device Hauppauge Hauppauge Device @ 480 Mbps (2040:b123) with 7 interfaces
-  [35258.502036] cx231xx 1-1.2:1.1: Identified as Hauppauge WinTV-HVR-955Q (111401) (card=21)
-  [35258.502540] i2c i2c-4: Added multiplexed i2c bus 6
-  [35258.502627] i2c i2c-4: Added multiplexed i2c bus 7
-  [35258.627172] cx25840 3-0044: cx23102 A/V decoder found @ 0x88 (cx231xx #0-0)
-  [35258.645376] cx25840 3-0044: Direct firmware load for v4l-cx231xx-avcore-01.fw failed with error -2
-  [35258.645394] cx25840 3-0044: unable to open firmware v4l-cx231xx-avcore-01.fw
-  [35258.701895] tveeprom 6-0050: Hauppauge model 111401, rev E3I6, serial# 4035698510
-  [35258.701909] tveeprom 6-0050: MAC address is 00:0d:fe:8b:df:4e
-  [35258.701916] tveeprom 6-0050: tuner model is SiLabs Si2157 (idx 186, type 4)
-  [35258.701925] tveeprom 6-0050: TV standards NTSC(M) ATSC/DVB Digital (eeprom 0x88)
-  [35258.701932] tveeprom 6-0050: audio processor is CX23102 (idx 47)
-  [35258.701940] tveeprom 6-0050: decoder processor is CX23102 (idx 46)
-  [35258.701947] tveeprom 6-0050: has no radio, has IR receiver, has no IR transmitter
-  [35258.702946] cx231xx 1-1.2:1.1: v4l2 driver version 0.0.3
-  [35258.754970] cx231xx 1-1.2:1.1: Unknown tuner type configuring SIF
-  [35258.780088] cx231xx 1-1.2:1.1: Registered video device video0 [v4l2]
-  [35258.780230] cx231xx 1-1.2:1.1: Registered VBI device vbi0
-  [35258.780243] cx231xx 1-1.2:1.1: video EndPoint Addr 0x84, Alternate settings: 5
-  [35258.780256] cx231xx 1-1.2:1.1: VBI EndPoint Addr 0x85, Alternate settings: 2
-  [35258.780266] cx231xx 1-1.2:1.1: sliced CC EndPoint Addr 0x86, Alternate settings: 2
-  [35258.780275] cx231xx 1-1.2:1.1: TS EndPoint Addr 0x81, Alternate settings: 6
-  [35258.780549] usbcore: registered new interface driver cx231xx
-  [35258.796429] cx231xx 1-1.2:1.1: audio EndPoint Addr 0x83, Alternate settings: 3
-  [35258.796447] cx231xx 1-1.2:1.1: Cx231xx Audio Extension initialized
-  [35258.896630] si2157 7-0060: Silicon Labs Si2147/2148/2157/2158 successfully attached
-  [35258.896671] DVB: registering new adapter (cx231xx #0)
-  [35258.896685] cx231xx 1-1.2:1.1: DVB: registering adapter 0 frontend 0 (LG Electronics LGDT3306A VSB/QAM Frontend)...
-  [35258.902066] cx231xx 1-1.2:1.1: Successfully loaded cx231xx-dvb
-  [35258.902086] cx231xx 1-1.2:1.1: Cx231xx dvb Extension initialized
-  [35259.074624] si2157 7-0060: found a 'Silicon Labs Si2157-A30'
-  [35259.123494] si2157 7-0060: firmware version: 3.0.5
-  [35259.123547] cx231xx 1-1.2:1.1: DVB: adapter 0 frontend 0 frequency 0 out of range (55000000..858000000)
-```
-
-### Backend (tvheadend)
-Install it:
-```
-sudo apt install xbian-package-tvheadend
-```
-
-If required to admin the services, do it via:
-```
-sudo xbian-config
-```
-
-#### Basic setup
-
-* Set proper users using the web interface: http://ip:9981 (mine is: <http://192.168.1.22:9981> )
+Goto Configuration > General > User:
+* Set proper users login (as required).
   * Admin:
-    * ```tvheadend```
-    * ```xxxxx```
+    * `tvheadend`
+    * `xxxxx`
   * User:
-    * ```*```
-    * ```<blank>```
+    * `*`
+    * `<blank>`
 
-* Goto Config > General > Base:
-  * Set User interface level to Expert
-  * Picon ssection:
-    * Uncheck prefer picon
-    * Set channel icon path: https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png
-    * Channel icon name scheme: "All lower case"
+### DVR Setup
 
-#### Channel setup
+The following is done using the web interface.
+
+Refer to <http://docs.tvheadend.org/webui/config_dvr/>
+
+Goto Configuration > Recording > Digital Video Recorder Profiles:
+* Select the <Default profile)
+* In the Parameters right section:
+  * DVR file retention period: Forever
+  * Recording system path: `/storage/DVR/recordings`
+  * Format string: `$t$-e_%F$n.$x`
+
+### Channel setup
 
 The following is done using the web interface: <http://192.168.1.23:9981> while logged in as admin.
 
-Goto Config > DVB Input
-
+Goto Configuration > DVB Input:
 * Network tab: Add network
   * type = ATSC-T
   * Name = ATSC-T
-  * Predefined muxes: United States: us-ATSC-center-frequencies-8VSB
+  * Predefined muxes: United States: us-ATSC-center-frequencies-8VSB-062009
 * TV Adapters tab:
   * Enable only the ATSC-T sub tuner
   * Assign network to tuner for ATSC-T (for terrestial)
-* Network tab: Force scan
-* Muxes tab: Check scan results.
+* Network tab: Select ATSC-T, then click Force scan
+* Muxes tab:
+  * Check scan results.
+  * For frequency 575.028 (ICI Television), enable:
+    * Accept zero value for TSID
+    * EIT - skip TSID check
 * Services tab: map all selected, map all services.
 
-Goto Config > Channel/EPG
+Goto Configuration > Channel/EPG
 * Channel Tags tab (optional): create the following tags to help when searching:
   * French
   * English
@@ -200,106 +124,44 @@ Goto Config > Channel/EPG
   * USA
   * En-Can
 * Channels tab:
-  * Adjust channel name & number
-  * Make sure user icon is set properly (use reset icon + save).  Manually setting icons can be done as follows:
-    * Full URL: https://www.satlogo.com/hires/cc/cbc_tv_ca.png
-    * Local file URL: file:///home/xbian/rpiDvr/zap2xml/iconsMan/ctv_ca.png
-  * Manually add channel and map to services if not all services were correctly mapped
-* EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_file"
-* EPG Grabber tab: Set EPG frequency (Expert mode) for Internal grabber
+  * Adjust channel name & number, ex: CBC, 6.1
+  * Make sure user icon is set properly (use reset icon + save).
+  * Manually add channel and map to services if not all services were correctly mapped.  Refer to <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital> and <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies> to find the corresponding frequency for each channel.
 
-```
-# Run at 04:00 after zap2xml script
-0 4 * * *
-```
+
+### EPG Downloader
+
+These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night.
+
+Download the addon *script.module.zap2epg* from <https://github.com/mathieugouin/script.module.zap2epg>
+
+Direct download link <https://github.com/mathieugouin/script.module.zap2epg/releases/download/v1.3.3/script.module.zap2epg-1.3.3.zip>
+
+Copy the file on the PI.
+
+Install the addon.
+
+Configure the Addon as follows
+* TBD
+* ZIP Code: J3B2X8
+
+The following is done using the tvheadend web interface: <http://192.168.1.23:9981> while logged in as admin.
+Goto Configuration > Channel/EPG
+* EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_zap2epg"
+* EPG Grabber tab:
+  * General configuration: enable save to disk after import
+  * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber ` 0 4 * * * `
 
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 
-#### DVR Setup
-Possible file naming scheme:
-
-Refer to <http://docs.tvheadend.org/webui/config_dvr/>
-
-Goto Configuration > Recording > Profile
-
-```
-$t$-e_%F$n.$x
-```
-
-### Frontend (Kodi)
+## Frontend (Kodi)
 In Kodi TV interface:
 
 * Install/Enable PVR addon: *Tvheadend HTSP Client*
 * Config: point to localhost
 
-### EPG Downloader
-A program that will fetch channel EPG nightly.
 
-#### Install perl missing libs
-This is required for the EPG downloader.
-
-Note: should install tvheadend first (lots of perl lib will be installed at the same time)
-
-```
-sudo apt install libjson-xs-perl libhtml-parser-perl
-```
-
-#### EPG Downloader Setup
-* install git: `sudo apt install git`
-* git clone project: `git clone https://github.com/mathieugouin/rpiDvr.git rpiDvr`
-* update email & password in ```runZap2Xml.sh``` (do not commit ;) )
-* Set cron job to fetch EPG daily:
-
-```
-crontab -e
-
- # m  h  dom mon dow   command
-   33 3  *   *   *     /home/xbian/rpiDvr/zap2xml/runZap2Xml.sh
-```
-
-* Enable internal grabber in path to work with tvheadend (refer to steps above):
-
-```
-cd /usr/local/bin
-sudo ln -s /home/xbian/rpiDvr/zap2xml/tv_grab_file
-```
-
-### Debugging
-
-Refer to: <https://tvheadend.readthedocs.org/en/latest/Appendices/command_line_options/>
-
-Debug command:
-
-```
-tvheadend -d -u xbian -g xbian -c /home/xbian/.hts/tvheadend
-```
-
-Default command:
-
-```
-tvheadend -f -u xbian -g xbian -c /home/xbian/.hts/tvheadend
-```
-
-### General Infos
-
-HD Recordings:
-
-* 30 min = 4165 MB, 4 GB
-* 1 h = 8330 MB, 8.1 GB
-
-Recordings are stored in a textual DB:
-
-```
-/home/xbian/.hts/tvheadend/dvr/log
-```
-
-## Maintenance
-
-### APT
-* apt-cache search keywords
-* apt-cache show package_name
-
-### Clear Icons Cache
+# Clear Icons Cache
 When changing tvheadend channel icons, it is required to clear the cache to force Kodi to reload the new icons
 ```
 rm $HOME/.kodi/userdata/Thumbnails/*/*.png
@@ -307,49 +169,19 @@ rm $HOME/.kodi/userdata/Database/Textures13.db
 sudo reboot
 ```
 
-### SSH
-Connect:
+# References
 
-```
-ssh xbian@192.168.1.22
-```
+**SSH**
 
-File copy *from* PI:
+Connect: `ssh xbian@192.168.1.22`
 
-```
-scp xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz .
-```
+File copy *from* PI: `scp xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz .`
 
-File copy *to* PI:
+File copy *to* PI: `scp zap2xml.tar.gz xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz`
 
-```
-scp zap2xml.tar.gz xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz
-```
-
-### Check
-```
-mount
-cat /etc/fstab
-lsblk
-sudo fdisk -l
-df -h
-sudo btrfs-auto-snapshot list
-```
-
-Remove snapshots:
-
-```
-sudo -i
-btrfs-auto-snapshot list | grep -v /@$ | grep auto-snap | xargs -L1 btrfs-auto-snapshot destroy
-```
-
-### Correction
-TBD? btrfs how to check for filesystem integrity?
-
-## References
 * <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital>
-* <https://en.wikipedia.org/wiki/List_of_United_States_stations_available_in_Canada>
 * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
+* <https://en.wikipedia.org/wiki/List_of_United_States_stations_available_in_Canada>
 * <http://docs.tvheadend.org/before_you_begin/>
 * <http://kodi.wiki/view/Tvheadend_PVR>
 * <http://wiki.xbian.org/doku.php/snapshots>
