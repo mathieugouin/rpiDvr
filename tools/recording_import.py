@@ -173,7 +173,6 @@ def process():
         if not os.path.exists(TEMP_DIR):
             raise "BAD"
             return
-            makedirs(TEMP_DIR)
         with open(outFileName, 'wb') as fh_log:
             json.dump(recordingDict, fh_log, indent=4)
             fh_log.write('\n')
