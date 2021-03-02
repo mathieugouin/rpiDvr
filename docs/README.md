@@ -176,11 +176,11 @@ TBD advanced settings.
 
 **SSH**
 
-Connect: `ssh xbian@192.168.1.22`
+Connect: `ssh root@192.168.1.23`
 
-File copy *from* PI: `scp xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz .`
+File copy *from* PI: `scp root@192.168.1.23:/home/xbian/zap2xml.tar.gz .`
 
-File copy *to* PI: `scp zap2xml.tar.gz xbian@192.168.1.22:/home/xbian/zap2xml.tar.gz`
+File copy *to* PI: `scp file.tar.gz root@192.168.1.23:/path/to/copy/file.tar.gz`
 
 * <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital>
 * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
