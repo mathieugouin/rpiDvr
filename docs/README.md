@@ -15,10 +15,12 @@ It aims at providing and addressing the following:
 ## Bill of Material
 
 * Raspberry Pi 3 kit
-* 2 TB USB external hard drive
+* 2 TB (or more) USB external hard drive
 * 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
 * Raspberry MPEG-2 License (to enable HW decoding of ATSC Streams when playing back)
 * Coax cable splitter (not required if dual recording is not a must)
+* MicroSD card
+* MicroSD card USB reader
 
 # LibreELEC Install
 
@@ -30,18 +32,11 @@ Extract downloaded file and unzip it.
 
 Plug micro sd card in PC.
 
-Check where mounted:
-```
-lsblk
-```
+Check where mounted: `lsblk`
 
-Unmount card partition (if mounted):
-```
-sudo umount /dev/sdx#
-```
+Unmount card partition (if mounted): `sudo umount /dev/sdx#`
 
 Write to micro sd card:
-
 ```
 sudo dd if=XXX.img of=/dev/sdx bs=4M conv=fsync status=progress
 sync
@@ -64,6 +59,8 @@ Enable via: TBD (GUI?)
 ## Backend (tvheadend)
 
 Install it via LibreELEC add-ons repo under "services".
+
+Configure the addon to have a delayed startup of TBD seconds.
 
 Most of the tvheadend configuration is done from a web interface: http://ip:9981 (mine is: <http://192.168.1.23:9981>)
 
