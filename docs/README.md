@@ -1,6 +1,6 @@
 # Overview
 
-A short introduction on how to setup a DVR using Raspberry Pi 3 to watch and record free over the air HDTV.
+A semi-detailed guide on how to setup a DVR using Raspberry Pi 3 to watch and record free over the air HDTV.
 
 These instructions will allow 2 simultaneous programme recording while watching another already recorder programme.
 
