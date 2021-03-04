@@ -50,9 +50,17 @@ sync
 ## MPEG-2 License
 Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
 
-For my PI, the license is: ```0x16baa230```
+For my PI, the license is: `0x16baa230`
 
-Enable via: TBD (GUI?)
+Enable the license by sshing on the PI:
+* `ssh root@192.168.1.23`
+* The default password is `libreelec` all lowercase.
+* In the SSH session mount the /flash directory with read and write privileges:
+  * `mount -o remount,rw /flash`
+* Edit the /flash/config.txt file to add the MPEG-2 license key:
+  * nano /flash/config.txt
+  * Locate the `decode_MPG2` line, remove the # and space at the front, and add your MPEG-2 license key: `decode_MPG2=0x16baa230`
+
 
 # Tvheadend
 
