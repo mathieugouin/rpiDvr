@@ -175,7 +175,7 @@ In Kodi TV interface:
 
 # Miscelaneous
 
-**Clear Icons Cache**
+## Clear Icons Cache
 
 When changing tvheadend channel icons, it is required to clear the cache to force Kodi to reload the new icons
 ```
@@ -184,7 +184,7 @@ rm $HOME/.kodi/userdata/Database/Textures13.db
 sudo reboot
 ```
 
-**Enable debug log**
+## Enable debug log
 If required to help debugging an issue with kodi, activate debug logging without the annying onscreen debug overlay as follows:
 * Connect through ssh on the PI: `ssh root@192.168.1.23`
 * If not already present, create the following text file: `/storage/.kodi/userdata/advancedsettings.xml`
