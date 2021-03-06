@@ -165,7 +165,7 @@ Goto Configuration > Channel/EPG:
 * EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_zap2epg"
 * EPG Grabber tab:
   * General configuration: enable save to disk after import
-  * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber ` 0 4 * * * `
+  * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber `0 4 * * *`
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 
 ## Frontend (Kodi)
