@@ -189,7 +189,8 @@ If required to help debugging an issue with kodi, activate debug logging without
 * Connect through ssh on the PI: `ssh root@192.168.1.23`
 * If not already present, create the following text file: `/storage/.kodi/userdata/advancedsettings.xml`
 * Edit to contains:
-```
+
+```xml
 <advancedsettings version="1.0">
     <!-- That should enable debug logging but without that annoying overlay on the screen. -->
     <loglevel>1</loglevel>
