@@ -37,7 +37,7 @@ Check where mounted: `lsblk`
 Unmount card partition (if mounted): `sudo umount /dev/sdx#`
 
 Write to micro sd card:
-```
+```bash
 sudo dd if=XXX.img of=/dev/sdx bs=4M conv=fsync status=progress
 sync
 ```
@@ -178,7 +178,7 @@ In Kodi TV interface:
 ## Clear Icons Cache
 
 When changing tvheadend channel icons, it is required to clear the cache to force Kodi to reload the new icons
-```
+```bash
 rm $HOME/.kodi/userdata/Thumbnails/*/*.png
 rm $HOME/.kodi/userdata/Database/Textures13.db
 sudo reboot
