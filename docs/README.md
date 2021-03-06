@@ -59,18 +59,23 @@ Enable the license by sshing on the PI:
   * `mount -o remount,rw /flash`
 * Edit the /flash/config.txt file to add the MPEG-2 license key:
   * nano /flash/config.txt
-  * Locate the `decode_MPG2` line, remove the # and space at the front, and add your MPEG-2 license key: `decode_MPG2=0x16baa230`
-
+  * Locate the `decode_MPG2` line, remove the # and space at the front, and add your MPEG-2 license key, ex: `decode_MPG2=0x16baa230`
 
 # Tvheadend
 
 ## Backend (tvheadend)
 
-Install it via LibreELEC add-ons repo under "services".
+Install the *Tvheadend Server* add-on from the "Service" category in the add-ons repos.
 
-Configure the addon to have a delayed startup of TBD seconds.
+Configure the addon to have a delayed startup of 20 seconds.  This is to make sure that the externally mounted drive are available when tvheadend starts:
+* My Addons
+* Tvheadend Server
+* Configure
+* DVB section
+* Delay Start of tvheadend: active
+* Seconds delay: 20
 
-Most of the tvheadend configuration is done from a web interface: http://ip:9981 (mine is: <http://192.168.1.23:9981>)
+The rest of the tvheadend configuration is done from its web interface: `http://ip:9981` (mine is: <http://192.168.1.23:9981>)
 
 Goto Configuration > General > Base:
 * Set User interface level to Expert
@@ -90,7 +95,7 @@ Goto Configuration > General > User:
 
 ### DVR Setup
 
-The following is done using the web interface.
+The following is done using tvheadend web interface.
 
 Refer to <http://docs.tvheadend.org/webui/config_dvr/>
 
@@ -103,7 +108,7 @@ Goto Configuration > Recording > Digital Video Recorder Profiles:
 
 ### Channel setup
 
-The following is done using the web interface: <http://192.168.1.23:9981> while logged in as admin.
+The following is done using tvheadend web interface.
 
 Goto Configuration > DVB Input:
 * Network tab: Add network
@@ -136,7 +141,7 @@ Goto Configuration > Channel/EPG
 
 ### EPG Downloader
 
-These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night.
+These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night and make it available for tvheadend.
 
 Download the addon *script.module.zap2epg* from <https://github.com/mathieugouin/script.module.zap2epg>
 
@@ -147,24 +152,26 @@ Copy the file on the PI.
 Install the addon.
 
 Configure the Addon as follows
-* TBD
-* ZIP Code: J3B2X8
+* Option section:
+  * Nb days download: 14
+  * Nb days delete cache: 3
+* Location section:
+  * ZIP Code: J3B2X8
+  * Lineup: local over the air
 
-The following is done using the tvheadend web interface: <http://192.168.1.23:9981> while logged in as admin.
-Goto Configuration > Channel/EPG
+The following is done using tvheadend web interface.
+
+Goto Configuration > Channel/EPG:
 * EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_zap2epg"
 * EPG Grabber tab:
   * General configuration: enable save to disk after import
   * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber ` 0 4 * * * `
-
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 
 ## Frontend (Kodi)
 In Kodi TV interface:
-
 * Install/Enable PVR addon: *Tvheadend HTSP Client*
 * Config: point to localhost
-
 
 # Miscelaneous
 
@@ -178,7 +185,16 @@ sudo reboot
 ```
 
 **Enable debug log**
-TBD advanced settings.
+If required to help debugging an issue with kodi, activate debug logging without the annying onscreen debug overlay as follows:
+* Connect through ssh on the PI: `ssh root@192.168.1.23`
+* If not already present, create the following text file: `/storage/.kodi/userdata/advancedsettings.xml`
+* Edit to contains:
+```
+<advancedsettings version="1.0">
+    <!-- That should enable debug logging but without that annoying overlay on the screen. -->
+    <loglevel>1</loglevel>
+</advancedsettings>
+```
 
 # References
 
