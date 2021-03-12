@@ -16,7 +16,9 @@ It aims at providing and addressing the following:
 
 * Raspberry Pi 3 kit
 * 2 TB (or more) USB external hard drive
-* 2 ATSC USB Tuners: Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must
+* ATSC USB Tuners:
+  * 2 Digital TV Tuner for Xbox One (1 is enough if dual recording is not a must)
+  * (alternate option) Hauppauge 1595 WinTV-DualHD
 * Raspberry MPEG-2 License (to enable HW decoding of ATSC Streams when playing back)
 * Coax cable splitter (not required if dual recording is not a must)
 * MicroSD card
