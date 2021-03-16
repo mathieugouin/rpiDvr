@@ -48,6 +48,8 @@ sync
 * Boot PI
 * Wait for full initial setup, including partition resize
 * Follow wizzard to setup Wifi, etc...
+* Disable auto update:
+  * TBD
 
 ## MPEG-2 License
 Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
