@@ -149,8 +149,9 @@ Goto Configuration > Channel/EPG
 * Channels tab:
   * Adjust channel name & number, ex: CBC, 6.1
   * Make sure user icon is set properly (use reset icon + save).
-  * Manually add channel and map to services if not all services were correctly mapped.  Refer to <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital> and <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies> to find the corresponding frequency for each channel.
-
+  * Manually add channel and map to services if not all services were correctly mapped.  Refer to both website below to find the corresponding frequency for each channel:
+    * <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital>
+    * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 
 ### EPG Downloader
 
@@ -184,7 +185,11 @@ Goto Configuration > Channel/EPG:
 ## Frontend (Kodi)
 In Kodi TV interface:
 * Install/Enable PVR addon: *Tvheadend HTSP Client*
-* Config: point to localhost
+
+Configure Kodi TV settings:
+* Kodi Settings
+* TV
+* Enable: use channel number from backend
 
 # Miscelaneous
 
