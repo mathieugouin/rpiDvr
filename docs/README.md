@@ -49,7 +49,16 @@ sync
 * Wait for full initial setup, including partition resize
 * Follow wizzard to setup Wifi, etc...
 * Disable auto update:
-  * TBD
+  * Settings
+  * LibreELEC
+  * Updates
+  * Change "Automatic Updates" to "manual"
+* Set proper timezone:
+  * Settings
+  * Interface
+  * Regional
+  * Timezone country
+
 
 ## MPEG-2 License
 Need to buy a license from <http://www.raspberrypi.com/mpeg-2-license-key/>
