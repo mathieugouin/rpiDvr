@@ -128,6 +128,7 @@ Goto Configuration > DVB Input:
   * For frequency 575.028 (ICI Television), enable:
     * Accept zero value for TSID
     * EIT - skip TSID check
+    * Play it manually once using the play button.  This should launch VLC player.  Then, it will allow the service to be mapped to a channel.
 * Services tab: map all selected, map all services.
 
 Goto Configuration > Channel/EPG
