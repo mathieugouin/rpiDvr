@@ -140,8 +140,9 @@ Goto Configuration > Channel/EPG
 * Channels tab:
   * Adjust channel name & number, ex: CBC, 6.1
   * Make sure user icon is set properly (use reset icon + save).
-  * Manually add channel and map to services if not all services were correctly mapped.  Refer to the 2 wiki pages below to find the corresponding frequency for each channel.  Note that tvheadend reports mux frequency as 3.028 MHz + "Lower edge".  For example, wiki lists UHF channel 15 lower edge at 476 MHz, tvheadend displays 479.028 MHz and it corresponds to CKMI-DT-1 (Global).
+  * Manually add channel and map to services if not all services were correctly mapped.  Refer to the wiki pages below to find the corresponding frequency for each channel.  Note that tvheadend reports mux frequency as 3.028 MHz + "Lower edge".  For example, wiki lists UHF channel 15 lower edge at 476 MHz, tvheadend displays 479.028 MHz and it corresponds to CKMI-DT-1 (Global).
     * <https://en.wikipedia.org/wiki/List_of_Canadian_television_stations#Digital>
+    * <https://en.wikipedia.org/wiki/List_of_United_States_television_stations_available_in_Canada>
     * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 
 ### EPG Downloader
