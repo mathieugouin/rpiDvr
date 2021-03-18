@@ -11,35 +11,40 @@ TVH_SERVER = 'http://192.168.1.23:9981'
 
 
 def get_api_url(api):
-    return TVH_SERVER + '/api/' + api
-
-
-def get_autorecs():
-    ts_query = get_api_url('dvr/autorec/grid')
-    ts_response = requests.get(ts_query)
+    url = TVH_SERVER + '/api/' + api
+    ts_response = requests.get(url)
     if ts_response.status_code != 200:
-        print('<pre>Error code %d\n%s</pre>' % (ts_response.status_code, ts_response.content, ))
+        print('Error code %d\n%s' % (ts_response.status_code, ts_response.content))
         return {}
     ts_json = json.loads(ts_response.text, strict=False)
     return ts_json
 
 
+def get_autorecs():
+    return get_api_url('dvr/autorec/grid')
+
+
+def get_idnode(uuid):
+    return get_api_url('idnode/load?uuid=' + uuid)
+
+
+def json_pp(js):
+    print(json.dumps(js, indent=4, sort_keys=False))
+
+
 def main():
-    ar = get_autorecs()
+    autorecs = get_autorecs()
+    #json_pp(autorecs)
 
-    print(ar)
+    if autorecs and 'entries' in autorecs:
+        for e in autorecs['entries']:
+            #print(e)
+            #print("%s\t%s\t%s" % (e['uuid'], e['enabled'], e['name']))
+            pass
 
-    """
-    timers = get_timers()
-    if len(timers):
-        for timer in timers:
-            start = time.localtime(timer['start'])
-            print('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
-                % (time.strftime("%a %e/%m",start),
-                   time.strftime("%H:%M",start),
-                   time.strftime("%H:%M",time.localtime(timer['stop'])),
-                   timer['disp_title'],
-                ))
-    """
-                
-main()
+    idnode = get_idnode('64a34dd9bceba0aa55066d93c9b87b3f')
+    json_pp(idnode)
+
+
+if __name__ == "__main__":
+    main()
