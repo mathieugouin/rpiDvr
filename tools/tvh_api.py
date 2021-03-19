@@ -1,11 +1,10 @@
-#!/usr/bin/python
-
-# To make print working for Python2/3
-from __future__ import print_function
+#!/usr/bin/python3
 
 import json
-import time
 import requests
+import urllib
+import time
+
 
 TVH_SERVER = 'http://192.168.1.23:9981'
 
@@ -28,6 +27,16 @@ def get_idnode(uuid):
     return get_api_url('idnode/load?uuid=' + uuid)
 
 
+def set_autorec_enabled(uuid, enabled):
+    js = {
+        'uuid' : uuid,
+        'enabled' : enabled
+    }
+    api = 'idnode/save?node=' + urllib.parse.quote(json.dumps(js))
+    #print(api)
+    return get_api_url(api)
+
+
 def json_pp(js):
     print(json.dumps(js, indent=4, sort_keys=False))
 
@@ -36,14 +45,22 @@ def main():
     autorecs = get_autorecs()
     #json_pp(autorecs)
 
+    enabled_uuid = []
+
     if autorecs and 'entries' in autorecs:
         for e in autorecs['entries']:
-            #print(e)
-            #print("%s\t%s\t%s" % (e['uuid'], e['enabled'], e['name']))
-            pass
+            if e['enabled']:
+                #print("%s\t%s\t%s" % (e['uuid'], e['enabled'], e['name']))
+                uuid = e['uuid']
+                enabled_uuid.append(uuid)
+                # disable
+                set_autorec_enabled(uuid, False)
 
-    idnode = get_idnode('64a34dd9bceba0aa55066d93c9b87b3f')
-    json_pp(idnode)
+    time.sleep(3)
+
+    for uuid in enabled_uuid:
+        print("Enabling " + uuid)
+        set_autorec_enabled(uuid, True)
 
 
 if __name__ == "__main__":
