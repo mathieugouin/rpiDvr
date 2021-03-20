@@ -97,7 +97,7 @@ Goto Configuration > General > Base:
   * Set channel icon path: `https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png`
   * Channel icon name scheme: "All lower case"
 
-### DVR Setup
+**DVR Setup**
 
 The following is done using tvheadend web interface.
 
@@ -110,7 +110,7 @@ Goto Configuration > Recording > Digital Video Recorder Profiles:
   * Recording system path: `/storage/DVR/recordings`
   * Format string: `$t$-e_%F$n.$x`
 
-### Channel setup
+**Channel setup**
 
 The following is done using tvheadend web interface.
 
@@ -146,7 +146,7 @@ Goto Configuration > Channel/EPG
     * <https://en.wikipedia.org/wiki/List_of_United_States_television_stations_available_in_Canada>
     * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 
-### EPG Downloader
+## EPG Downloader
 
 These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night and make it available for tvheadend.
 
@@ -154,24 +154,35 @@ Download the addon *script.module.zap2epg* from <https://github.com/mathieugouin
 
 Direct download link <https://github.com/mathieugouin/script.module.zap2epg/releases/download/v1.3.3/script.module.zap2epg-1.3.3.zip>
 
-Copy the file on the PI.
+Setup:
+* Copy the file on the PI.
+* Install the addon.
+* Run the addon and setup your lineup:
+  * Canada
+  * ZIP Code: J3B2X8
+  * Lineup: Local over the air broadcast
+* Configure your channel list (add channels to be downloaded)
+* You can run the program from the addon as a test - not necessary
 
-Install the addon.
-
-Configure the Addon as follows
+Configure the Addon as follows:
 * Option section:
   * Nb days download: 14
   * Nb days delete cache: 3
-* Location section:
-  * ZIP Code: J3B2X8
-  * Lineup: local over the air
+  * Download extra details: OFF
+  * Append extra details: OFF
+  * Include Episode Thumbnail: None
+  * Include Episode Genres: Full
+* Tvheadend section:
+  * Tvheadend Options Enbled: OFF
 
 The following is done using tvheadend web interface.
 
 Goto Configuration > Channel/EPG:
 * EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_zap2epg"
 * EPG Grabber tab:
-  * General configuration: enable save to disk after import
+  * General configuration: 
+    * Periodically save EPG to disk (hours): 0 (to disable)
+    * Enable save to disk after import
   * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber `0 4 * * *`
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 
