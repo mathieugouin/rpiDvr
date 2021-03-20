@@ -154,17 +154,20 @@ Download the addon *script.module.zap2epg* from <https://github.com/mathieugouin
 
 Direct download link <https://github.com/mathieugouin/script.module.zap2epg/releases/download/v1.3.3/script.module.zap2epg-1.3.3.zip>
 
-Copy the file on the PI.
+Setup:
+* Copy the file on the PI.
+* Install the addon.
+* Run the addon and setup your lineup:
+  * Canada
+  * ZIP Code: J3B2X8
+  * Lineup: Local over the air broadcast
+* Configure your channel list (add channels to be downloaded)
+* You can run the program from the addon as a test - not necessary
 
-Install the addon.
-
-Configure the Addon as follows
+Configure the Addon as follows:
 * Option section:
   * Nb days download: 14
   * Nb days delete cache: 3
-* Location section:
-  * ZIP Code: J3B2X8
-  * Lineup: local over the air
 
 The following is done using tvheadend web interface.
 
