@@ -97,7 +97,7 @@ Goto Configuration > General > Base:
   * Set channel icon path: `https://raw.githubusercontent.com/mathieugouin/rpiDvr/master/zap2xml/iconsMan/%C.png`
   * Channel icon name scheme: "All lower case"
 
-### DVR Setup
+**DVR Setup**
 
 The following is done using tvheadend web interface.
 
@@ -110,7 +110,7 @@ Goto Configuration > Recording > Digital Video Recorder Profiles:
   * Recording system path: `/storage/DVR/recordings`
   * Format string: `$t$-e_%F$n.$x`
 
-### Channel setup
+**Channel setup**
 
 The following is done using tvheadend web interface.
 
@@ -171,7 +171,9 @@ The following is done using tvheadend web interface.
 Goto Configuration > Channel/EPG:
 * EPG Grabber Modules tab: Enable only "Internal: XMLTV: tv_grab_zap2epg"
 * EPG Grabber tab:
-  * General configuration: enable save to disk after import
+  * General configuration: 
+    * Periodically save EPG to disk (hours): 0 (to disable)
+    * Enable save to disk after import
   * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber `0 4 * * *`
 * EPG Grabber Channels tab: Assign channels to each EPG channel
 
