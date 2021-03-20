@@ -146,7 +146,7 @@ Goto Configuration > Channel/EPG
     * <https://en.wikipedia.org/wiki/List_of_United_States_television_stations_available_in_Canada>
     * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 
-### EPG Downloader
+## EPG Downloader
 
 These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night and make it available for tvheadend.
 
@@ -168,6 +168,12 @@ Configure the Addon as follows:
 * Option section:
   * Nb days download: 14
   * Nb days delete cache: 3
+  * Download extra details: OFF
+  * Append extra details: OFF
+  * Include Episode Thumbnail: None
+  * Include Episode Genres: Full
+* Tvheadend section:
+  * Tvheadend Options Enbled: OFF
 
 The following is done using tvheadend web interface.
 
