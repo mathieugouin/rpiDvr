@@ -56,11 +56,13 @@ def main():
                 # disable
                 set_autorec_enabled(uuid, False)
 
-    time.sleep(3)
+    print("Disabled all enabled autorecs")
+    time.sleep(2)
 
     for uuid in enabled_uuid:
         print("Enabling " + uuid)
         set_autorec_enabled(uuid, True)
+        time.sleep(0.5)
 
 
 if __name__ == "__main__":
