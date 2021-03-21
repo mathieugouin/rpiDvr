@@ -146,8 +146,16 @@ Goto Configuration > Channel/EPG
     * <https://en.wikipedia.org/wiki/List_of_United_States_television_stations_available_in_Canada>
     * <https://en.wikipedia.org/wiki/North_American_television_frequencies#Channel_frequencies>
 
-## EPG Downloader
+## Frontend (Kodi)
+In Kodi TV interface:
+* Install/Enable PVR addon: *Tvheadend HTSP Client*
 
+Configure Kodi TV settings:
+* Kodi Settings
+* TV
+* Enable: use channel number from backend
+
+## EPG Downloader
 These steps explains how to install an addon that will download the updated EPG (Electronic Program Guide) every night and make it available for tvheadend.
 
 Download the addon *script.module.zap2epg* from <https://github.com/mathieugouin/script.module.zap2epg>
@@ -185,15 +193,6 @@ Goto Configuration > Channel/EPG:
     * Enable save to disk after import
   * Internal grabber: Set EPG frequency (Expert mode) for Internal grabber `0 4 * * *`
 * EPG Grabber Channels tab: Assign channels to each EPG channel
-
-## Frontend (Kodi)
-In Kodi TV interface:
-* Install/Enable PVR addon: *Tvheadend HTSP Client*
-
-Configure Kodi TV settings:
-* Kodi Settings
-* TV
-* Enable: use channel number from backend
 
 # Miscelaneous
 
