@@ -29,30 +29,19 @@ TEMP_DIR = '/storage/tmp/dvr'
 # ####### COMMON Config
 
 # /storage/.kodi/userdata/addon_data/service.tvheadend42/dvr/log
-TVH_DVR_CONFIG_DIR = TVH_BASE_DIR + '/dvr/log'
+TVH_DVR_DIR = TVH_BASE_DIR + '/dvr/log'
+TVH_CONFIG_DIR = TVH_BASE_DIR + '/dvr/config'
+TVH_CHANNEL_DIR = TVH_BASE_DIR + '/channel/config'
 
 TVH_FILE_PATTERN = "????????????????????????????????"
 
-TVH_CONFIG_NAME = "8d0f5b7ae354d956d7fe5db25f5d0d24"
+# TODO: The following constants need to be updated according to the TVH install: 
+TVH_CONFIG_NAME = "8d0f5b7ae354d956d7fe5db25f5d0d24" # Look for the file name inside TVH_BASE_DIR + 'dvr/config'
+TVH_DEFAULT_CHANNEL_KEY = '52cf67a489e79fdb75b9081e5ee8865e' # Look for any file name inside TVH_BASE_DIR + 'channel/config'
+TVH_DEFAULT_CHANNEL_NAME = 'Radio-Canada' # Pick the corresponding name of the chosen file
 
 START_TIME_RESOLUTION = 30.0 * 60.0 # in seconds
 DURATION_RESOLUTION = 60.0 # in seconds
-
-#       02ef45aeeca563efa8ed83b4733088c3:	"name": "Global",
-#       20b7ef885b8744b97c78759c2676f8ed:	"name": "TVA",
-#       52cf67a489e79fdb75b9081e5ee8865e:	"name": "Radio-Canada",
-#       5b5aca696f6f20fad80ce3905784cd53:	"name": "PBS",
-#       62ced70710b35a0f7301d9ad41e041a7:	"name": "CTV",
-#       797ae3f05380db0600f60698f33a4585:	"name": "PBS-Kids",
-#       7d6871240613ca9c7f3e7a22f638e686:	"name": "MHz-WorldView",
-#       92e042245493de8243d73097fbf93b23:	"name": "Canal-Savoir",
-#       a55cbeb805291409e6644c39ee708921:	"name": "City",
-#       ae2ef66a6fa4280b7c3e635109c00c6b:	"name": "V",
-#       ebd4c0e9b8826bc99592f2722f1d55e1:	"name": "Tele-Quebec",
-#       f373fd298a1732a94cd000092422d7e2:	"name": "CBC",
-
-TVH_DEFAULT_CHANNEL_KEY = '52cf67a489e79fdb75b9081e5ee8865e'
-TVH_DEFAULT_CHANNEL_NAME = 'Radio-Canada'
 
 def roundup(x, r):
     return math.ceil(float(x) / r) * r
@@ -86,6 +75,7 @@ def get_video_directory(video_file):
     return basedir
 
 def get_video_duration(video_file):
+    # Need to install the ffmpeg-tools addon
     # https://ffmpeg.org/ffprobe.html#Options
     # ffprobe -v quiet -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 filename.ts
     output = subprocess.check_output([
@@ -97,7 +87,7 @@ def get_video_duration(video_file):
         "-of",
         "default=noprint_wrappers=1:nokey=1",
         video_file])
-    return float(output.rstrip())
+    return float(output.strip())
 
 
 # Create a new filename for dvr log, with leading 0s
@@ -107,7 +97,7 @@ def get_new_filename():
 
 def process():
     # get all existing tvh recordings (to prevent accidental duplication of filename)
-    existing_recording_logs = [os.path.relpath(f, TVH_DVR_CONFIG_DIR) for f in find_files(TVH_DVR_CONFIG_DIR, TVH_FILE_PATTERN)]
+    existing_recording_logs = [os.path.relpath(f, TVH_DVR_DIR) for f in find_files(TVH_DVR_DIR, TVH_FILE_PATTERN)]
 
     for video_file in find_files(VIDEO_DIR, "*.ts"):
         print "Processing", video_file
@@ -136,14 +126,14 @@ def process():
         recordingDict['channel'] = TVH_DEFAULT_CHANNEL_KEY
         recordingDict['channelname'] = TVH_DEFAULT_CHANNEL_NAME
         recordingDict['title'] = { 'eng': title }
-        recordingDict['description'] = { 'eng': 'Not available' }
+        recordingDict['description'] = { 'eng': 'Recording auto imported from script' }
         recordingDict['pri'] =  2
         recordingDict['retention'] = 0
         recordingDict['removal'] = 0
         recordingDict['playposition'] = 0
         recordingDict['playcount'] = 0
         recordingDict['config_name'] = TVH_CONFIG_NAME
-        recordingDict['creator'] = "Rebuild"
+        recordingDict['creator'] = 'Rebuild'
         if video_directory:
             recordingDict['directory'] = video_directory
 
@@ -154,29 +144,27 @@ def process():
         recordingDict['noresched'] = True
         recordingDict['norerecord'] = False
         recordingDict['fileremoved'] = 0
-        recordingDict['autorec'] = ""
-        recordingDict['timerec'] = ""
-        recordingDict['parent'] = ""
-        recordingDict['child'] = ""
+        recordingDict['autorec'] = ''
+        recordingDict['timerec'] = ''
+        recordingDict['parent'] = ''
+        recordingDict['child'] = ''
         recordingDict['content_type'] = 0
         recordingDict['broadcast'] = 0
-        recordingDict['comment'] = "Recording auto imported from script"
+        recordingDict['comment'] = 'Recording auto imported from script'
 
         recordingDict['files'] = list()
-        filesDict = dict()
-        filesDict['filename'] = video_file
-        recordingDict['files'].append(filesDict)
+        recordingDict['files'].append({'filename': video_file})
 
-        #outFileName = os.path.join(TVH_DVR_CONFIG_DIR, log_name)  # real
-        outFileName = os.path.join(TEMP_DIR, log_name)     # testing
+        outFileName = os.path.join(TVH_DVR_DIR, log_name)  # real
+        #outFileName = os.path.join(TEMP_DIR, log_name)     # testing
 
         if not os.path.exists(TEMP_DIR):
-            raise "BAD"
+            raise 'BAD'
             return
         with open(outFileName, 'wb') as fh_log:
             json.dump(recordingDict, fh_log, indent=4)
             fh_log.write('\n')
-            print "  => Created:", outFileName
+            print '  => Created:', outFileName
 
 
 def _main():
