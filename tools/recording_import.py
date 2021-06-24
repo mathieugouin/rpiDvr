@@ -18,7 +18,7 @@ import collections
 
 # ####### KODI
 TVH_BASE_DIR = '/storage/.kodi/userdata/addon_data/service.tvheadend42' # TVH config base directory
-VIDEO_DIR = '/storage/DVR/recordings_backup'
+VIDEO_DIR = '/storage/DVR/recordings'
 TEMP_DIR = '/storage/tmp/dvr'
 
 # ####### TESTING
@@ -35,8 +35,9 @@ TVH_CHANNEL_DIR = TVH_BASE_DIR + '/channel/config'
 
 TVH_FILE_PATTERN = "????????????????????????????????"
 
-# TODO: The following constants need to be updated according to the TVH install: 
+# TODO: The following 3 constants need to be updated according to the TVH install: 
 TVH_CONFIG_NAME = "8d0f5b7ae354d956d7fe5db25f5d0d24" # Look for the file name inside TVH_BASE_DIR + 'dvr/config'
+# The imported recordings will all be configured with the following channel:
 TVH_DEFAULT_CHANNEL_KEY = '52cf67a489e79fdb75b9081e5ee8865e' # Look for any file name inside TVH_BASE_DIR + 'channel/config'
 TVH_DEFAULT_CHANNEL_NAME = 'Radio-Canada' # Pick the corresponding name of the chosen file
 
@@ -109,7 +110,7 @@ def process():
         while log_name in existing_recording_logs:
             log_name = get_new_filename()
 
-        # getmtime return in seconds, round down to a decent resolution
+        # getmtime return in seconds, round it to a decent resolution
         video_mod_time = roundup(os.path.getmtime(video_file), START_TIME_RESOLUTION)
         video_duration = roundup(get_video_duration(video_file), DURATION_RESOLUTION)
 
@@ -155,6 +156,7 @@ def process():
         recordingDict['files'] = list()
         recordingDict['files'].append({'filename': video_file})
 
+        # TODO chose where to output data
         outFileName = os.path.join(TVH_DVR_DIR, log_name)  # real
         #outFileName = os.path.join(TEMP_DIR, log_name)     # testing
 
