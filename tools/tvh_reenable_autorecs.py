@@ -1,31 +1,20 @@
 #!/usr/bin/python3
 
+# ref: https://github.com/dave-p/TVH-API-docs/wiki
+
 import json
-import requests
 import urllib
 import time
-
-
-TVH_SERVER = 'http://192.168.1.23:9981'
-
-
-def get_api_url(api):
-    url = TVH_SERVER + '/api/' + api
-    ts_response = requests.get(url)
-    if ts_response.status_code != 200:
-        print('Error code %d\n%s' % (ts_response.status_code, ts_response.content))
-        return {}
-    ts_json = json.loads(ts_response.text, strict=False)
-    return ts_json
+import tvh_api as ta
 
 
 def get_autorecs():
     # Large number to not be limited (default is 50)
-    return get_api_url('dvr/autorec/grid?limit=5000')
+    return ta.get_api_url('dvr/autorec/grid?limit=5000')
 
 
 def get_idnode(uuid):
-    return get_api_url('idnode/load?uuid=' + uuid)
+    return ta.get_api_url('idnode/load?uuid=' + uuid)
 
 
 def set_autorec_enabled(uuid, enabled):
@@ -35,7 +24,7 @@ def set_autorec_enabled(uuid, enabled):
     }
     api = 'idnode/save?node=' + urllib.parse.quote(json.dumps(js))
     #print(api)
-    return get_api_url(api)
+    return ta.get_api_url(api)
 
 
 def json_pp(js):
