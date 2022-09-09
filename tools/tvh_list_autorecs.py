@@ -12,6 +12,11 @@ def get_autorecs():
     return ta.get_api_url('dvr/autorec/grid?limit=5000')
 
 
+def get_channels():
+    # Large number to not be limited (default is 50)
+    return ta.get_api_url('channel/grid?limit=5000')
+
+
 
 def is_dir_name_ok(d):
     try:
@@ -25,7 +30,17 @@ def is_dir_name_ok(d):
             return False
         
 
+def get_channel_name(channels, uuid):
+    j = channels
+    if 'entries' in j:
+        for e in j['entries']:
+            if e['uuid'] == uuid:
+                return e['name']
+    return ''
+
+
 def get_df():
+    channels = get_channels()
     autorecs = get_autorecs()
 
     df = None
@@ -90,7 +105,7 @@ def get_df():
                         'Name': a['name'],
                         'Title': a['title'],
                         'Directory': a['directory'],
-                        'Channel': a['channel'],  # TBD need to parse channel
+                        'Channel': get_channel_name(channels, a['channel']),
                         })
 
         df = pd.DataFrame(info)
