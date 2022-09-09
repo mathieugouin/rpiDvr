@@ -27,13 +27,9 @@ def set_autorec_enabled(uuid, enabled):
     return ta.get_api_url(api)
 
 
-def json_pp(js):
-    print(json.dumps(js, indent=4, sort_keys=False))
-
-
 def _main():
     autorecs = get_autorecs()
-    #json_pp(autorecs)
+    #ta.json_pp(autorecs)
 
     enabled_uuid = []
     count = 0

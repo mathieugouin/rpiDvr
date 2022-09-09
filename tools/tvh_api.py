@@ -7,6 +7,11 @@ import urllib
 _TVH_SERVER = 'http://192.168.1.23:9981'
 
 
+# Debug utils
+def json_pp(js):
+    print(json.dumps(js, indent=4, sort_keys=False))
+
+
 def get_api_url(api):
     url = _TVH_SERVER + '/api/' + api
     ts_response = requests.get(url)

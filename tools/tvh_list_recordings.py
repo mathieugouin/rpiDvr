@@ -32,12 +32,12 @@ def _main():
                         'Subtitle': r['disp_subtitle']
                         })
 
-    df = pd.DataFrame(info)
-    df.sort_values(list(df.columns), inplace=True)
+        df = pd.DataFrame(info)
+        df.sort_values(list(df.columns), inplace=True)
 
-    # print full DF
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.expand_frame_repr', False):
-        print(df)
+        # print full DF
+        with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.expand_frame_repr', False):
+            print(df)
 
 
 
