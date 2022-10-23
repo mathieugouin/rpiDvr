@@ -74,6 +74,12 @@ Enable the license by sshing on the PI:
   * nano /flash/config.txt
   * Locate the `decode_MPG2` line, remove the # and space at the front, and add your MPEG-2 license key, ex: `decode_MPG2=0x16baa230`
 
+## External Hard-drive
+* Make sure the USB hard-drive is plugged in the PI and properly mounted.
+* Make a symlink to it in the storage folder:
+** `cd /storage`
+** `ln -s /media/BLUE_2TB/DVR` DVR
+
 # Tvheadend
 
 ## Backend (tvheadend)
