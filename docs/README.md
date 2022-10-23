@@ -9,7 +9,7 @@ It aims at providing and addressing the following:
 * Decoding of the signal: USB ATSC TV Tuner
 * Channel guide: third party source from <https://tvlistings.zap2it.com> & download script
 * Recordings management & scheduling: <https://tvheadend.org/>
-* Recordings playing: Kodi + XBian + Tvheadend HTSP Client
+* Recordings playing: Kodi + LibreELEC + Tvheadend HTSP Client
 * Recordings storage: high capacity external USB hard drive
 
 ## Bill of Material
