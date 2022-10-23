@@ -67,7 +67,7 @@ For my PI, the license is: `0x16baa230`
 
 Enable the license by sshing on the PI:
 * `ssh root@192.168.1.23`
-* The default password is `libreelec` all lowercase.
+* The default password is `libreelec`.
 * In the SSH session mount the /flash directory with read and write privileges:
   * `mount -o remount,rw /flash`
 * Edit the /flash/config.txt file to add the MPEG-2 license key:
