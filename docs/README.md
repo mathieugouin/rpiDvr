@@ -9,7 +9,7 @@ It aims at providing and addressing the following:
 * Decoding of the signal: USB ATSC TV Tuner
 * Channel guide: third party source from <https://tvlistings.zap2it.com> & download script
 * Recordings management & scheduling: <https://tvheadend.org/>
-* Recordings playing: Kodi + XBian + Tvheadend HTSP Client
+* Recordings playing: Kodi + LibreELEC + Tvheadend HTSP Client
 * Recordings storage: high capacity external USB hard drive
 
 ## Bill of Material
@@ -67,12 +67,18 @@ For my PI, the license is: `0x16baa230`
 
 Enable the license by sshing on the PI:
 * `ssh root@192.168.1.23`
-* The default password is `libreelec` all lowercase.
+* The default password is `libreelec`.
 * In the SSH session mount the /flash directory with read and write privileges:
   * `mount -o remount,rw /flash`
 * Edit the /flash/config.txt file to add the MPEG-2 license key:
   * nano /flash/config.txt
   * Locate the `decode_MPG2` line, remove the # and space at the front, and add your MPEG-2 license key, ex: `decode_MPG2=0x16baa230`
+
+## External Hard-drive
+* Make sure the USB hard-drive is plugged in the PI and properly mounted.
+* Make a symlink to it in the storage folder:
+** `cd /storage`
+** `ln -s /media/BLUE_2TB/DVR` DVR
 
 # Tvheadend
 
