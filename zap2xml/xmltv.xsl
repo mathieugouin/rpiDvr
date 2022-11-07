@@ -2,6 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.1">
     <xsl:output method="html" />
 
+    <!-- Need to start Chromium with following arguments to work:
+    ** Double dashes:
+    /usr/lib/chromium-browser/chromium-browser -usr-data-dir=/home/mgouin/Documents/git/rpiDvr/zap2xml -allow-file-access-from-files -->
+
     <!-- Sorting keys -->
     <xsl:key name="channel_key" match="programme" use="@channel"/>
     <xsl:key name="date_key" match="programme" use="substring(@start,1,8)"/>
@@ -43,7 +47,10 @@
     <!-- ******************************************************************************** -->
     <xsl:template match="tv" mode="normal">
         <h2>Template tv normal</h2>
-        <xsl:apply-templates select="channel" mode="simple" />
+        <ul>
+            <xsl:apply-templates select="channel" mode="simple" />
+        </ul>
+
 <!-- TBD MGouin:
         <xsl:apply-templates select="channel" mode="full" />
         <xsl:apply-templates select="channel" mode="simple" />
@@ -88,10 +95,10 @@
 
     <!-- ******************************************************************************** -->
     <xsl:template match="channel" mode="simple">
-        <h3>
+        <li>
             <xsl:value-of select="display-name[1]"/> |
             <xsl:value-of select="@id" />
-        </h3>
+        </li>
     </xsl:template>
 
     <!-- ******************************************************************************** -->
@@ -155,7 +162,7 @@
 
         <li>
             <div class="{$category_class}">
-                [<xsl:value-of select="$start_time" />-<xsl:value-of select="$stop_time" />]
+                [<xsl:value-of select="$start_time" /> - <xsl:value-of select="$stop_time" />]
                 <xsl:value-of select="title" />
 
                 <xsl:if test="sub-title">
