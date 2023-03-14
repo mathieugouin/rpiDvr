@@ -2,7 +2,6 @@
 
 import json
 import requests
-import urllib
 
 _TVH_SERVER = 'http://192.168.1.23:9981'
 

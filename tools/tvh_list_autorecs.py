@@ -57,48 +57,45 @@ def get_df():
             for a in autorecs['entries']:
                 # Example:
                 """
-
-        {
-            "uuid": "b803e4b58c67683d8cd3cafc7a3eb0a6",
-            "enabled": true,
-            "name": "Une affaire criminelle",
-            "directory": "Une-affaire-criminelle",
-            "title": "Une affaire criminelle",
-            "fulltext": false,
-            "channel": "43bd2daafc3b4ee9a460ce48909673eb",
-            "tag": "",
-            "btype": 0,
-            "content_type": 0,
-            "start": "Any",
-            "start_window": "Any",
-            "start_extra": 0,
-            "stop_extra": 0,
-            "weekdays": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7
-            ],
-            "minduration": 0,
-            "maxduration": 0,
-            "pri": 2,
-            "record": 0,
-            "retention": 0,
-            "removal": 0,
-            "maxcount": 0,
-            "maxsched": 0,
-            "config_name": "8d0f5b7ae354d956d7fe5db25f5d0d24",
-            "brand": "",
-            "season": "",
-            "serieslink": "",
-            "creator": "192.168.1.51",
-            "comment": "Une affaire criminelle"
-        },
-
-
+                {
+                    "uuid": "b803e4b58c67683d8cd3cafc7a3eb0a6",
+                    "enabled": true,
+                    "name": "Une affaire criminelle",
+                    "directory": "Une-affaire-criminelle",
+                    "title": "Une affaire criminelle",
+                    "fulltext": false,
+                    "channel": "43bd2daafc3b4ee9a460ce48909673eb",
+                    "tag": "",
+                    "btype": 0,
+                    "content_type": 0,
+                    "start": "Any",
+                    "start_window": "Any",
+                    "start_extra": 0,
+                    "stop_extra": 0,
+                    "weekdays": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ],
+                    "minduration": 0,
+                    "maxduration": 0,
+                    "pri": 2,
+                    "record": 0,
+                    "retention": 0,
+                    "removal": 0,
+                    "maxcount": 0,
+                    "maxsched": 0,
+                    "config_name": "8d0f5b7ae354d956d7fe5db25f5d0d24",
+                    "brand": "",
+                    "season": "",
+                    "serieslink": "",
+                    "creator": "192.168.1.51",
+                    "comment": "Une affaire criminelle"
+                },
                 """
                 #print('{}\t{}'.format(a['disp_title'], a['disp_subtitle']))
                 info.append({
@@ -106,6 +103,7 @@ def get_df():
                         'Title': a['title'],
                         'Directory': a['directory'],
                         'Channel': get_channel_name(channels, a['channel']),
+                        'Enabled': a['enabled'],
                         })
 
         df = pd.DataFrame(info)
