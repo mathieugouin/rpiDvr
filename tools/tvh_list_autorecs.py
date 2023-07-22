@@ -103,6 +103,7 @@ def get_df():
                         'Title': a['title'],
                         'Directory': a['directory'],
                         'Channel': get_channel_name(channels, a['channel']),
+                        'Comment': a['comment'],
                         'Enabled': a['enabled'],
                         })
 

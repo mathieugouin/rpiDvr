@@ -2,6 +2,7 @@
 
 import json
 import requests
+import urllib.parse
 
 _TVH_SERVER = 'http://192.168.1.23:9981'
 
@@ -11,8 +12,10 @@ def json_pp(js):
     print(json.dumps(js, indent=4, sort_keys=False))
 
 
-def get_api_url(api):
+def get_api_url(api, params=None):
     url = _TVH_SERVER + '/api/' + api
+    if params is not None:
+        url += "?" + urllib.parse.urlencode(params)
     ts_response = requests.get(url)
     if ts_response.status_code != 200:
         print('Error code %d\n%s' % (ts_response.status_code, ts_response.content))
