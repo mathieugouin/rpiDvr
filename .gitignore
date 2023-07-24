@@ -15,3 +15,6 @@ zap2xml/*.xml
 # Pycharm
 .idea/
 
+# Python notebooks
+.ipynb_checkpoints/
+

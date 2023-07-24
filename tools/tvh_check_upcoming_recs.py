@@ -114,27 +114,20 @@ def get_df():
 
                 if e['enabled']:
 
-                    d = ""
-                    if 'directory' in e:
-                        d = e['directory']
-
                     info.append({
                             'Title': e['disp_title'],
                             'Channel': get_channel_name(channels, e['channel']),
-                            # 'Directory': d,
 
                             'Start': to_timestamp(e['start']),
-                            # 'Start Real': e['start_real'],
                             'Stop': to_timestamp(e['stop']),
-                            # 'Stop Real': e['stop_real'],
 
-                            #'Duration (min)': e['duration'] / 60.0,
+                            # 'Duration (min)': e['duration'] / 60.0,
                             })
 
         df = pd.DataFrame(info)
         df.sort_values(by='Start', inplace=True, ignore_index=True)
 
-        df['Duration'] = df['Stop'] - df['Start']
+        # df['Duration'] = df['Stop'] - df['Start']
 
         df.rename_axis('ATTRIBUTES', axis='columns', inplace=True)
         df.rename_axis('INDEX', axis='index', inplace=True)
@@ -153,8 +146,6 @@ def analyze_df(df):
     #                      ------                      : y
     #                         ------------             : y
     #                                 -------------    : n
-    #
-    # start_c < start_r && stop_c < start_r || start_c > stop_r && stop_c > stop_r
 
     start_c = df['Start'].to_numpy()
     stop_c = df['Stop'].to_numpy()
