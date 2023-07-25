@@ -134,7 +134,7 @@ def get_df():
 
         return df
 
-    
+
 def analyze_df(df):
     # Many possibilities:
     #
@@ -149,24 +149,27 @@ def analyze_df(df):
 
     start_c = df['Start'].to_numpy()
     stop_c = df['Stop'].to_numpy()
-    
+
     start_r = df['Start'].to_numpy()[:, np.newaxis]
     stop_r = df['Stop'].to_numpy()[:, np.newaxis]
-    
+
     # ref: https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
     dfa = pd.DataFrame(((start_c < stop_r) & (stop_c > start_r)) * 1)
-    
+
     # dfa.rename_axis('INDEX', axis='columns', inplace=True)
     # dfa.rename_axis('INDEX', axis='index', inplace=True)
-    
-    return df.iloc[dfa.sum().pipe(lambda x: x[x > MAX_CONCURRENT_RECORDING]).index]
+
+    dfr = df.copy()
+    dfr['NbTunerRequired'] = dfa.sum()
+
+    return dfr[dfr['NbTunerRequired'] > 2]
 
 
 def _main():
     df = get_df()
 
     df2 = analyze_df(df)
-    
+
     if not df2.empty:
         print("The following upcoming recording(s) will not be possible with %d tuner(s)" % MAX_CONCURRENT_RECORDING)
 
