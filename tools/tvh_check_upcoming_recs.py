@@ -125,7 +125,8 @@ def get_df():
                             })
 
         df = pd.DataFrame(info)
-        df.sort_values(by='Start', inplace=True, ignore_index=True)
+        #                                              At equal start time, longer 1st
+        df.sort_values(by=['Start', 'Stop'], ascending=[True, False], inplace=True, ignore_index=True)
 
         # df['Duration'] = df['Stop'] - df['Start']
 
