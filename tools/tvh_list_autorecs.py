@@ -108,7 +108,7 @@ def get_df():
                         })
 
         df = pd.DataFrame(info)
-        df.sort_values(list(df.columns), inplace=True)
+        df.sort_values(list(df.columns), inplace=True, ignore_index=True)
 
         return df
 
