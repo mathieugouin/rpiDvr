@@ -45,11 +45,6 @@ def get_df():
     info = []
 
     if js:
-        # ta.json_pp(js)
-
-        # if 'total' in js:
-        #    print('Total number of upcoming recording: %d' % (js['total']))
-
         if 'entries' in js:
             for e in js['entries']:
                 # Example:
@@ -128,7 +123,7 @@ def get_df():
         #                                              At equal start time, longer 1st
         df.sort_values(by=['Start', 'Stop'], ascending=[True, False], inplace=True, ignore_index=True)
 
-        # df['Duration'] = df['Stop'] - df['Start']
+        df['Duration'] = df['Stop'] - df['Start']
 
         df.rename_axis('ATTRIBUTES', axis='columns', inplace=True)
         df.rename_axis('INDEX', axis='index', inplace=True)
@@ -147,23 +142,35 @@ def analyze_df(df):
     #                      ------                      : y
     #                         ------------             : y
     #                                 -------------    : n
+    #
+    # Loop on the df and store the start & stop time in a new df,
+    # in the same column with a column attribute indicating start (1) or stop (0).
+    # Store also the recording Index from the original df.
+    data = []
+    for index, row in df.iterrows():
+        data.append([row['Start'], 1, index])
+        data.append([row['Stop'], 0, index])
 
-    start_c = df['Start'].to_numpy()
-    stop_c = df['Stop'].to_numpy()
+    dfa = pd.DataFrame(data=data, columns=['Time', 'Type', 'RecIndex'])
+    dfa.sort_values(by=['Time', 'Type', 'RecIndex'], ascending=[True, True, True], inplace=True, ignore_index=True)
+    dfa.rename_axis('ATTRIBUTES', axis='columns', inplace=True)
+    dfa.rename_axis('INDEX', axis='index', inplace=True)
 
-    start_r = df['Start'].to_numpy()[:, np.newaxis]
-    stop_r = df['Stop'].to_numpy()[:, np.newaxis]
-
-    # ref: https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
-    dfa = pd.DataFrame(((start_c < stop_r) & (stop_c > start_r)) * 1)
-
-    # dfa.rename_axis('INDEX', axis='columns', inplace=True)
-    # dfa.rename_axis('INDEX', axis='index', inplace=True)
-
+    # Loop on the analysis df and use a stack to push when start time, pop when stop time
     dfr = df.copy()
-    dfr['NbTunerRequired'] = dfa.sum()
+    dfr['NbTunerRequired'] = 0
+    recording_stack = []
+    for index, row in dfa.iterrows():
+        if row['Type'] > 0: # Start: one more tuner used.
+            recording_stack.append(row['RecIndex'])
+            dfr.loc[recording_stack, 'NbTunerRequired'] = len(recording_stack) # Equivalent of the nb of tuner used
+            if len(recording_stack) > MAX_CONCURRENT_RECORDING:
+                print('--------------------------------------------------')
+                print(dfr.loc[recording_stack])
+        else:
+            _ = recording_stack.pop()
 
-    return dfr[dfr['NbTunerRequired'] > 2]
+    return dfr[dfr['NbTunerRequired'] > MAX_CONCURRENT_RECORDING]
 
 
 def _main():
