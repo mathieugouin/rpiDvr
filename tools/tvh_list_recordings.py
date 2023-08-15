@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import json
-import time
 import pandas as pd
 import tvh_api as ta
 

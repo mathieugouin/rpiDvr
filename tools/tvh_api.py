@@ -22,5 +22,3 @@ def get_api_url(api, params=None):
         return {}
     ts_json = json.loads(ts_response.text, strict=False)
     return ts_json
-
-

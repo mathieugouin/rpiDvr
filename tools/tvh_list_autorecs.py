@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import json
-import time
 import pandas as pd
 import tvh_api as ta
 import re
@@ -27,7 +25,7 @@ def is_dir_name_ok(d):
             return True
         else:
             return False
-        
+
 
 def get_channel_name(channels, uuid):
     j = channels
@@ -47,10 +45,10 @@ def get_df():
     info = []
 
     if autorecs:
-        #ta.json_pp(autorecs)
+        # ta.json_pp(autorecs)
 
-        #if 'total' in autorecs:
-        #    print('Total number of autorecs: %d' % (autorecs['total']))
+        # if 'total' in autorecs:
+        #     print('Total number of autorecs: %d' % (autorecs['total']))
 
         if 'entries' in autorecs:
             for a in autorecs['entries']:
@@ -124,4 +122,3 @@ def _main():
 
 if __name__ == "__main__":
     _main()
-
