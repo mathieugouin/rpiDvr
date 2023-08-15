@@ -3,8 +3,6 @@
 import time
 import datetime
 import pandas as pd
-import re
-
 import tvh_api as ta
 
 MAX_CONCURRENT_RECORDING = 2
@@ -18,7 +16,6 @@ def get_upcoming_recs():
 def get_channels():
     # Large number to not be limited (default is 50)
     return ta.get_api_url('channel/grid', {'limit': 5000})
-
 
 
 def get_channel_name(channels, uuid):
@@ -159,9 +156,9 @@ def analyze_df(df):
     dfr['NbTunerRequired'] = 0
     recording_stack = []
     for index, row in dfa.iterrows():
-        if row['Type'] > 0: # Start: one more tuner used.
+        if row['Type'] > 0:  # Start: one more tuner used.
             recording_stack.append(row['RecIndex'])
-            dfr.loc[recording_stack, 'NbTunerRequired'] = len(recording_stack) # Equivalent of the nb of tuner used
+            dfr.loc[recording_stack, 'NbTunerRequired'] = len(recording_stack)  # Equivalent of the nb of tuner used
             if len(recording_stack) > MAX_CONCURRENT_RECORDING:
                 print('--------------------------------------------------')
                 print(dfr.loc[recording_stack])
@@ -186,6 +183,6 @@ def _main():
     else:
         print("All upcoming recording(s) will be possible with %d tuner(s)" % MAX_CONCURRENT_RECORDING)
 
+
 if __name__ == "__main__":
     _main()
-
