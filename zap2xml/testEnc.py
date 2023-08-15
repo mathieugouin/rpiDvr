@@ -8,8 +8,8 @@
 ###########################################################################
 
 import re
-import io
 import sys
+
 
 for line in sys.stdin:
     # Decode what you receive:
@@ -20,4 +20,3 @@ for line in sys.stdin:
         # Encode what you send:
         line = line.encode('utf-8')
         sys.stdout.write(line)
-

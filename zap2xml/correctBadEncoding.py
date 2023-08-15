@@ -8,12 +8,13 @@
 ###########################################################################
 
 import re
-import io
 import sys
+
 
 def repl(m):
     print >> sys.stderr, 'correctBadEncoding.py: replacing bad characters'
     return unichr(ord(m.group(1)) + 0x40)
+
 
 for line in sys.stdin:
     # Decode what you receive:
@@ -30,4 +31,3 @@ for line in sys.stdin:
     # Encode what you send:
     line = line.encode('utf-8')
     sys.stdout.write(line)
-

@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
-import json
 import time
 import datetime
-import numpy as np
 import pandas as pd
 import re
 

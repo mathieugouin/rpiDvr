@@ -16,7 +16,7 @@ def json_pp(js):
 
 def _main():
     recs = get_finished_recordings()
-    #json_pp(recs)
+    # json_pp(recs)
 
     info = []
 
@@ -25,7 +25,7 @@ def _main():
             print('Total number of recordings: %d' % (recs['total']))
         if 'entries' in recs:
             for r in recs['entries']:
-                #print('{}\t{}'.format(r['disp_title'], r['disp_subtitle']))
+                # print('{}\t{}'.format(r['disp_title'], r['disp_subtitle']))
                 info.append({
                         'Title': r['disp_title'],
                         'Subtitle': r['disp_subtitle']
@@ -39,7 +39,5 @@ def _main():
             print(df)
 
 
-
 if __name__ == "__main__":
     _main()
-
