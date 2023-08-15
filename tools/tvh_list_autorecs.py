@@ -9,13 +9,12 @@ import re
 
 def get_autorecs():
     # Large number to not be limited (default is 50)
-    return ta.get_api_url('dvr/autorec/grid?limit=5000')
+    return ta.get_api_url('dvr/autorec/grid', {'limit': 5000})
 
 
 def get_channels():
     # Large number to not be limited (default is 50)
-    return ta.get_api_url('channel/grid?limit=5000')
-
+    return ta.get_api_url('channel/grid', {'limit': 5000})
 
 
 def is_dir_name_ok(d):

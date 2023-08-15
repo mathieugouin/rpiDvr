@@ -10,11 +10,7 @@ import tvh_api as ta
 
 def get_autorecs():
     # Large number to not be limited (default is 50)
-    return ta.get_api_url('dvr/autorec/grid?limit=5000')
-
-
-def get_idnode(uuid):
-    return ta.get_api_url('idnode/load?uuid=' + uuid)
+    return ta.get_api_url('dvr/autorec/grid', {'limit': 5000})
 
 
 def set_autorec_enabled(uuid, enabled):
@@ -22,9 +18,7 @@ def set_autorec_enabled(uuid, enabled):
         'uuid' : uuid,
         'enabled' : enabled
     }
-    api = 'idnode/save?node=' + urllib.parse.quote(json.dumps(js))
-    #print(api)
-    return ta.get_api_url(api)
+    return ta.get_api_url('idnode/save', {'node': json.dumps(js)})
 
 
 def _main():
@@ -44,18 +38,18 @@ def _main():
                     print("%s\t%s\t%s" % (e['uuid'], e['enabled'], e['name']))
                     uuid = e['uuid']
                     enabled_uuid.append(uuid)
-                    # disable
-                    time.sleep(0.2)
+                    time.sleep(0.1)
                     set_autorec_enabled(uuid, False)
                     count += 1
 
+    print("========================================================")
     print("Disabled %d enabled autorecs" % (count))
-    time.sleep(1)
+    print("========================================================")
 
     for uuid in enabled_uuid:
         print("Enabling " + uuid)
         set_autorec_enabled(uuid, True)
-        time.sleep(0.2)
+        time.sleep(0.1)
 
 
 if __name__ == "__main__":

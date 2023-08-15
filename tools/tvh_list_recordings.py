@@ -8,7 +8,7 @@ import tvh_api as ta
 
 def get_finished_recordings():
     # Large number to not be limited (default is 50)
-    return ta.get_api_url('dvr/entry/grid_finished?limit=5000')
+    return ta.get_api_url('dvr/entry/grid_finished', {'limit': 5000})
 
 
 def json_pp(js):
