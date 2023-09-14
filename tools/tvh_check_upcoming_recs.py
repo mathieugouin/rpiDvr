@@ -177,7 +177,8 @@ def _main():
     df2 = analyze_df(df)
 
     if not df2.empty:
-        print("The following upcoming recording(s) will not be possible with %d tuner(s)" % MAX_CONCURRENT_RECORDING)
+        print('--------------------------------------------------')
+        print("\n\nThe following upcoming recording(s) will not be possible with %d tuner(s)" % MAX_CONCURRENT_RECORDING)
 
         # print full DF
         with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.expand_frame_repr', False):

@@ -107,13 +107,13 @@ def get_df():
         df = pd.DataFrame(info)
         df.sort_values(list(df.columns), inplace=True, ignore_index=True)
 
+        df['DirOk'] = df['Directory'].apply(is_dir_name_ok)
+
         return df
 
 
 def _main():
     df = get_df()
-
-    df['DirOk'] = df['Directory'].apply(is_dir_name_ok)
 
     # print full DF
     with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.expand_frame_repr', False):
