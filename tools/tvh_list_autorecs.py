@@ -94,7 +94,7 @@ def get_df():
                     "comment": "Une affaire criminelle"
                 },
                 """
-                #print('{}\t{}'.format(a['disp_title'], a['disp_subtitle']))
+                # print('{}\t{}'.format(a['disp_title'], a['disp_subtitle']))
                 info.append({
                         'Name': a['name'],
                         'Title': a['title'],

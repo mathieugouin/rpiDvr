@@ -3,7 +3,6 @@
 # ref: https://github.com/dave-p/TVH-API-docs/wiki
 
 import json
-import urllib
 import time
 import tvh_api as ta
 
@@ -15,15 +14,15 @@ def get_autorecs():
 
 def set_autorec_enabled(uuid, enabled):
     js = {
-        'uuid' : uuid,
-        'enabled' : enabled
+        'uuid': uuid,
+        'enabled': enabled
     }
     return ta.get_api_url('idnode/save', {'node': json.dumps(js)})
 
 
 def _main():
     autorecs = get_autorecs()
-    #ta.json_pp(autorecs)
+    # ta.json_pp(autorecs)
 
     enabled_uuid = []
     count = 0
@@ -33,7 +32,6 @@ def _main():
             print('Total number of autorecs: %d' % (autorecs['total']))
         if 'entries' in autorecs:
             for e in autorecs['entries']:
-                #if True:
                 if e['enabled']:
                     print("%s\t%s\t%s" % (e['uuid'], e['enabled'], e['name']))
                     uuid = e['uuid']
