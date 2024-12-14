@@ -6,6 +6,11 @@ span, div, th, td, font, h1, h2, h3, h4, p, body, small, input
     font-family: Tahoma, Arial, MS Sans Serif;
 }
 
+body
+{
+    font-size: 9pt;
+}
+
 /*
  * If a program falls into more than one category, the
  * last style it sees will be the one applied.

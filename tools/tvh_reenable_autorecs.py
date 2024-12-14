@@ -17,7 +17,7 @@ def set_autorec_enabled(uuid, enabled):
         'uuid': uuid,
         'enabled': enabled
     }
-    return ta.get_api_url('idnode/save', {'node': json.dumps(js)})
+    ta.get_api_url('idnode/save', {'node': json.dumps(js)})
 
 
 def _main():

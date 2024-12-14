@@ -4,7 +4,10 @@
 
     <!-- Need to start Chromium with following arguments to work:
     ** Double dashes:
-    /usr/lib/chromium-browser/chromium-browser -usr-data-dir=/home/mgouin/Documents/git/rpiDvr/zap2xml -allow-file-access-from-files -->
+    /usr/lib/chromium-browser/chromium-browser -usr-data-dir=/home/mgouin/Documents/git/rpiDvr/zap2xml -allow-file-access-from-files
+    
+    Other option is: python3 -m http.server
+    -->
 
     <!-- Sorting keys -->
     <xsl:key name="channel_key" match="programme" use="@channel"/>
@@ -22,7 +25,7 @@
                 <h1>TV Listing</h1>
 
                 <h2>Category Colors</h2>
-                <div style="width: 50%; margin: auto">
+                <div style="width: 25%; margin-left: 2em">
                     <div class="drama">drama</div>
                     <div class="talk">talk</div>
                     <div class="sitco">sitco</div>
@@ -46,7 +49,7 @@
 
     <!-- ******************************************************************************** -->
     <xsl:template match="tv" mode="normal">
-        <h2>Template tv normal</h2>
+        <h2>Channel listing</h2>
         <ul>
             <xsl:apply-templates select="channel" mode="simple" />
         </ul>

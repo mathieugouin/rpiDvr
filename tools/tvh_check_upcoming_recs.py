@@ -106,6 +106,7 @@ def get_df():
 
                     info.append({
                             'Title': e['disp_title'],
+                            'SubTitle': e['disp_subtitle'],
                             'Channel': get_channel_name(channels, e['channel']),
 
                             'Start': to_timestamp(e['start']),
@@ -143,6 +144,7 @@ def analyze_df(df):
     # Store also the recording Index from the original df.
     data = []
     for index, row in df.iterrows():
+        # TBD: could have been done using array of dict
         data.append([row['Start'], 1, index])
         data.append([row['Stop'], 0, index])
 
