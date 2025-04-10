@@ -464,6 +464,7 @@ sub enc {
 sub printHeader {
   my ($FH, $enc) = @_;
   print $FH "<?xml version=\"1.0\" encoding=\"$enc\"?>\n";
+  print $FH "<?xml-stylesheet href=\"xmltv.xsl\" type=\"text/xsl\"?>\n";
   print $FH "<!DOCTYPE tv SYSTEM \"xmltv.dtd\">\n\n";
   if (defined($options{z})) {
     print $FH "<tv source-info-url=\"http://tvguide.com/\" source-info-name=\"tvguide.com\"";

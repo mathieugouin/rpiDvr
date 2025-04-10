@@ -26,16 +26,16 @@
 
                 <h2>Category Colors</h2>
                 <div style="width: 25%; margin-left: 2em">
-                    <div class="drama">drama</div>
-                    <div class="talk">talk</div>
-                    <div class="sitco">sitco</div>
-                    <div class="sport">sport</div>
-                    <div class="news">news</div>
-                    <div class="child">child</div>
-                    <div class="reali">reali</div>
-                    <div class="cooki">cooki</div>
-                    <div class="mv">mv</div>
-                    <div class="child_hidden">child_hidden</div>
+                    <div class="drama">Movie / Drama</div>
+                    <div class="talk">Talk show</div>
+                    <!-- <div class="sitco">sitco</div> -->
+                    <div class="sport">Sports</div>
+                    <div class="news">News / Current affairs</div>
+                    <div class="child">Children's / Youth programs</div>
+                    <!-- <div class="reali">reali</div> -->
+                    <!-- <div class="cooki">cooki</div> -->
+                    <!-- <div class="mv">mv</div> -->
+                    <!-- <div class="child_hidden">child_hidden</div> -->
                     <div class="empty_category">empty_category</div>
                     <div class="unknown">unknown</div>
                 </div>
