@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.1">
-    <xsl:output method="html" />
+    <xsl:output method="html" encoding="UTF-8"/>
 
     <!-- Need to start Chromium with following arguments to work:
     ** Double dashes:
@@ -18,7 +18,8 @@
     <xsl:template match="/">
         <html>
             <head>
-                <meta charset="utf-8">
+                <!-- <meta charset="utf-8"> -->
+                <xsl:text disable-output-escaping="yes">&lt;meta charset="utf-8"&gt;</xsl:text>
                 <link rel="stylesheet" href="xmltv.css" type="text/css" />
                 <title>TV Listings</title>
             </head>
