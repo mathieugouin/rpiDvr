@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.1">
-    <xsl:output method="html" />
+    <xsl:output method="html" encoding="UTF-8"/>
 
     <!-- Need to start Chromium with following arguments to work:
     ** Double dashes:
@@ -18,6 +18,8 @@
     <xsl:template match="/">
         <html>
             <head>
+                <!-- <meta charset="utf-8"> -->
+                <xsl:text disable-output-escaping="yes">&lt;meta charset="utf-8"&gt;</xsl:text>
                 <link rel="stylesheet" href="xmltv.css" type="text/css" />
                 <title>TV Listings</title>
             </head>
@@ -26,16 +28,16 @@
 
                 <h2>Category Colors</h2>
                 <div style="width: 25%; margin-left: 2em">
-                    <div class="drama">drama</div>
-                    <div class="talk">talk</div>
-                    <div class="sitco">sitco</div>
-                    <div class="sport">sport</div>
-                    <div class="news">news</div>
-                    <div class="child">child</div>
-                    <div class="reali">reali</div>
-                    <div class="cooki">cooki</div>
-                    <div class="mv">mv</div>
-                    <div class="child_hidden">child_hidden</div>
+                    <div class="drama">Movie / Drama</div>
+                    <div class="talk">Talk show</div>
+                    <!-- <div class="sitco">sitco</div> -->
+                    <div class="sport">Sports</div>
+                    <div class="news">News / Current affairs</div>
+                    <div class="child">Children's / Youth programs</div>
+                    <!-- <div class="reali">reali</div> -->
+                    <!-- <div class="cooki">cooki</div> -->
+                    <!-- <div class="mv">mv</div> -->
+                    <!-- <div class="child_hidden">child_hidden</div> -->
                     <div class="empty_category">empty_category</div>
                     <div class="unknown">unknown</div>
                 </div>
