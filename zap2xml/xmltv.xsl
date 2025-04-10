@@ -18,6 +18,7 @@
     <xsl:template match="/">
         <html>
             <head>
+                <meta charset="utf-8">
                 <link rel="stylesheet" href="xmltv.css" type="text/css" />
                 <title>TV Listings</title>
             </head>
