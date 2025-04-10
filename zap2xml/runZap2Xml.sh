@@ -67,11 +67,7 @@ echo $(date) >> $OUTPUT_DEBUG_LOG
 # Use UTF-8 encoding
 ./zap2xml.pl -u xxx@xxx.com -p xxx -d 14 -N 3 -M -U >> $OUTPUT_DEBUG_LOG 2>&1
 
-# Correct bad encoding
-# ./correctBadEncoding.py < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
-# mv -f xmltv.xml.new xmltv.xml
-
-# Correct the bad categories
+# Update categories
 ./category-update.pl < xmltv.xml > xmltv.xml.new 2>> $OUTPUT_DEBUG_LOG
 mv -f xmltv.xml.new xmltv.xml
 
