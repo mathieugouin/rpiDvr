@@ -17,14 +17,16 @@ def get_channels():
 
 def is_dir_name_ok(d):
     try:
-        d.decode('ascii') if isinstance(d, bytes) else d.encode('ascii')
-    except UnicodeDecodeError:
-        return False
-    else:
-        if re.match(r'^[-0-9A-Z_a-z]+$', d):
-            return True
+        # normalize to str
+        if isinstance(d, bytes):
+            d = d.decode('ascii')
         else:
-            return False
+            d = d.encode('ascii').decode('ascii')
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return False
+
+    # check allowed characters
+    return re.match(r'^[-0-9A-Za-z_]+$', d) is not None
 
 
 def get_channel_name(channels, uuid):
@@ -47,8 +49,8 @@ def get_df():
     if autorecs:
         # ta.json_pp(autorecs)
 
-        # if 'total' in autorecs:
-        #     print('Total number of autorecs: %d' % (autorecs['total']))
+        if 'total' in autorecs:
+            print('Total number of autorecs: %d' % (autorecs['total']))
 
         if 'entries' in autorecs:
             for a in autorecs['entries']:
@@ -94,13 +96,14 @@ def get_df():
                     "comment": "Une affaire criminelle"
                 },
                 """
+                # ta.json_pp(a)
                 # print('{}\t{}'.format(a['disp_title'], a['disp_subtitle']))
                 info.append({
                         'Name': a['name'],
                         'Title': a['title'],
                         'Directory': a['directory'],
                         'Channel': get_channel_name(channels, a['channel']),
-                        'Comment': a['comment'],
+                        'Comment': a.get('comment', ''),
                         'Enabled': a['enabled'],
                         })
 
