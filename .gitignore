@@ -18,3 +18,7 @@ zap2xml/*.xml
 # Python notebooks
 .ipynb_checkpoints/
 
+# Venv
+.venv/
+venv/
+
