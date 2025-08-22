@@ -19,9 +19,8 @@ def get_channels():
 
 
 def get_channel_name(channels, uuid):
-    j = channels
-    if 'entries' in j:
-        for e in j['entries']:
+    if 'entries' in channels:
+        for e in channels['entries']:
             if e['uuid'] == uuid:
                 return e['name']
     return ''
@@ -33,15 +32,15 @@ def to_timestamp(t):
 
 def get_df():
     channels = get_channels()
-    js = get_upcoming_recs()
+    recs = get_upcoming_recs()
 
     df = None
 
     info = []
 
-    if js:
-        if 'entries' in js:
-            for e in js['entries']:
+    if recs:
+        if 'entries' in recs:
+            for e in recs['entries']:
                 # Example:
 
                 """
