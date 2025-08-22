@@ -1,4 +1,5 @@
-# ref: https://github.com/dave-p/TVH-API-docs/wiki
+# ref: https://docs.tvheadend.org/documentation/development/json-api/api-description
+#      https://github.com/dave-p/TVH-API-docs/wiki
 
 import json
 import urllib.request
