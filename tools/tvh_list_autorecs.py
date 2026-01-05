@@ -97,14 +97,14 @@ def get_df():
                 },
                 """
                 # ta.json_pp(a)
-                # print('{}\t{}'.format(a['disp_title'], a['disp_subtitle']))
+                # print('{}\t{}'.format(a.get('disp_title', ''), a.get('disp_subtitle', '')))
                 info.append({
-                        'Name': a['name'],
-                        'Title': a['title'],
-                        'Directory': a['directory'],
-                        'Channel': get_channel_name(channels, a['channel']),
+                        'Name': a.get('name', ''),
+                        'Title': a.get('title', ''),
+                        'Directory': a.get('directory', ''),
+                        'Channel': get_channel_name(channels, a.get('channel', '')),
                         'Comment': a.get('comment', ''),
-                        'Enabled': a['enabled'],
+                        'Enabled': a.get('enabled', ''),
                         })
 
         df = pd.DataFrame(info)
