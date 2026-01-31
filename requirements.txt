@@ -1,1 +1,4 @@
-pandas
+pandas == 2.2.3
+
+# 2.4.1 not working
+numpy == 2.2.5
