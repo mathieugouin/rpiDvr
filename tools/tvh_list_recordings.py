@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import json
+import datetime
 import pandas as pd
 import tvh_api as ta
 
@@ -10,13 +11,9 @@ def get_finished_recordings():
     return ta.get_api_url('dvr/entry/grid_finished', {'limit': 5000})
 
 
-def json_pp(js):
-    print(json.dumps(js, indent=4, sort_keys=False))
-
-
 def _main():
     recs = get_finished_recordings()
-    # json_pp(recs)
+    # ta.json_pp(recs)
 
     info = []
 
@@ -28,11 +25,12 @@ def _main():
                 # print('{}\t{}'.format(r['disp_title'], r['disp_subtitle']))
                 info.append({
                         'Title': r['disp_title'],
-                        'Subtitle': r['disp_subtitle']
+                        'Subtitle': r['disp_subtitle'],
+                        'Start': datetime.datetime.fromtimestamp(r['start']),
                         })
 
         df = pd.DataFrame(info)
-        df.sort_values(list(df.columns), inplace=True)
+        df = df.sort_values(list(df.columns))
 
         # print full DF
         with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.expand_frame_repr', False):
