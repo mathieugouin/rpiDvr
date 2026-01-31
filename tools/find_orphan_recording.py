@@ -1,20 +1,17 @@
+"""Find all orphan video recordings on disk not registered in TVHeadend DVR logs.
+
+IMPORTANT: This script must be executed directly on the device where TVHeadend is running,
+as it relies on local file paths."""
+
 from __future__ import print_function
 import json
 import os
 import fnmatch
 
 # ####### KODI
-TVH_BASE_DIR = '/storage/.kodi/userdata/addon_data/service.tvheadend42' # TVH config base directory
+TVH_BASE_DIR = '/storage/.kodi/userdata/addon_data/service.tvheadend42'  # TVH config base directory
 VIDEO_DIR = '/storage/DVR/recordings'
-
-# ####### TESTING
-#TVH_BASE_DIR = '/home/mgouin/Documents/Mathieu/DVR/tvh' # TVH config base directory
-#VIDEO_DIR = '/home/mgouin/Documents/Mathieu/DVR/recordings_bak'
-
-# ####### COMMON Config
-
 TVH_DVR_DIR = TVH_BASE_DIR + '/dvr/log'
-
 TVH_FILE_PATTERN = "????????????????????????????????"
 
 
