@@ -17,45 +17,25 @@ body
  */
 .drama, .comed, .actio, .suspe, .scien, .fanta, .docud
 {
-    background-color: #FFA07A; /* lightsalmon */
+    background-color: #36f58c;
 }
 .talk, .paid, .relig, .shopp, .commu, .compu
 {
-    background-color: #FFE4C4; /* bisque */
-}
-.sitco, .serie
-{
-    background-color: #ADD8E6; /* lightblue */
+    background-color: #e4ac9b;
 }
 .sport, .water
 {
-    background-color: #FFA500; /* orange */
+    background-color: #28bbff;
 }
 .news, .speci, .inter, .newsm, .publi, .docum
 {
-    background-color: #F0E68C; /* khaki */
+    background-color: #fff171;
 }
 .child, .anima, .educa
 {
-    background-color: #DDA0DD;  /* plum */
+    background-color: #ff9fd9;
 }
-.reali
-{
-    background-color: #20B2AA; /* lightseagreen */
-}
-.cooki, .how-t, .home, .garde
-{
-    background-color: #7FFFD4; /* aquamarine */
-}
-.mv
-{
-    background-color:#FF6347; /* tomato */
-}
-.child_hidden
-{
-    background-color: #fff
-}
-.empty_category
+.empty_category .child_hidden
 {
     background-color: #fff
 }
@@ -64,3 +44,20 @@ body
     background-color: #f00
 }
 
+/* not used, colors not updated*/
+.reali
+{
+    background-color: #20B2AA;
+}
+.cooki, .how-t, .home, .garde
+{
+    background-color: #7FFFD4;
+}
+.mv
+{
+    background-color:#FF6347;
+}
+.sitco, .serie
+{
+    background-color: #ADD8E6;
+}

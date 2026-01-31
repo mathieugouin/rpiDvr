@@ -38,11 +38,11 @@ my $ATHLETICS         =    "Athletics";
 my $SPORT_MOTOR       =    "Motor sport";
 my $SPORT_WATER       =    "Water sport";
 
-my $KIDS              =    "Children's / Youth programmes";
-my $KIDS_0_5          =    "Pre-school children's programmes";
-my $KIDS_6_14         =    "Entertainment programmes for 6 to 14";
-my $KIDS_10_16        =    "Entertainment programmes for 10 to 16";
-my $EDUCATIONAL       =    "Informational / Educational / School programmes";
+my $KIDS              =    "Children's / Youth programs";
+my $KIDS_0_5          =    "Pre-school children's programs";
+my $KIDS_6_14         =    "Entertainment programs for 6 to 14";
+my $KIDS_10_16        =    "Entertainment programs for 10 to 16";
+my $EDUCATIONAL       =    "Informational / Educational / School programs";
 my $CARTOON           =    "Cartoons / Puppets";
 
 my $MUSIC             =    "Music / Ballet / Dance";
