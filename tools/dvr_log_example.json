@@ -1,0 +1,65 @@
+{
+	"enabled": true,
+	"start": 1735245060,
+	"start_extra": 0,
+	"stop": 1735250400,
+	"stop_extra": 0,
+	"channel": "56b29764cdc81c92d19ea120336812af",
+	"channelname": "Tele-Quebec",
+	"title": {
+		"eng": "Boule et Bill"
+	},
+	"subtitle": {
+		"eng": "Movie (2013)"
+	},
+	"description": {
+		"eng": "Tout commence à la S.P.A. Un jeune cocker se morfond dans sa cage. Il ne trouve pas les maîtres de ses rêves. Soudain apparaît un petit garçon, aussi roux que lui. Qui se ressemble s'assemble. Pour Boule et Bill, c'est le début d'une grande amitié."
+	},
+	"pri": 2,
+	"retention": 0,
+	"removal": 0,
+	"playposition": 0,
+	"playcount": 1,
+	"config_name": "8d0f5b7ae354d956d7fe5db25f5d0d24",
+	"creator": "192.168.1.51",
+	"errorcode": 0,
+	"errors": 0,
+	"data_errors": 0,
+	"dvb_eid": 0,
+	"noresched": true,
+	"norerecord": false,
+	"fileremoved": 0,
+	"autorec": "",
+	"timerec": "",
+	"parent": "",
+	"child": "",
+	"content_type": 1,
+	"broadcast": 0,
+	"files": [
+		{
+			"filename": "/storage/DVR/recordings/Boule-et-Bill_2024-12-26.ts",
+			"info": [
+				{
+					"type": "MPEG2VIDEO",
+					"width": 1280,
+					"height": 720,
+					"duration": 1501,
+					"aspect_num": 0,
+					"aspect_den": 0
+				},
+				{
+					"type": "AC3",
+					"language": "fre",
+					"audio_type": 0
+				},
+				{
+					"type": "AC3",
+					"language": "fre",
+					"audio_type": 0
+				}
+			],
+			"start": 1735245060,
+			"stop": 1735250400
+		}
+	]
+}
