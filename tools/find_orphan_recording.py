@@ -20,10 +20,7 @@ def find_files(directory, pattern):
     for root, dirs, files in os.walk(directory):
         for basename in files:
             if fnmatch.fnmatch(basename, pattern):
-                # Abs path
                 filename = os.path.join(root, basename)
-                # Optional: relative path from directory
-                #filename = os.path.relpath(filename, directory)
                 yield filename
 
 
